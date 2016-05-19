@@ -1,0 +1,7 @@
+div.my-tabs
+    a.btn(v-link="'/'") Overview
+    span(v-for="tab of tabs", track-by="pid")
+        a.btn(v-link="{name: 'passage', params: {pid: tab.pid}}") {{tab.title}}
+        a.btn.btn-danger.btn-xs.my-tabs-close(v-link="'/'", "@click"="closePassage(tab.pid)")
+            span.glyphicon.glyphicon-remove
+    button.btn("@click"="addPassage") +

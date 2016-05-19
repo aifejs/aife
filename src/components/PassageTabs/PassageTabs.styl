@@ -1,0 +1,23 @@
+.my-tabs
+    a
+        cursor: pointer;
+
+    li.active
+        a
+            cursor: default;
+
+    li
+        position: relative
+        .my-tabs-close
+            position: absolute
+            opacity: 0.65
+            top: 0
+            right: 0
+        &:hover
+            .my-tabs-close
+                opacity: 1
+
+        &.special
+            font-weight: bold
+            & + :not(.special) // distance between special and non-special tabs
+                margin-left: 1em

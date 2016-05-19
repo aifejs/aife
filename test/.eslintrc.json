@@ -1,0 +1,9 @@
+{
+  "extends": "../package.json",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-shadow": ["off"]
+  }
+}
