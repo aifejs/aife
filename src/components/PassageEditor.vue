@@ -24,13 +24,13 @@ article.passageEditor(v-if="passage")
             },
         },
         route: {
-            data (transition) {
+            data(transition) {
                 if (this.passage === undefined) {
                     transition.abort('no such passage');
                 } else {
-                    transition.next()
+                    transition.next();
                 }
-            }
-        }
+            },
+        },
     };
 </script>
