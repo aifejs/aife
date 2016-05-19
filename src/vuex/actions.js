@@ -17,3 +17,7 @@ export function deletePassage({dispatch,}, pid) {
 export function updateStoryFromProof({dispatch,}, event) {
     dispatch('UPDATE_STORY_FROM_PROOF', event.target.value, event.target.selectionStart);
 }
+
+export function setPassagesSorting({dispatch}, sorting) {
+    dispatch('PASSAGES_SORTING', sorting);
+}

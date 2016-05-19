@@ -14,6 +14,10 @@ const state = {
             pid: 1,
         },
     ],
+    passagesSorting: {
+        field: 'pid',
+        sort: 'desc',
+    },
     opened: [],
     script: '',
     style: '',

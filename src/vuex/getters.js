@@ -1,5 +1,6 @@
 import countWords from '../lib/countWords';
 import {pickleStory,} from '../lib/pickle';
+import {sortBy,} from 'lodash';
 
 export function tabs(state) {
     return state.opened
@@ -9,8 +10,14 @@ export function tabs(state) {
         }));
 }
 
-export function passagesOverview(state) {
-    return state.passages;
+export function passagesOverview({passages, passagesSorting,}) {
+    const sorted = sortBy(passages, (passage) => passage[passagesSorting.field]);
+
+    if (passagesSorting.sort === 'asc') {
+        return sorted.reverse();
+    } else {
+        return sorted;
+    }
 }
 
 export function getCurrentPassage({passages, route,}) {
