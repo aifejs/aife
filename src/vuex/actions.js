@@ -21,3 +21,7 @@ export function updateStoryFromProof({dispatch,}, event) {
 export function setPassagesSorting({dispatch,}, sorting) {
     dispatch('PASSAGES_SORTING', sorting);
 }
+
+export function setPassagesFiltering({dispatch,}, event) {
+    dispatch('PASSAGES_FILTERING', event.target.value);
+}

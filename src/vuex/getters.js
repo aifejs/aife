@@ -1,6 +1,6 @@
 import countWords from '../lib/countWords';
 import {pickleStory,} from '../lib/pickle';
-import {sortBy,} from 'lodash';
+import {sortBy,deburr,} from 'lodash';
 
 export function tabs(state) {
     return state.opened
@@ -10,14 +10,32 @@ export function tabs(state) {
         }));
 }
 
-export function passagesOverview({passages, passagesSorting,}) {
-    const sorted = sortBy(passages, (passage) => passage[passagesSorting.field]);
+function passageCheckerFactory(term) {
+    return function ({text, title,}) {
+        return deburr(text.toLowerCase()).includes(term) || deburr(title.toLowerCase()).includes(term);
+    };
+}
+
+export function passagesOverview({passages, passagesSorting, passagesFiltering,}) {
+    let passagesToSort;
+    const termTrimmed = passagesFiltering.trim();
+    if (termTrimmed === '') {
+        passagesToSort = passages;
+    } else {
+        const deburred = deburr(termTrimmed).toLowerCase();
+        passagesToSort = passages.filter(passageCheckerFactory(deburred));
+    }
+
+    const sorted = sortBy(passagesToSort, (passage) => passage[passagesSorting.field]);
 
     if (passagesSorting.sort === 'asc') {
         return sorted.reverse();
     } else {
         return sorted;
     }
+}
+export function getPassagesFiltering({passagesFiltering,}) {
+    return passagesFiltering;
 }
 
 export function getCurrentPassage({passages, route,}) {

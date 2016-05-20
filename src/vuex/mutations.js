@@ -65,6 +65,10 @@ const mutations = {
     PASSAGES_SORTING(state, sorting) {
         state.passagesSorting = sorting;
     },
+
+    PASSAGES_FILTERING(state, filtering) {
+        state.passagesFiltering = filtering;
+    },
 };
 
 export default mutations;

@@ -24,6 +24,7 @@ const state = {
         field: 'pid',
         sort: 'desc',
     },
+    passagesFiltering: '',
     opened: [],
     script: '',
     style: '',
