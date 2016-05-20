@@ -9,9 +9,15 @@ const state = {
         },
         {
             title: 'Big cave',
-            text: 'Biggest cave ever. You wonder if you can fit here your mom.',
+            text: 'Biggest cave ever. You wonder if you can fit whale here.',
             tags: ['tag', 'lol, another tag',],
             pid: 1,
+        },
+        {
+            title: 'Ach, it\'s your room',
+            text: 'It was all a dream.',
+            tags: ['tag', 'no way, man:(',],
+            pid: 42,
         },
     ],
     passagesSorting: {
