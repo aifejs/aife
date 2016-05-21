@@ -19,6 +19,7 @@
     ]
   },
   "dependencies": {
+    "codemirror": "^5.15.2",
     "common-tags": "^0.1.1",
     "lodash": "^4.12.0",
     "vue": "^1.0.24",
