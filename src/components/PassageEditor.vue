@@ -16,7 +16,7 @@ article.passageEditor(v-if="passage")
 
 <script>
     import {getCurrentPassage,} from '../vuex/getters';
-    import {openPassage} from '../vuex/actions';
+    import {openPassage,} from '../vuex/actions';
     export default {
         name: 'passage-editor',
         vuex: {
@@ -25,7 +25,7 @@ article.passageEditor(v-if="passage")
             },
             actions: {
                 openPassage,
-            }
+            },
         },
         route: {
             data(transition) {

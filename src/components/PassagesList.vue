@@ -20,7 +20,7 @@
 
 <script>
     import {setPassagesSorting,setPassagesFiltering,} from '../vuex/actions';
-    import {passagesOverview,getPassagesFiltering} from '../vuex/getters';
+    import {passagesOverview,getPassagesFiltering,} from '../vuex/getters';
     import SorterButtons from './SorterButtons.vue';
     import HiliteTerm from '../directives/HiliteTerm';
 
