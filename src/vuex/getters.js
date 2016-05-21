@@ -84,3 +84,17 @@ export function proofReadCopy({passages, title,}) {
         passages: pickleStory(passages),
     };
 }
+
+export function cssEditorOptions({codeEditorOptions,}) {
+    return Object.assign(
+        {},
+        codeEditorOptions,
+        {
+            mode: 'css',
+        }
+    );
+}
+
+export function getStyleSheet({styleSheet,}) {
+    return styleSheet;
+}

@@ -25,3 +25,7 @@ export function setPassagesSorting({dispatch,}, sorting) {
 export function setPassagesFiltering({dispatch,}, event) {
     dispatch('PASSAGES_FILTERING', event.target.value);
 }
+
+export function saveStyleSheet({dispatch,}, styleSheet) {
+    dispatch('SAVE_STYLESHEET', styleSheet);
+}

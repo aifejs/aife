@@ -1,5 +1,7 @@
 const state = {
     route: {},
+
+    title: 'Humongous occurence',
     passages: [
         {
             title: 'Twisty little passages',
@@ -20,15 +22,21 @@ const state = {
             pid: 42,
         },
     ],
+    script: '',
+    styleSheet: '',
+
     passagesSorting: {
         field: 'pid',
         sort: 'desc',
     },
     passagesFiltering: '',
     opened: [],
-    script: '',
-    style: '',
-    title: 'Humongous occurence',
+
+    codeEditorOptions: {
+        lineWrapping: true,
+        lineNumbers: true,
+        indentUnit: 4,
+    },
 };
 
 export default state;

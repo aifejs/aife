@@ -69,6 +69,10 @@ const mutations = {
     PASSAGES_FILTERING(state, filtering) {
         state.passagesFiltering = filtering;
     },
+
+    SAVE_STYLESHEET(state, styleSheet) {
+        state.styleSheet = styleSheet;
+    },
 };
 
 export default mutations;
