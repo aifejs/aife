@@ -16,15 +16,21 @@ article.passageEditor(v-if="passage")
 
 <script>
     import {getCurrentPassage,} from '../vuex/getters';
+    import {openPassage} from '../vuex/actions';
     export default {
         name: 'passage-editor',
         vuex: {
             getters: {
                 passage: getCurrentPassage,
             },
+            actions: {
+                openPassage,
+            }
         },
         route: {
             data(transition) {
+                this.openPassage(parseInt(transition.to.params.pid));
+
                 if (this.passage === undefined) {
                     transition.abort('no such passage');
                 } else {
