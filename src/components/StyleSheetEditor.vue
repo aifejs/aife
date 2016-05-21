@@ -1,6 +1,9 @@
 <template lang="pug">
-article.cssEditor
-    code-mirror("v-bind:options"="cssEditorOptions", "v-bind:code"="getStyleSheet" "@code-changed"="saveStyleSheet")
+article.cssEditor.panel.panel-default
+    div.panel-heading
+        h3.panel-title Edit story stylesheet
+    div.panel-body
+        code-mirror("v-bind:options"="cssEditorOptions", "v-bind:code"="getStyleSheet" "@code-changed"="saveStyleSheet")
 </template>
 
 <style lang="stylus"></style>

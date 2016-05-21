@@ -2,6 +2,7 @@
     import StoryStats from './StoryStats.vue';
     import PassagesList from './PassagesList.vue';
     import StyleSheetEditor from './StyleSheetEditor.vue';
+    import ScriptEditor from './ScriptEditor.vue';
 
     export default {
         name: 'overview',
@@ -9,6 +10,7 @@
             StoryStats,
             PassagesList,
             StyleSheetEditor,
+            ScriptEditor,
         },
     };
 </script>
@@ -19,6 +21,7 @@ article.overview
     story-stats
     passages-list
     style-sheet-editor
+    script-editor
     a(v-link="{name: 'proofRead'}") Proof-read
     router-view
 </template>

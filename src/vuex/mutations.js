@@ -73,6 +73,10 @@ const mutations = {
     SAVE_STYLESHEET(state, styleSheet) {
         state.styleSheet = styleSheet;
     },
+
+    SAVE_SCRIPT(state, script) {
+        state.script = script;
+    },
 };
 
 export default mutations;

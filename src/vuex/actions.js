@@ -29,3 +29,7 @@ export function setPassagesFiltering({dispatch,}, event) {
 export function saveStyleSheet({dispatch,}, styleSheet) {
     dispatch('SAVE_STYLESHEET', styleSheet);
 }
+
+export function saveScript({dispatch,}, script) {
+    dispatch('SAVE_SCRIPT', script);
+}

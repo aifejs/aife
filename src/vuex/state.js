@@ -22,7 +22,7 @@ const state = {
             pid: 42,
         },
     ],
-    script: '',
+    script: 'alert(42);',
     styleSheet: '',
 
     passagesSorting: {

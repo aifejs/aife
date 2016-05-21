@@ -95,6 +95,20 @@ export function cssEditorOptions({codeEditorOptions,}) {
     );
 }
 
+export function jsEditorOptions({codeEditorOptions,}) {
+    return Object.assign(
+        {},
+        codeEditorOptions,
+        {
+            mode: 'javascript',
+        }
+    );
+}
+
 export function getStyleSheet({styleSheet,}) {
     return styleSheet;
+}
+
+export function getScript({script,}) {
+    return script;
 }
