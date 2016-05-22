@@ -5,7 +5,7 @@ export default {
     },
 
     update(newValue) {
-        this.el.classList.toggle('glyphicon-sort-by-attributes', newValue === 'desc');
-        this.el.classList.toggle('glyphicon-sort-by-attributes-alt', newValue === 'asc');
+        this.el.classList.toggle('glyphicon-sort-by-attributes', newValue === 'asc');
+        this.el.classList.toggle('glyphicon-sort-by-attributes-alt', newValue === 'desc');
     },
 };

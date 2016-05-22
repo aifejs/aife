@@ -28,7 +28,7 @@ export function passagesOverview({passages, passagesSorting, passagesFiltering,}
 
     const sorted = sortBy(passagesToSort, (passage) => passage[passagesSorting.field]);
 
-    if (passagesSorting.sort === 'asc') {
+    if (passagesSorting.sort === 'desc') {
         return sorted.reverse();
     } else {
         return sorted;
@@ -48,14 +48,14 @@ export function getCurrentPassage({passages, route,}) {
     });
 }
 
-export function countPassageWords(passage) {
-    return countWords(passage.text) + countWords(passage.title) + countWords(passage.tags.join(' '));
+function countPassageWords(passage) {
+    return countWords(passage.text) + countWords(passage.title) + countWords(passage.tags);
 }
 
-export function passageStats(passage) {
+function passageStats(passage) {
     return {
         words: countPassageWords(passage),
-        characters: passage.text.length + passage.title.length + passage.tags.join(' ').split(' ').length,
+        characters: passage.text.length + passage.title.length + passage.tags.join('').length,
     };
 }
 
@@ -79,6 +79,7 @@ export function stats({passages,}) {
 }
 
 export function proofReadCopy({passages, title,}) {
+    console.log(pickleStory(passages));
     return {
         title,
         passages: pickleStory(passages),

@@ -147,8 +147,5 @@ test('pickle', (assert) => {
             1,
             'In a galaxy far away -- 1st passage'
         );
-
-        // assert.equals(caretPositionToPassage(testPickledStory, ), 1);
-
     });
 });

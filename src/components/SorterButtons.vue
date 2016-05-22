@@ -31,7 +31,6 @@ div.button-group
             changeSort(sortProperty) {
                 const sort = this.activeProperty.sort;
                 if (sortProperty.field === this.activeProperty.field) {
-                    console.log(sort);
                     if (sort === 'desc') {
                         this.activeProperty.sort = 'asc';
                     } else {

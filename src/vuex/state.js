@@ -27,7 +27,7 @@ const state = {
 
     passagesSorting: {
         field: 'pid',
-        sort: 'desc',
+        sort: 'asc',
     },
     passagesFiltering: '',
     opened: [],
