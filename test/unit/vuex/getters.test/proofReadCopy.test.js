@@ -1,6 +1,6 @@
 import {proofReadCopy,} from '../../../../src/vuex/getters';
 import test from 'tape';
-import {fixture,} from './fixture';
+import {fixture,} from '../fixture';
 
 test('proofReadCopy', (assert) => {
     assert.plan(4);

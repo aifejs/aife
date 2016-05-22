@@ -1,6 +1,6 @@
 import {stats,} from '../../../../src/vuex/getters';
 import test from 'tape';
-import {testState,} from './fixture';
+import {testState,} from '../fixture';
 
 test('stats', (assert) => {
     assert.plan(2);

@@ -1,6 +1,6 @@
 import {passagesOverview,} from '../../../../src/vuex/getters';
 import test from 'tape';
-import {testState, fixture,} from './fixture';
+import {testState, fixture,} from '../fixture';
 
 test('passagesOverview', (assert) => {
     assert.test('passagesSorting', (assert) => {

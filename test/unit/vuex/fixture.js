@@ -1,3 +1,4 @@
+import {cloneDeep,} from 'lodash';
 export const testState = {
     passages: [
         {
@@ -18,7 +19,7 @@ export const testState = {
 export function fixture(additionalProps = {}) {
     return Object.assign(
         {},
-        testState,
+        cloneDeep(testState),
         additionalProps
     );
 }
