@@ -2,6 +2,8 @@ import {proofReadCopy,} from '../../../../src/vuex/getters';
 import test from 'tape';
 import {fixture,} from '../fixture';
 
+// more thorough tests located in /test/unit/lib/pickle.test.js, this is just simple integration
+
 test('proofReadCopy', (assert) => {
     assert.plan(4);
 
