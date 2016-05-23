@@ -79,7 +79,6 @@ export function stats({passages,}) {
 }
 
 export function proofReadCopy({passages, title,}) {
-    console.log(pickleStory(passages));
     return {
         title,
         passages: pickleStory(passages),
