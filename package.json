@@ -10,7 +10,8 @@
     "dev": "npm-run-all --parallel watchify serve",
     "build": "cross-env NODE_ENV=production browserify -e src/aife.js",
     "lint": "eslint --ext .js,.vue src test",
-    "test": "watch \"browserify -t babelify test/unit/index.js | tape-run | faucet\""
+    "test": "watch \"browserify -t babelify test/unit/index.js | tape-run | faucet\"",
+    "test-once": "browserify -t babelify test/unit/index.js | tape-run | faucet"
   },
   "browserify": {
     "transform": [
