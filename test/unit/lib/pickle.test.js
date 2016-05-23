@@ -1,5 +1,5 @@
 import test from 'tape';
-import {stripIndent,} from 'common-tags';
+import {stripIndents, stripIndent,} from 'common-tags';
 import {
     picklePassage,
     unpicklePassage,
@@ -18,8 +18,8 @@ const testPassage0 = {
 const testPassage1 = {
     title: 'Big cave',
     text: stripIndent`
-    Biggest cave ever.
-    You wonder if you can fit here your mom.`,
+        Biggest cave ever.
+        You wonder if you can fit here your mom.`,
     tags: ['tag', 'lol, another tag',],
     pid: 1,
 };
@@ -27,20 +27,21 @@ const testPassage1 = {
 const testStory = [testPassage0, testPassage1,];
 
 const testPassage0Pickled = stripIndent`
-== Twisty little passages (0)
-
-They're incredibly all alike.`;
+    == Twisty little passages (0)
+    
+    They're incredibly all alike.`;
 
 const testPassage1Pickled = stripIndent`
-== Big cave (1)
-#tag #lol, another tag
-Biggest cave ever.
-You wonder if you can fit here your mom.`;
+    == Big cave (1)
+    #tag #lol, another tag
+    Biggest cave ever.
+    You wonder if you can fit here your mom.`;
 
-const testPickledStory = // TODO: find out why stripIndent works wrong here
-    testPassage0Pickled +
-    '\n=========================================================\n' +
-    testPassage1Pickled;
+const testPickledStory = stripIndents`
+    ${testPassage0Pickled}
+    =========================================================
+    ${testPassage1Pickled}
+`;
 
 
 test('pickle', (assert) => {
