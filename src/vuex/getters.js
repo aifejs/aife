@@ -1,6 +1,6 @@
 import countWords from '../lib/countWords';
 import {pickleStory,} from '../lib/pickle';
-import {sortBy,deburr,} from 'lodash';
+import {sortBy,deburr,uniq,} from 'lodash';
 
 export function tabs(state) {
     return state.opened
@@ -111,4 +111,20 @@ export function getStyleSheet({styleSheet,}) {
 
 export function getScript({script,}) {
     return script;
+}
+
+export function tagSuggestions({passages, route,}) {
+    const collectedTags = [];
+    let currentPassageTags = [];
+    passages.forEach(({tags, pid,}) => {
+        if (pid.toString() !== route.params.pid) {
+            collectedTags.push(...tags);
+        } else {
+            currentPassageTags = tags;
+        }
+    });
+
+    collectedTags.push(...currentPassageTags);
+
+    return uniq(collectedTags);
 }

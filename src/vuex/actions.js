@@ -33,3 +33,10 @@ export function saveStyleSheet({dispatch,}, styleSheet) {
 export function saveScript({dispatch,}, script) {
     dispatch('SAVE_SCRIPT', script);
 }
+
+export function editPassage({dispatch,}, {target,}, pid, field) {
+    dispatch('UPDATE_PASSAGE', {
+        [field]: target.value,
+        pid,
+    });
+}
