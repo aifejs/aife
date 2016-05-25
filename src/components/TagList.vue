@@ -9,7 +9,13 @@
             option(v-for="(suggestion, count) of suggestions", value="{{ suggestion }}") {{count}}
 </template>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+.tagList
+    &-item
+        margin-right: 1ex
+        &::before
+            content: '#'
+</style>
 
 <script>
     import {uniqueId,} from 'lodash';

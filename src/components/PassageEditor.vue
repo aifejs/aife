@@ -7,10 +7,6 @@ article.passageEditor(v-if="passage")
 </template>
 
 <style lang="stylus">
-    .passageEditor-tag
-        margin-right: 1ex
-        &::before
-            content: '#'
 </style>
 
 <script>
