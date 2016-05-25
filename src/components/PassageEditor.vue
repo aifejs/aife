@@ -2,12 +2,8 @@
 article.passageEditor(v-if="passage")
     input(placeholder="Passage title", required, "v-bind:value"="passage.title", @input="editPassage($event, passage.pid, 'title')")
     small (\#{{passage.pid}})
-    h3
-        span.passageEditor-tag(v-for="tag of passage.tags") {{ tag }}
-        input(list="passage-tags-{{passage.pid}}")
+    tag-list("v-bind:tags"="passage.tags", "v-bind:pid.once"="passage.pid", "v-bind:suggestions"="tagSuggestions", @add-tag="addTag", @remove-tag="removeTag")
     textarea("v-bind:value"="passage.text", @input="editPassage($event, passage.pid, 'text')")
-    datalist(id="passage-tags-{{passage.pid}}")
-        option(v-for="tag of tagSuggestions", value="{{ tag }}")
 </template>
 
 <style lang="stylus">
@@ -18,18 +14,21 @@ article.passageEditor(v-if="passage")
 </style>
 
 <script>
-    import {getCurrentPassage, tagSuggestions,} from '../vuex/getters';
-    import {openPassage, editPassage,} from '../vuex/actions';
+    import {getCurrentPassage, tagSuggestionsCounted,} from '../vuex/getters';
+    import {openPassage, editPassage, addTag, removeTag,} from '../vuex/actions';
+    import TagList from './TagList.vue';
     export default {
         name: 'passage-editor',
         vuex: {
             getters: {
                 passage: getCurrentPassage,
-                tagSuggestions,
+                tagSuggestions: tagSuggestionsCounted,
             },
             actions: {
                 openPassage,
                 editPassage,
+                addTag,
+                removeTag,
             },
         },
         route: {
@@ -42,6 +41,9 @@ article.passageEditor(v-if="passage")
                     transition.next();
                 }
             },
+        },
+        components: {
+            TagList,
         },
     };
 </script>

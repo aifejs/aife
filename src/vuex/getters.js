@@ -128,3 +128,19 @@ export function tagSuggestions({passages, route,}) {
 
     return uniq(collectedTags);
 }
+
+export function tagSuggestionsCounted({passages,}) {
+    const collectedTags = {};
+
+    passages.forEach(({tags,}) => {
+        tags.forEach((tag) => {
+            if (!collectedTags[tag]) {
+                collectedTags[tag] = 1;
+            } else {
+                collectedTags[tag] += 1;
+            }
+        });
+    });
+
+    return collectedTags;
+}

@@ -72,3 +72,15 @@ export function SAVE_STYLESHEET(state, styleSheet) {
 export function SAVE_SCRIPT(state, script) {
     state.script = script;
 }
+
+export function ADD_TAG(state, {pid, tag,}) {
+    const passage = findByPid(state.passages, pid);
+    if (!passage.tags.includes(tag)) {
+        passage.tags.push(tag);
+    }
+}
+
+export function REMOVE_TAG(state, {pid, index,}) {
+    const passage = findByPid(state.passages, pid);
+    passage.tags.splice(index, 1);
+}

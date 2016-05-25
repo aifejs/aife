@@ -40,3 +40,17 @@ export function editPassage({dispatch,}, {target,}, pid, field) {
         pid,
     });
 }
+
+export function addTag({dispatch,}, pid, tag) {
+    dispatch('ADD_TAG', {
+        pid,
+        tag,
+    });
+}
+
+export function removeTag({dispatch,}, pid, index) {
+    dispatch('REMOVE_TAG', {
+        pid,
+        index,
+    });
+}
