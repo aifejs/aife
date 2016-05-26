@@ -1,6 +1,6 @@
-import countWords from '../lib/countWords';
 import {pickleStory,} from '../lib/pickle';
 import {sortBy,deburr,uniq,} from 'lodash';
+import storyStats from '../lib/storyStats';
 
 export function tabs(state) {
     return state.opened
@@ -16,7 +16,12 @@ function passageCheckerFactory(term) {
     };
 }
 
-export function passagesOverview({passages, passagesSorting, passagesFiltering,}) {
+export function getCurrentStory({route, stories,}) {
+    return stories.find(({ifid,}) => ifid === route.params.ifid);
+}
+
+export function passagesOverview({route, stories, passagesSorting, passagesFiltering,}) {
+    const passages = getCurrentStory({route, stories,}).passages;
     let passagesToSort;
     const termTrimmed = passagesFiltering.trim();
     if (termTrimmed === '') {
@@ -38,7 +43,8 @@ export function getPassagesFiltering({passagesFiltering,}) {
     return passagesFiltering;
 }
 
-export function getCurrentPassage({passages, route,}) {
+export function getCurrentPassage({route, stories,}) {
+    const passages = getCurrentStory({route, stories,}).passages;
     return passages.find((passage) => {
         if ('pid' in route.params) {
             return passage.pid.toString() === route.params.pid;
@@ -48,40 +54,16 @@ export function getCurrentPassage({passages, route,}) {
     });
 }
 
-function countPassageWords(passage) {
-    return countWords(passage.text) + countWords(passage.title) + countWords(passage.tags);
+export function stats({route, stories,}) {
+    const story = getCurrentStory({route, stories,});
+    return storyStats(story);
 }
 
-function passageStats(passage) {
+export function proofReadCopy({route, stories,}) {
+    const story = getCurrentStory({route, stories,});
     return {
-        words: countPassageWords(passage),
-        characters: passage.text.length + passage.title.length + passage.tags.join('').length,
-    };
-}
-
-export function stats({passages,}) {
-    const storyStats = passages.reduce(
-        (accumulator, passage) => {
-            const stat = passageStats(passage);
-            accumulator.words += stat.words;
-            accumulator.characters += stat.characters;
-            return accumulator;
-        },
-        {
-            words: 0,
-            characters: 0,
-        }
-    );
-
-    storyStats.passages = passages.length;
-
-    return storyStats;
-}
-
-export function proofReadCopy({passages, title,}) {
-    return {
-        title,
-        passages: pickleStory(passages),
+        title: story.title,
+        passages: pickleStory(story.passages),
     };
 }
 
@@ -105,15 +87,16 @@ export function jsEditorOptions({codeEditorOptions,}) {
     );
 }
 
-export function getStyleSheet({styleSheet,}) {
-    return styleSheet;
+export function getStyleSheet({route, stories,}) {
+    return getCurrentStory({route, stories,}).styleSheet;
 }
 
-export function getScript({script,}) {
-    return script;
+export function getScript({route, stories,}) {
+    return getCurrentStory({route, stories,}).script;
 }
 
-export function tagSuggestions({passages, route,}) {
+export function tagSuggestions({route, stories,}) {
+    const passages = getCurrentStory({route, stories,}).passages;
     const collectedTags = [];
     let currentPassageTags = [];
     passages.forEach(({tags, pid,}) => {
@@ -129,7 +112,8 @@ export function tagSuggestions({passages, route,}) {
     return uniq(collectedTags);
 }
 
-export function tagSuggestionsCounted({passages,}) {
+export function tagSuggestionsCounted({route, stories,}) {
+    const passages = getCurrentStory({route, stories,}).passages;
     const collectedTags = {};
 
     passages.forEach(({tags,}) => {
@@ -143,4 +127,46 @@ export function tagSuggestionsCounted({passages,}) {
     });
 
     return collectedTags;
+}
+
+const storySorters = {
+    passages(story) {
+        return story.passages.length;
+    },
+    title(story) {
+        return story.title;
+    },
+    lastEdit(story) {
+        return story.lastEdit;
+    },
+};
+
+export function storiesList({stories, storiesSorting,}) {
+    let sorted = sortBy(stories, storySorters[storiesSorting.field]);
+
+    if (storiesSorting.sort === 'desc') {
+        sorted = sorted.reverse();
+    }
+
+    return sorted.map((story) => ({
+        title: story.title,
+        stats: storyStats(story),
+        ifid: story.ifid,
+    }));
+}
+
+export function getCurrentIfid({route,}) {
+    return route.params.ifid;
+}
+
+export function getEditStylesheet({editStylesheet,}) {
+    return editStylesheet;
+}
+
+export function getEditScript({editScript,}) {
+    return editScript;
+}
+
+export function getProofRead({proofRead,}) {
+    return proofRead;
 }

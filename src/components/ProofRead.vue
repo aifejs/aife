@@ -1,6 +1,6 @@
 <script type="module">
     import {proofReadCopy} from '../vuex/getters';
-    import {updateStoryFromProof} from '../vuex/actions';
+    import {updateStoryFromProof, openProofRead} from '../vuex/actions';
 
     export default {
         name: 'proof-read',
@@ -10,6 +10,15 @@
             },
             actions: {
                 updateStoryFromProof,
+                openProofRead,
+            },
+        },
+
+        route: {
+            data(transition) {
+                this.openProofRead();
+
+                transition.next();
             },
         },
     }
@@ -17,7 +26,6 @@
 
 <template lang="pug">
 article.proofRead
-    a(v-link="{name: 'overview'}") Back to overview
     h1 {{proofReadCopy.title}}
     label
         span.text-danger

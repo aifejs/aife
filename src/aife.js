@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './App.vue';
+import AifeRoot from './AifeRoot.vue';
 import routerSetup from './lib/routerSetup';
 import routerParams from './routerParams';
 import store from './vuex/store';
@@ -11,4 +11,4 @@ const router = routerSetup(routerParams);
 
 sync(store, router);
 
-router.start(App, 'app');
+router.start(AifeRoot, 'aife-root');

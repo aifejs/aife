@@ -1,18 +1,17 @@
 <template lang="pug">
-article.jsEditor.panel.panel-default
-    div.panel-heading
-        h3.panel-title Edit story script
-    div.panel-body
-        code-mirror("v-bind:options"="jsEditorOptions", "v-bind:code"="getScript" "@code-changed"="saveScript")
+article.jsEditor
+    h3 Edit story script
+
+    code-mirror("v-bind:options"="jsEditorOptions", "v-bind:code"="getScript" "@code-changed"="saveScript")
 </template>
 
 <style lang="stylus"></style>
 
 <script>
-    import CodeMirror from './CodeMirror.vue';
+    import CodeMirror from './common/CodeMirror.vue';
     import 'codemirror/mode/javascript/javascript';
     import {jsEditorOptions, getScript,} from '../vuex/getters';
-    import {saveScript,} from '../vuex/actions';
+    import {saveScript, openScript,} from '../vuex/actions';
     export default {
         vuex: {
             getters: {
@@ -22,11 +21,20 @@ article.jsEditor.panel.panel-default
 
             actions: {
                 saveScript,
+                openScript,
             },
         },
 
         components: {
             CodeMirror,
+        },
+
+        route: {
+            data(transition) {
+                this.openScript();
+
+                transition.next();
+            },
         },
     };
 </script>

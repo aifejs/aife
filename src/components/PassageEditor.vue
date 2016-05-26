@@ -12,7 +12,7 @@ article.passageEditor(v-if="passage")
 <script>
     import {getCurrentPassage, tagSuggestionsCounted,} from '../vuex/getters';
     import {openPassage, editPassage, addTag, removeTag,} from '../vuex/actions';
-    import TagList from './TagList.vue';
+    import TagList from './common/TagList.vue';
     export default {
         name: 'passage-editor',
         vuex: {

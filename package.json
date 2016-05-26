@@ -23,6 +23,7 @@
     "codemirror": "^5.15.2",
     "common-tags": "^1.1.0",
     "lodash": "^4.13.1",
+    "tiny-uuid": "^1.0.0",
     "vue": "^1.0.24",
     "vue-router": "^0.7.13",
     "vuex": "^0.6.3",

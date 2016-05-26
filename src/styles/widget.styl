@@ -1,0 +1,39 @@
+.widget
+    display: flex
+    justify-content: space-between
+    flex-direction: column
+    border: 1px solid silver
+    border-radius: 2px
+
+    &-header,
+    &-footer
+        display: flex
+        flex-direction: row
+        align-items: center
+        background-color: silver
+
+    &-header
+        justify-content: space-between
+    &-footer
+        justify-content: flex-end
+
+    &-header,
+    &-body,
+    &-footer
+        padding-left: 1em
+        padding-right: 1em
+        padding-top: 0.5em
+        padding-bottom: 0.5em
+
+    &.collapsed > &-body
+        display: none;
+
+    &.laconic > &-footer
+        display: none;
+
+    &.lighter > &-header,
+    &.lighter > &-footer
+        background-color: whitesmoke
+
+    &.lighter
+        border-color: gainsboro

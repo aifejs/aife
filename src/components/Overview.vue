@@ -1,27 +1,37 @@
 <script>
-    import StoryStats from './StoryStats.vue';
+    import OverviewStats from './OverviewStats.vue';
     import PassagesList from './PassagesList.vue';
-    import StyleSheetEditor from './StyleSheetEditor.vue';
-    import ScriptEditor from './ScriptEditor.vue';
 
     export default {
         name: 'overview',
         components: {
-            StoryStats,
+            OverviewStats,
             PassagesList,
-            StyleSheetEditor,
-            ScriptEditor,
         },
     };
 </script>
 
+<style lang="stylus">
+.overview
+    &-editorLinks
+        a
+            margin-left: 1ex
+</style>
+
 <template lang="pug">
-article.overview
-    h1 Story overview
-    story-stats
-    passages-list
-    style-sheet-editor
-    script-editor
-    a(v-link="{name: 'proofRead'}") Proof-read
-    router-view
+article.overview.widget
+    .widget-header
+        .widget-title Story overview
+        .widget-controls
+            .overview-editorLinks
+                a(v-link="{name: 'stylesheet'}", title="Edit styles")
+                    span.glyphicon.glyphicon-film
+                a(v-link="{name: 'script'}", title="Edit script")
+                    span.glyphicon.glyphicon-list-alt
+                a(v-link="{name: 'proofRead'}", title="Proof-read copy")
+                    span.glyphicon.glyphicon-eye-open
+    .widget-body
+        overview-stats
+        br
+        passages-list
 </template>

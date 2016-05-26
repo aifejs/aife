@@ -1,0 +1,21 @@
+.storyStats
+    &.shortForm .longForm,
+    &.longForm .shortForm
+        display: none
+
+    &-toggler
+        cursor: pointer
+
+    .storyStats-list
+        margin-bottom: 0
+        dt
+            display: inline-block
+            width: 8em
+            text-align: right
+            margin-right: 1ex
+        dd
+            display: inline
+            margin: 0
+            &::after
+                display: block
+                content: ''

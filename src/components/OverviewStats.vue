@@ -1,24 +1,22 @@
 <template lang="pug">
-dl.dl-horizontal
-    dt Passages:
-    dd {{stats.passages}}
-    dt Words:
-    dd {{stats.words}}
-    dt Characters:
-    dd {{stats.characters}}
+story-stats("v-bind:stats"="stats").lighter
 </template>
 
 <style lang="stylus"></style>
 
 <script>
+    import StoryStats from './common/StoryStats.vue';
     import {stats,} from '../vuex/getters';
 
     export default {
-        name: 'story-stats',
+        name: 'overview-stats',
         vuex: {
             getters: {
                 stats,
             },
+        },
+        components: {
+            StoryStats,
         },
     };
 </script>

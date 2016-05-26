@@ -1,18 +1,17 @@
 <template lang="pug">
-article.cssEditor.panel.panel-default
-    div.panel-heading
-        h3.panel-title Edit story stylesheet
-    div.panel-body
-        code-mirror("v-bind:options"="cssEditorOptions", "v-bind:code"="getStyleSheet" "@code-changed"="saveStyleSheet")
+article.cssEditor
+    h3 Edit story stylesheet
+
+    code-mirror("v-bind:options"="cssEditorOptions", "v-bind:code"="getStyleSheet" "@code-changed"="saveStyleSheet")
 </template>
 
 <style lang="stylus"></style>
 
 <script>
-    import CodeMirror from './CodeMirror.vue';
+    import CodeMirror from './common/CodeMirror.vue';
     import 'codemirror/mode/css/css';
     import {cssEditorOptions, getStyleSheet,} from '../vuex/getters';
-    import {saveStyleSheet,} from '../vuex/actions';
+    import {saveStyleSheet, openStylesheet,} from '../vuex/actions';
     export default {
         vuex: {
             getters: {
@@ -22,11 +21,20 @@ article.cssEditor.panel.panel-default
 
             actions: {
                 saveStyleSheet,
+                openStylesheet,
             },
         },
 
         components: {
             CodeMirror,
+        },
+
+        route: {
+            data(transition) {
+                this.openStylesheet();
+
+                transition.next();
+            },
         },
     };
 </script>

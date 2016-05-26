@@ -1,0 +1,22 @@
+div.my-tabs
+    a.btn(v-link="{name: 'story', params: {ifid: ifid}}") Overview
+
+    span(v-if="editScript")
+        a.btn(v-link="{name: 'script'}") Script
+        a.btn.btn-danger.btn-xs.my-tabs-close(v-link="{name: 'story', params: {ifid: ifid}}", "@click"="closeScript")
+            span.glyphicon.glyphicon-remove
+    span(v-if="editStylesheet")
+        a.btn(v-link="{name: 'stylesheet'}") Style
+        a.btn.btn-danger.btn-xs.my-tabs-close(v-link="{name: 'story', params: {ifid: ifid}}", "@click"="closeStylesheet")
+            span.glyphicon.glyphicon-remove
+    span(v-if="proofRead")
+        a.btn(v-link="{name: 'proofRead'}") Proof-read
+        a.btn.btn-danger.btn-xs.my-tabs-close(v-link="{name: 'story', params: {ifid: ifid}}", "@click"="closeProofRead")
+            span.glyphicon.glyphicon-remove
+
+    span(v-for="tab of tabs", track-by="pid")
+        a.btn(v-link="{name: 'passage', params: {pid: tab.pid}}") {{tab.title}}
+        a.btn.btn-danger.btn-xs.my-tabs-close(v-link="{name: 'story', params: {ifid: ifid}}", "@click"="closePassage(tab.pid)")
+            span.glyphicon.glyphicon-remove
+
+    button.btn("@click"="addPassage") +

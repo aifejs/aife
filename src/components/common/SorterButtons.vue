@@ -1,15 +1,16 @@
 <template lang="pug">
-div.button-group
-    | Sort by:
-    button.btn(v-for="sortProperty of sortProperties", "v-bind:class"="{active: sortProperty.field === activeProperty.field}", "@click"="changeSort(sortProperty)")
-        | {{ sortProperty.name }}
-        span(v-sort-icon="activeProperty.sort")
+.sorterButtons
+    span.sorterButtons-title Sort by:
+    .sorterButtons-grp
+        button.sorterButtons-btn(v-for="sortProperty of sortProperties", "v-bind:class"="{active: sortProperty.field === activeProperty.field}", "@click"="changeSort(sortProperty)")
+            | {{ sortProperty.name }}
+            span.sorterButtons-sort(v-sort-icon="activeProperty.sort")
 </template>
 
-<style lang="stylus"></style>
+<style lang="stylus" src="../../styles/sorterButtons.styl"></style>
 
 <script>
-    import SortIcon from '../directives/SortIcon';
+    import SortIcon from '../../directives/SortIcon';
 
     export default {
         name: 'sorter-buttons',
