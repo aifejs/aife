@@ -1,0 +1,23 @@
+nav.aifeTabs
+    span.aifeTabs-item.btn.back
+        a(v-link="{name: 'stories'}", title="Back to stories list") <<
+
+    span.aifeTabs-item.special(v-link-active)
+        a(v-link="{name: 'story'}") Overview
+
+    span.aifeTabs-item.special(v-if="editScript", v-link-active)
+        a(v-link="{name: 'script'}") Script
+        button.aifeTabs-close("@click"="closeScriptAndGoBack") x
+    span.aifeTabs-item.special(v-if="editStylesheet", v-link-active)
+        a(v-link="{name: 'stylesheet'}") Style
+        button.aifeTabs-close("@click"="closeStylesheetAndGoBack") x
+    span.aifeTabs-item.special(v-if="proofRead", v-link-active)
+        a(v-link="{name: 'proofRead'}") Proof-read
+        button.aifeTabs-close("@click"="closeProofReadAndGoBack") x
+
+    span.aifeTabs-item.passage(v-for="tab of tabs", track-by="pid", v-link-active)
+        a(v-link="{name: 'passage', params: {pid: tab.pid}}") {{tab.title}}
+        button.aifeTabs-close("@click"="closePassageAndGoBack(tab.pid)") x
+
+    span.aifeTabs-item.btn.addPassage
+        a("@click"="addPassage") Add passage

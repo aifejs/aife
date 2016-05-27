@@ -13,7 +13,7 @@ const routerParams = {
     options: {
         root: '/',
         history: false,
-        linkActiveClass: 'btn-primary',
+        linkActiveClass: 'active',
     },
 
     routes: {
