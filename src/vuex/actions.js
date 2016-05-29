@@ -63,6 +63,21 @@ export function addStory({dispatch,}, title) {
     dispatch('CREATE_STORY', {title,});
 }
 
+export function deleteStory({dispatch,}, ifid) {
+    dispatch('DELETE_STORY', ifid);
+}
+
+export function editStoryTitle({dispatch,}, title, ifid) {
+    dispatch('SET_STORY_TITLE', {
+        title,
+        ifid,
+    });
+}
+
+export function duplicateStory({dispatch,}, ifid) {
+    dispatch('DUPLICATE_STORY', ifid);
+}
+
 export function openStylesheet({dispatch,}) {
     dispatch('OPEN_STYLESHEET');
 }

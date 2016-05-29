@@ -1,31 +1,12 @@
-<template lang="pug">
-article.storyList.widget.lighter
-    .widget-header
-        h2.widget-title List of stories
-        .widget-controls
-            sorter-buttons("v-bind:sort-properties"="sortProperties", "@sort"="setStoriesSorting")
-    .widget-body
-        div(v-if="storiesList.length")
-            .widget.storyList-item(v-for="story of storiesList")
-                .widget-header
-                    a.widget-title(v-link="{name: 'story', params: {ifid: story.ifid}}") {{ story.title }}
-                    .widget-controls
-                        a(v-link="{name: 'proofRead', params: {ifid: story.ifid}}", title="Proof-read copy")
-                            span.glyphicon.glyphicon-eye-open
-                .widget-body
-                    story-stats("v-bind:stats"="story.stats").lighter
-</template>
+<template lang="pug" src="../../templates/storyList.pug"></template>
 
-<style lang="stylus">
-    .storyList-item
-        max-width: 20em
-        display: inline-block
-</style>
+<style lang="stylus" src="../../styles/storyList.styl"></style>
 
 <script>
     import {storiesList,} from '../../vuex/getters';
     import {setStoriesSorting,} from '../../vuex/actions';
-    import StoryStats from '../common/StoryStats.vue';
+
+    import StoryListItem from './StoryListItem.vue';
     import SorterButtons from '../common/SorterButtons.vue';
 
     export default {
@@ -34,8 +15,8 @@ article.storyList.widget.lighter
         data() {
             return {
                 sortProperties: [
-                    {field: 'title', name: 'Title',},
                     {field: 'lastEdit', name: 'Last edit',},
+                    {field: 'title', name: 'Title',},
                     {field: 'passages', name: 'Passages #',},
                 ],
             };
@@ -50,8 +31,8 @@ article.storyList.widget.lighter
             },
         },
         components: {
-            StoryStats,
             SorterButtons,
+            StoryListItem,
         },
     };
 </script>

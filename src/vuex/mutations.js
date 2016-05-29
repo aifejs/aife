@@ -2,7 +2,9 @@
 
 import {unpickleStory, caretPositionToPassage,} from '../lib/pickle';
 import {getCurrentStory,} from './getters';
-import {ifid,} from 'tiny-uuid';
+import uuid from 'tiny-uuid';
+import {cloneDeep,} from 'lodash';
+import createCopyTitle from '../lib/createCopyTitle';
 
 function findByPid(passages, pid) {
     return passages.find((passage) => passage.pid === pid);
@@ -122,12 +124,38 @@ export function REMOVE_TAG(state, {pid, index,}) {
 export function CREATE_STORY(state, {title,}) {
     state.stories.push({
         title,
-        ifid: ifid(),
+        ifid: uuid(),
         passages: [],
         styleSheet: '',
         script: '',
         lastEdit: Date.now(),
     });
+}
+
+export function DELETE_STORY(state, ifid) {
+    const storyIndex = state.stories.findIndex((story) => story.ifid === ifid);
+    if (storyIndex !== -1) {
+        state.stories.splice(storyIndex, 1);
+    }
+}
+
+export function SET_STORY_TITLE(state, {title, ifid,}) {
+    const storyToEdit = state.stories.find((story) => story.ifid === ifid);
+    storyToEdit.title = title;
+}
+
+export function DUPLICATE_STORY(state, ifid) {
+    const storyToDuplicate = state.stories.find((story) => story.ifid === ifid);
+    const newStory = Object.assign(
+        cloneDeep(storyToDuplicate),
+        {
+            ifid: uuid(),
+            title: createCopyTitle(storyToDuplicate.title),
+            lastEdit: Date.now(),
+        }
+    );
+
+    state.stories.push(newStory);
 }
 
 export function OPEN_STYLESHEET(state) {

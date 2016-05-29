@@ -1,0 +1,31 @@
+.storyListItem
+    size = 14em
+    display: inline-block
+    width: size * 1.62
+    height: size
+    overflow-y: auto
+    margin-right: 1ex
+    vertical-align: top
+
+    &-input
+        display: none
+        width: 12em
+        background: white
+        border: 1px solid gray
+
+        .editing &
+            display: inline-block
+
+    &-link
+        display: inline-block
+        width: 12em
+        overflow: hidden
+        vertical-align: middle
+        white-space: nowrap
+        text-overflow: ellipsis
+
+        .editing &
+            display: none
+
+    &-editBtn
+        margin-left: 0.5ex

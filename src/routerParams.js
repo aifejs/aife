@@ -8,6 +8,7 @@ import StyleSheetEditor from './components/StyleSheetEditor.vue';
 
 import StoryList from './components/story/StoryList.vue';
 import Story from './components/story/Story.vue';
+import StoryDeleter from './components/story/StoryDeleter.vue';
 
 const routerParams = {
     options: {
@@ -57,6 +58,11 @@ const routerParams = {
                     component: StyleSheetEditor,
                 },
             },
+        },
+
+        '/deleteStory/:ifid': {
+            name: 'deleteStory',
+            component: StoryDeleter,
         },
     },
 };

@@ -11,19 +11,14 @@
     };
 </script>
 
-<style lang="stylus">
-.overview
-    &-editorLinks
-        a
-            margin-left: 1ex
-</style>
+<style lang="stylus"></style>
 
 <template lang="pug">
 article.overview.widget
     .widget-header
         .widget-title Story overview
         .widget-controls
-            .overview-editorLinks
+            .widget-controlIcons
                 a(v-link="{name: 'stylesheet'}", title="Edit styles")
                     span.glyphicon.glyphicon-film
                 a(v-link="{name: 'script'}", title="Edit script")
