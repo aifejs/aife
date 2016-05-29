@@ -33,7 +33,7 @@ const routerParams = {
                     component: Overview,
                 },
 
-                '/delete/:pid': {
+                '/deletePassage/:pid': {
                     name: 'deletePassage',
                     component: PassageDeleter,
                 },
@@ -57,12 +57,12 @@ const routerParams = {
                     name: 'stylesheet',
                     component: StyleSheetEditor,
                 },
-            },
-        },
 
-        '/deleteStory/:ifid': {
-            name: 'deleteStory',
-            component: StoryDeleter,
+                '/deleteStory': {
+                    name: 'deleteStory',
+                    component: StoryDeleter,
+                },
+            },
         },
     },
 };

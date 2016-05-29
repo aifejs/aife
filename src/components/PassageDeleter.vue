@@ -1,18 +1,27 @@
 <template lang="pug">
-    .alert.alert-danger(v-if="passage")
-        | Are you sure you want to delete passage \#{{passage.pid}}?
-        br
-        .btn-group
-            button.btn.btn-default(v-link="{name: 'overview'}") Cancel
-            button.btn.btn-danger("@click"="deletePassage(passage.pid)", v-link="{name: 'overview'}") Delete passage forever
+article.deleteStory.deleter
+    h3 Delete passage?
+    p Are you sure you want to delete passage&nbsp;
+        strong \#{{ passage.pid }} ({{ passage.title }})
+        | ? This can't be undone.
+    a.deleter-cancel(v-link="{name: 'overview'}") No, take me back
+    button.deleter-confirm(@click="dropPassage(passage.pid)") Yes, delete passage completely and unrecoverably
 </template>
 
-<script type="module">
+<script>
     import {deletePassage,} from '../vuex/actions';
     import {getCurrentPassage,} from '../vuex/getters';
+    import router from '../router';
 
     export default {
         name: 'passage-deleter',
+        methods: {
+            dropPassage(pid) {
+                this.deletePassage(pid);
+                router.go({name: 'overview'})
+            },
+        },
+
         vuex: {
             actions: {
                 deletePassage,
