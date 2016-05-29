@@ -4,7 +4,7 @@ const state = {
     stories: [
         {
             title: 'Humongous occurence',
-            ifid: 'F51FC123-28AA-4A30-A591-7E4D78EFB2D5',
+            ifid: 'f51fc123-28aa-4a30-a591-7e4d78efb2d5',
             lastEdit: 1464294831088,
             passages: [
                 {
