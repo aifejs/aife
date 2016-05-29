@@ -1,12 +1,25 @@
 <template lang="pug">
 article.passageEditor(v-if="passage")
-    input(placeholder="Passage title", required, "v-bind:value"="passage.title", @input="editPassage($event, passage.pid, 'title')")
-    small (\#{{passage.pid}})
+    small pid \#{{passage.pid}}
+    label
+        | Passage title
+        br
+        input(placeholder="Passage title", required, "v-bind:value"="passage.title", @input="editPassage($event, passage.pid, 'title')")
     tag-list("v-bind:tags"="passage.tags", "v-bind:pid.once"="passage.pid", "v-bind:suggestions"="tagSuggestions", @add-tag="addTag", @remove-tag="removeTag")
-    textarea("v-bind:value"="passage.text", @input="editPassage($event, passage.pid, 'text')")
+    label
+        | Passage contents
+        textarea("v-bind:value"="passage.text", @input="editPassage($event, passage.pid, 'text')")
 </template>
 
 <style lang="stylus">
+.passageEditor
+    label
+        display: block
+        font-weight: normal
+    textarea
+        width: 100%
+        height: 400px
+        font-weight: normal
 </style>
 
 <script>

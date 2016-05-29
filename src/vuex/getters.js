@@ -64,6 +64,7 @@ export function proofReadCopy({route, stories,}) {
     return {
         title: story.title,
         passages: pickleStory(story.passages),
+        ifid: story.ifid,
     };
 }
 

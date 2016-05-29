@@ -2,6 +2,11 @@
     div.codeEditor
 </template>
 
+<style lang="stylus">
+.codeEditor
+    width: 100%
+</style>
+
 <script>
     import CodeMirror from 'codemirror';
 
