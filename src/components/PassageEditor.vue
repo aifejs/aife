@@ -8,7 +8,7 @@ article.passageEditor(v-if="passage")
     tag-list("v-bind:tags"="passage.tags", "v-bind:pid.once"="passage.pid", "v-bind:suggestions"="tagSuggestions", @add-tag="addTag", @remove-tag="removeTag")
     label
         | Passage contents
-        textarea("v-bind:value"="passage.text", @input="editPassage($event, passage.pid, 'text')")
+        textarea.codeArea("v-bind:value"="passage.text", @input="editPassage($event, passage.pid, 'text')")
 </template>
 
 <style lang="stylus">
@@ -17,7 +17,6 @@ article.passageEditor(v-if="passage")
         display: block
         font-weight: normal
     textarea
-        width: 100%
         height: 400px
         font-weight: normal
 </style>

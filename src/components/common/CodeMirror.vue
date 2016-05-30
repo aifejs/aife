@@ -1,11 +1,8 @@
 <template lang="pug">
-    div.codeEditor
+div.codeEditor.codeArea
 </template>
 
-<style lang="stylus">
-.codeEditor
-    width: 100%
-</style>
+<style lang="stylus"></style>
 
 <script>
     import CodeMirror from 'codemirror';

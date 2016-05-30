@@ -7,7 +7,7 @@ article.proofRead
         br
         input(placeholder="Story title", required, "v-bind:value"="proofReadCopy.title", @input="editTitle")
     label
-        textarea("v-bind:value"="proofReadCopy.passages", @input="updateStoryFromProof")
+        textarea.codeArea("v-bind:value"="proofReadCopy.passages", @input="updateStoryFromProof")
 </template>
 
 <style lang="stylus">
