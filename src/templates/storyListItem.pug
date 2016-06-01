@@ -3,13 +3,13 @@
         .widget-title(title="{{ story.title }}", "v-bind:class"="{editing: editing}")
             a.storyListItem-link(v-link="{name: 'story', params: {ifid: story.ifid}}") {{ story.title }}
             input.storyListItem-input("v-bind:value.once"="story.title", "@keydown"="processTitleEdit", "@blur"="onBlur", "v-el:input")
-            span.glyphicon.glyphicon-pencil.activeIcon.storyListItem-editBtn("@click"="toggleEditing", title="Rename story")
+            span.fa.fa-pencil.activeIcon.storyListItem-editBtn("@click"="toggleEditing", title="Rename story")
         .widget-controls
             .widget-controlIcons
-                span.glyphicon.glyphicon-duplicate.activeIcon(title="Duplicate story", "@click"="duplicateStory(story.ifid)")
+                span.fa.fa-files-o.activeIcon(title="Duplicate story", "@click"="duplicateStory(story.ifid)")
                 a(v-link="{name: 'deleteStory', params: {ifid: story.ifid}}", title="Delete story")
-                    span.glyphicon.glyphicon-trash.activeIcon.danger
+                    span.fa.fa-trash.activeIcon.danger
                 a(v-link="{name: 'proofRead', params: {ifid: story.ifid}}", title="Proof-read mode")
-                    span.glyphicon.glyphicon-eye-open
+                    span.fa.fa-pencil-square-o
     .widget-body
         story-stats("v-bind:stats"="story.stats").lighter

@@ -2,8 +2,8 @@
     .tagList
         span.tagList-item(v-for="tag of tags")
             | {{ tag }}
-            button.btn.btn-danger.btn-xs("@click"="onTagRemoveClick($index)")
-                span.glyphicon.glyphicon-remove
+            i.fa.fa-trash.activeIcon.danger.tagList-remove("@click"="onTagRemoveClick($index)")
+
         input(list="{{uuid}}-{{pid}}", placeholder="Press enter to add tag", @keyup="onKeyPress")
         datalist(id="{{uuid}}-{{pid}}")
             option(v-for="(suggestion, count) of suggestions", value="{{ suggestion }}") {{count}}
@@ -12,9 +12,12 @@
 <style lang="stylus">
 .tagList
     &-item
-        margin-right: 1ex
+        margin-right: 1em
         &::before
             content: '#'
+            color: silver
+    &-remove
+        margin-left: 1ex
 </style>
 
 <script>

@@ -3,7 +3,7 @@ article.storyStats.widget("v-bind:class"="{longForm: longForm, shortForm: !longF
     .widget-header
         .widget-title Story stats
         .widget-controls
-            span.glyphicon.storyStats-toggler("v-bind:class"="{'glyphicon-collapse-down': longForm, 'glyphicon-expand': !longForm}", @click="toggleLongForm", title="Show more/less")
+            span.fa.storyStats-toggler("v-bind:class"="{'fa-minus-square-o': longForm, 'fa-plus-square-o': !longForm}", @click="toggleLongForm", title="Show more/less")
     .widget-body
         dl.storyStats-list
             dt Passages:

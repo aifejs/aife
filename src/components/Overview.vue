@@ -20,11 +20,11 @@ article.overview.widget
         .widget-controls
             .widget-controlIcons
                 a(v-link="{name: 'stylesheet'}", title="Edit styles")
-                    span.glyphicon.glyphicon-film
+                    i.fa.fa-css3
                 a(v-link="{name: 'script'}", title="Edit script")
-                    span.glyphicon.glyphicon-list-alt
+                    i.fa.fa-terminal
                 a(v-link="{name: 'proofRead'}", title="Proof-read copy")
-                    span.glyphicon.glyphicon-eye-open
+                    span.fa.fa-pencil-square-o
     .widget-body
         overview-stats
         br

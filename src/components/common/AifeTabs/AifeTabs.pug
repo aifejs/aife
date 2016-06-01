@@ -7,17 +7,17 @@ nav.aifeTabs
 
     span.aifeTabs-item.special(v-if="editScript", v-link-active)
         a(v-link="{name: 'script'}") Script
-        button.aifeTabs-close("@click"="closeScriptAndGoBack") x
+        i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeScriptAndGoBack")
     span.aifeTabs-item.special(v-if="editStylesheet", v-link-active)
         a(v-link="{name: 'stylesheet'}") Style
-        button.aifeTabs-close("@click"="closeStylesheetAndGoBack") x
+        i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeStylesheetAndGoBack")
     span.aifeTabs-item.special(v-if="proofRead", v-link-active)
         a(v-link="{name: 'proofRead'}") Proof-read
-        button.aifeTabs-close("@click"="closeProofReadAndGoBack") x
+        i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeProofReadAndGoBack")
 
     span.aifeTabs-item.passage(v-for="tab of tabs", track-by="pid", v-link-active)
         a(v-link="{name: 'passage', params: {pid: tab.pid}}") {{tab.title}}
-        button.aifeTabs-close("@click"="closePassageAndGoBack(tab.pid)") x
+        i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closePassageAndGoBack(tab.pid)")
 
     span.aifeTabs-item.btn.addPassage
         a("@click"="addPassage") Add passage

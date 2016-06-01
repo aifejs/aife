@@ -10,12 +10,17 @@ article.passagesList.widget.lighter
             li(v-for="passage of passagesOverview")
                 // we have to use @click to create a tab and we have to use v-link for routes to work
                 a(v-link="{name: 'passage', params: {pid: passage.pid}}", v-hilite-term="getPassagesFiltering") {{passage.title}}
-                a.btn.btn-xs.btn-danger(v-link="{name: 'deletePassage', params: {pid: passage.pid}}")
-                    span.glyphicon.glyphicon-trash
+                a(v-link="{name: 'deletePassage', params: {pid: passage.pid}}")
+                    i.fa.fa-trash.activeIcon.danger.passagesList-remove
                 p(v-hilite-term="getPassagesFiltering") {{passage.text}}
 </template>
 
-<style></style>
+<style lang="stylus">
+.passagesList
+    &-remove
+        margin-left: 1ex
+
+</style>
 
 <script>
     import {setPassagesSorting,setPassagesFiltering,} from '../vuex/actions';

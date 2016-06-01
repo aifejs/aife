@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "watchify": "watchify -v --poll browserify-hmr -e src/aife.js -o dist/aife.js",
-    "serve": "http-server -c 1 -a localhost",
+    "serve": "http-server -c 1 -a localhost --proxy http://localhost:8080/node_modules/font-awesome/",
     "dev": "npm-run-all --parallel watchify serve",
     "build": "cross-env NODE_ENV=production browserify -e src/aife.js",
     "lint": "eslint --ext .js,.vue src test",
@@ -22,7 +22,9 @@
   "dependencies": {
     "codemirror": "^5.15.2",
     "common-tags": "^1.1.0",
+    "font-awesome": "^4.6.3",
     "lodash": "^4.13.1",
+    "normalize.css": "^4.1.1",
     "tiny-uuid": "^1.0.0",
     "vue": "^1.0.24",
     "vue-router": "^0.7.13",
