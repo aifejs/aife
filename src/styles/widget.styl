@@ -14,6 +14,7 @@
 
     &-header
         justify-content: space-between
+
     &-footer
         justify-content: flex-end
 
@@ -41,3 +42,16 @@
     &-controlIcons
         a, span
             margin-left: 1ex
+        a > i
+            margin-right: 1ex
+
+
+    &.screen
+        height: 100%
+
+    &.screen > &-footer
+        justify-content: flex-start
+
+    &.screen > &-body
+        display: flex
+        flex-grow: 1

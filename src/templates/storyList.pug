@@ -1,4 +1,4 @@
-article.storyList.widget.lighter
+article.widget.lighter.screen.storyList
     .widget-header
         h2.widget-title List of stories
         .widget-controls
@@ -6,8 +6,13 @@ article.storyList.widget.lighter
     .widget-body.storyList-body
         story-list-item(v-for="story of storiesList", "v-bind:story"="story")
 
-        .storyList-item.addStory
+        .storyListItem.addStory
             .addStory-body
                 p(v-if="storiesList.length") Add new story
                 p(v-if="!storiesList.length") No stories. Go ahead and create one!
                 button.addStory-btn() +
+
+    .widget-footer.widget-controlIcons
+        a(v-link="{name: 'settings'}")
+            i.fa.fa-cog
+            | Settings

@@ -10,6 +10,8 @@ import StoryList from './components/story/StoryList.vue';
 import Story from './components/story/Story.vue';
 import StoryDeleter from './components/story/StoryDeleter.vue';
 
+import Settings from './components/settings/Settings.vue';
+
 const routerParams = {
     options: {
         root: '/',
@@ -63,6 +65,11 @@ const routerParams = {
                     component: StoryDeleter,
                 },
             },
+        },
+        
+        '/settings/': {
+            name: 'settings',
+            component: Settings,
         },
     },
 };
