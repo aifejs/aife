@@ -1,9 +1,14 @@
 import {pickleStory,} from '../lib/pickle';
-import {sortBy,deburr,uniq,} from 'lodash';
+import {sortBy, deburr, uniq,} from 'lodash';
 import storyStats from '../lib/storyStats';
 
+export function getCurrentStory({route, stories,}) {
+    return stories.find(({ifid,}) => ifid === route.params.ifid);
+}
+
 export function tabs(state) {
-    return state.opened
+    const story = getCurrentStory(state);
+    return story.opened
         .map((passage) => ({
             title: passage.title,
             pid: passage.pid,
@@ -14,10 +19,6 @@ function passageCheckerFactory(term) {
     return function ({text, title,}) {
         return deburr(text.toLowerCase()).includes(term) || deburr(title.toLowerCase()).includes(term);
     };
-}
-
-export function getCurrentStory({route, stories,}) {
-    return stories.find(({ifid,}) => ifid === route.params.ifid);
 }
 
 export function passagesOverview({route, stories, passagesSorting, passagesFiltering,}) {
@@ -160,14 +161,17 @@ export function getCurrentIfid({route,}) {
     return route.params.ifid;
 }
 
-export function getEditStylesheet({editStylesheet,}) {
-    return editStylesheet;
+export function getEditStylesheet({stories, route,}) {
+    const currentStory = getCurrentStory({stories, route,});
+    return currentStory.editStylesheet;
 }
 
-export function getEditScript({editScript,}) {
-    return editScript;
+export function getEditScript({stories, route,}) {
+    const currentStory = getCurrentStory({stories, route,});
+    return currentStory.editScript;
 }
 
-export function getProofRead({proofRead,}) {
-    return proofRead;
+export function getProofRead({stories, route,}) {
+    const currentStory = getCurrentStory({stories, route,});
+    return currentStory.proofRead;
 }

@@ -2,12 +2,15 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import * as mutations from './mutations';
 import state from './state';
+import {persistenceMw,} from './middlewares';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
     state,
     mutations,
     strict: true,
-    // middlewares: debug ? [createLogger()] : [],
+    middlewares: [persistenceMw,],
 });
+
+export default store;

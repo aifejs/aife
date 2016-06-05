@@ -15,6 +15,7 @@ function passageStats(passage) {
 }
 
 export default function storyStats({passages, styleSheet, script,}) {
+    if (!passages) debugger;
     const storyStatistics = passages.reduce(
         (accumulator, passage) => {
             const stat = passageStats(passage);
