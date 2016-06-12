@@ -38,17 +38,17 @@ export function loadState({dispatch,}) {
     Promise.all([
         storage.getItem('stories', []),
     ]).then(
-        (stories) => {
+        ([stories,]) => {
             stories.forEach(
-                (results) => {
-                    dispatch('LOAD_STORY', results[0]);
+                (story) => {
+                    dispatch('LOAD_STORY', story);
                 }
             );
         }
     );
 }
 
-export default {
+export {
     openPassage,
     editPassage,
     closePassage,

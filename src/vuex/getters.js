@@ -144,6 +144,10 @@ const storySorters = {
 };
 
 export function storiesList({stories, storiesSorting,}) {
+    if (!stories) {
+        return [];
+    }
+
     let sorted = sortBy(stories, storySorters[storiesSorting.field]);
 
     if (storiesSorting.sort === 'desc') {
