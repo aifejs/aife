@@ -18,7 +18,9 @@ article.deleteStory.deleter
         methods: {
             dropPassage(pid) {
                 this.deletePassage(pid);
-                router.go({name: 'overview'})
+                router.go({
+                    name: 'overview',
+                });
             },
         },
 
@@ -30,5 +32,5 @@ article.deleteStory.deleter
                 passage: getCurrentPassage,
             },
         },
-    }
+    };
 </script>

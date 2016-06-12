@@ -66,4 +66,4 @@ export default {
     PASSAGES_SORTING,
     STORIES_SORTING,
     PASSAGES_FILTERING,
-}
+};

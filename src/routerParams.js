@@ -66,7 +66,7 @@ const routerParams = {
                 },
             },
         },
-        
+
         '/settings/': {
             name: 'settings',
             component: Settings,

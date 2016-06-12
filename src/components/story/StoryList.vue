@@ -4,7 +4,7 @@
 
 <script>
     import {storiesList,} from '../../vuex/getters';
-    import {setStoriesSorting,} from '../../vuex/actions';
+    import {setStoriesSorting, addStory,} from '../../vuex/actions';
 
     import StoryListItem from './StoryListItem.vue';
     import SorterButtons from '../common/SorterButtons.vue';
@@ -28,6 +28,7 @@
             },
             actions: {
                 setStoriesSorting,
+                addStory,
             },
         },
         components: {
