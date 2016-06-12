@@ -2,20 +2,24 @@ const asyncStorage = {
     getItem(key, defaultValue) {
         const item = window.localStorage.getItem(key);
         if (item === null) {
-            if (defaultValue) {
-                return Promise.resolve(defaultValue);
-            } else {
-                return Promise.reject(null);
-            }
+            return new Promise((resolve, reject) => {
+                if (defaultValue) {
+                    resolve(defaultValue);
+                } else {
+                    reject(null);
+                }
+            });
         } else {
-            let parsed;
-            try {
-                parsed = JSON.parse(item);
-            } catch (e) {
-                return Promise.reject(e);
-            }
+            return new Promise((resolve, reject) => {
+                let parsed;
+                try {
+                    parsed = JSON.parse(item);
+                } catch (e) {
+                    return reject(e);
+                }
 
-            return Promise.resolve(parsed);
+                resolve(parsed);
+            });
         }
     },
 
