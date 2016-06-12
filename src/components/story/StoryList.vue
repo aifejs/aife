@@ -22,6 +22,12 @@
             };
         },
 
+        methods: {
+            onAddStoryClick(event) {
+                this.addStory();
+            }
+        },
+
         vuex: {
             getters: {
                 storiesList,
