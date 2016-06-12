@@ -179,3 +179,7 @@ export function getProofRead({stories, route,}) {
     const currentStory = getCurrentStory({stories, route,});
     return currentStory.proofRead;
 }
+
+export function getStoriesLoaded({storiesLoaded,}) {
+    return storiesLoaded;
+}

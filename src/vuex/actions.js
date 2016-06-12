@@ -44,6 +44,8 @@ export function loadState({dispatch,}) {
                     dispatch('LOAD_STORY', story);
                 }
             );
+
+            dispatch('SET_STORIES_LOADED', true);
         }
     );
 }

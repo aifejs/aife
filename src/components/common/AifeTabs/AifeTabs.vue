@@ -1,6 +1,6 @@
 <script type="module">
     import {addPassage, closePassage, closeStylesheet, closeScript, closeProofRead,} from '../../../vuex/actions';
-    import {tabs, getCurrentIfid, getEditStylesheet, getEditScript, getProofRead,} from '../../../vuex/getters';
+    import {tabs, getCurrentIfid, getEditStylesheet, getEditScript, getProofRead, getCurrentStory,} from '../../../vuex/getters';
     import router from '../../../router';
     export default {
         name: 'aife-tabs',
@@ -40,6 +40,7 @@
                 editStylesheet: getEditStylesheet,
                 editScript: getEditScript,
                 proofRead: getProofRead,
+                story: getCurrentStory,
             },
         },
     }

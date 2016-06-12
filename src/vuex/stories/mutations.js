@@ -67,6 +67,10 @@ export function LOAD_STORY(state, story) {
     state.stories.push(story);
 }
 
+export function SET_STORIES_LOADED(state, status) {
+    state.storiesLoaded = status;
+}
+
 
 // Stylesheet mutations
 
