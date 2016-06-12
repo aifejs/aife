@@ -1,8 +1,8 @@
 import asyncStorage from '../lib/asyncStorage';
 
 const mutationMap = {
-    'CLOSE_PASSAGE': 'opened',
-    'OPEN_PASSAGE': 'opened',
+    'CLOSE_PASSAGE': 'stories',
+    'OPEN_PASSAGE': 'stories',
 
     'DELETE_PASSAGE': 'stories',
     'ADD_PASSAGE': 'stories',
