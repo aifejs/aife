@@ -9,7 +9,7 @@ import updateStory from '../../lib/updateStory';
 import {getCurrentStory,} from '../getters';
 
 const storyBlueprint = {
-    title: '',
+    title: 'Untitled story',
     ifid: undefined,
     passages: [],
     opened: [],
@@ -23,17 +23,17 @@ const storyBlueprint = {
 
 
 export function CREATE_STORY(state, {title,}) {
-    state.stories.push(
-        Object.assign(
-            {},
-            storyBlueprint,
-            {
-                title,
-                ifid: uuid(),
-                lastEdit: Date.now(),
-            }
-        )
+    const newStory = Object.assign(
+        {},
+        storyBlueprint,
+        {
+            title: title ? createCopyTitle(title) : createCopyTitle(storyBlueprint.title),
+            ifid: uuid(),
+            lastEdit: Date.now(),
+        }
     );
+
+    state.stories.push(newStory);
 }
 
 export function DELETE_STORY(state, ifid) {
