@@ -3,16 +3,24 @@ import asyncStorage from '../lib/asyncStorage';
 const mutationMap = {
     'CLOSE_PASSAGE': 'stories',
     'OPEN_PASSAGE': 'stories',
-
     'DELETE_PASSAGE': 'stories',
     'ADD_PASSAGE': 'stories',
+
     'SET_STORY_TITLE': 'stories',
     'DUPLICATE_STORY': 'stories',
     'CREATE_STORY': 'stories',
     'DELETE_STORY': 'stories',
-    'UPDATE_STORY_FROM_PROOF': 'stories',
+
+    'OPEN_STYLESHEET': 'stories',
     'SAVE_STYLESHEET': 'stories',
+    'CLOSE_STYLESHEET': 'stories',
+    'OPEN_SCRIPT': 'stories',
     'SAVE_SCRIPT': 'stories',
+    'CLOSE_SCRIPT': 'stories',
+    'OPEN_PROOFREAD': 'stories',
+    'UPDATE_STORY_FROM_PROOF': 'stories',
+    'CLOSE_PROOFREAD': 'stories',
+
     'ADD_TAG': 'stories',
     'REMOVE_TAG': 'stories',
 };
