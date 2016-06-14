@@ -12,6 +12,9 @@ import StoryDeleter from './components/story/StoryDeleter.vue';
 
 import Settings from './components/settings/Settings.vue';
 
+import publishStory from './lib/publishStory';
+import {getCurrentStory,} from './vuex/getters';
+
 const routerParams = {
     options: {
         root: '/',
@@ -63,6 +66,21 @@ const routerParams = {
                 '/deleteStory': {
                     name: 'deleteStory',
                     component: StoryDeleter,
+                },
+
+                '/play': {
+                    name: 'play',
+                    component: {
+                        ready() {
+                            publishStory(this.story);
+                        },
+
+                        vuex: {
+                            getters: {
+                                story: getCurrentStory,
+                            },
+                        },
+                    },
                 },
             },
         },
