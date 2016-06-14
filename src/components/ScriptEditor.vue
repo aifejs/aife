@@ -7,7 +7,7 @@ article.jsEditor
 
 <style lang="stylus"></style>
 
-<script>
+<script type="module">
     import CodeMirror from './common/CodeMirror.vue';
     import 'codemirror/mode/javascript/javascript';
     import {jsEditorOptions, getScript,} from '../vuex/getters';

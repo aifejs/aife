@@ -13,7 +13,7 @@
 
 <style lang="stylus"></style>
 
-<script>
+<script type="module">
     export default {
         vuex: {
         },

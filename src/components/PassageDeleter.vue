@@ -8,7 +8,7 @@ article.deleteStory.deleter
     button.deleter-confirm(@click="dropPassage(passage.pid)") Yes, delete passage completely and unrecoverably
 </template>
 
-<script>
+<script type="module">
     import {deletePassage,} from '../vuex/actions';
     import {getCurrentPassage,} from '../vuex/getters';
     import router from '../router';

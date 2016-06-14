@@ -2,7 +2,7 @@
 
 <style lang="stylus" src="../../styles/storyListItem.styl"></style>
 
-<script>
+<script type="module">
     import {editStoryTitle, duplicateStory,} from '../../vuex/actions';
     import StoryStats from '../common/StoryStats.vue';
 

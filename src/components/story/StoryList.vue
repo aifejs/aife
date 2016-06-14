@@ -2,7 +2,7 @@
 
 <style lang="stylus" src="../../styles/storyList.styl"></style>
 
-<script>
+<script type="module">
     import {storiesList,} from '../../vuex/getters';
     import {setStoriesSorting, addStory,} from '../../vuex/actions';
 

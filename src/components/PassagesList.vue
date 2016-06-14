@@ -22,7 +22,7 @@ article.passagesList.widget.lighter
 
 </style>
 
-<script>
+<script type="module">
     import {setPassagesSorting,setPassagesFiltering,} from '../vuex/actions';
     import {passagesOverview,getPassagesFiltering,} from '../vuex/getters';
     import SorterButtons from './common/SorterButtons.vue';

@@ -21,7 +21,7 @@ article.passageEditor(v-if="passage")
         font-weight: normal
 </style>
 
-<script>
+<script type="module">
     import {getCurrentPassage, tagSuggestionsCounted,} from '../vuex/getters';
     import {openPassage, editPassage, addTag, removeTag,} from '../vuex/actions';
     import TagList from './common/TagList.vue';

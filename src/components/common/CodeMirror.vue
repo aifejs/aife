@@ -4,7 +4,7 @@ div.codeEditor.codeArea
 
 <style lang="stylus"></style>
 
-<script>
+<script type="module">
     import CodeMirror from 'codemirror';
 
     /**

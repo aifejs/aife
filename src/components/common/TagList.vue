@@ -20,7 +20,7 @@
         margin-left: 1ex
 </style>
 
-<script>
+<script type="module">
     import {uniqueId,} from 'lodash';
     export default {
         props: {
