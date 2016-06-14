@@ -7,6 +7,7 @@ import {
     deletePassage,
     addTag,
     removeTag,
+    makeStarting,
 } from './passages/actions';
 import {
     addStory,
@@ -16,7 +17,9 @@ import {
     openStylesheet,
     saveStyleSheet,
     closeStylesheet,
-    openScript, saveScript, closeScript,
+    openScript,
+    saveScript,
+    closeScript,
     openProofRead,
     updateStoryFromProof,
     closeProofRead,
@@ -58,6 +61,7 @@ export {
     deletePassage,
     addTag,
     removeTag,
+    makeStarting,
 
     addStory,
     deleteStory,

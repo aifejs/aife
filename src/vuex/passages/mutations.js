@@ -7,6 +7,7 @@ const passageBlueprint = {
     title: 'New passage',
     text: 'This blank sheet stares at you. Blankly.',
     tags: [],
+    starting: false,
 };
 
 function findByPid(passages, pid) {
@@ -49,7 +50,14 @@ export function ADD_PASSAGE(state, {title = passageBlueprint.title, text = passa
     const story = getCurrentStory(state);
     const lastPid = story.passages.reduce((pid, passage) => Math.max(pid, passage.pid), 0);
 
-    story.passages.push({title, text, pid: lastPid + 1, tags: [],});
+    story.passages.push({
+        title,
+        text,
+        pid: lastPid + 1,
+        tags: [],
+        starting: false,
+    });
+
     updateStory(story);
 }
 
@@ -77,6 +85,19 @@ export function REMOVE_TAG(state, {pid, index,}) {
     const story = getCurrentStory(state);
     const passage = findByPid(story.passages, pid);
     passage.tags.splice(index, 1);
+    updateStory(story);
+}
+
+export function MAKE_PASSAGE_STARTING(state, pid) {
+    const story = getCurrentStory(state);
+    const currentStarting = story.passages.find((passage) => passage.starting);
+    if (currentStarting) {
+        currentStarting.starting = false;
+    }
+
+    const passage = findByPid(story.passages, pid);
+    passage.starting = true;
+
     updateStory(story);
 }
 

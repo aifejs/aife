@@ -16,7 +16,11 @@
 <template lang="pug">
 article.overview.widget
     .widget-header
-        .widget-title Story overview
+        .widget-title
+            | Story overview
+            | &nbsp;
+            a(v-link="{name: 'play'}", target="_blank", title="Run game (in new window)")
+                i.fa.fa-play
         .widget-controls
             .widget-controlIcons
                 a(v-link="{name: 'stylesheet'}", title="Edit styles")

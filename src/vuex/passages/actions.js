@@ -34,3 +34,7 @@ export function removeTag({dispatch,}, pid, index) {
         index,
     });
 }
+
+export function makeStarting({dispatch,}, pid) {
+    dispatch('MAKE_PASSAGE_STARTING', pid);
+}

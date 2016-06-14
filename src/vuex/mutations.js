@@ -8,6 +8,7 @@ import {
     DELETE_PASSAGE,
     ADD_TAG,
     REMOVE_TAG,
+    MAKE_PASSAGE_STARTING,
 } from './passages/mutations';
 
 import {
@@ -48,6 +49,7 @@ export {
     DELETE_PASSAGE,
     ADD_TAG,
     REMOVE_TAG,
+    MAKE_PASSAGE_STARTING,
 
     CREATE_STORY,
     DELETE_STORY,
