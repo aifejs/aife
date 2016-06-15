@@ -8,6 +8,7 @@
 
     import StoryListItem from './StoryListItem.vue';
     import SorterButtons from '../common/SorterButtons.vue';
+    import pkg from '../../../package.json';
 
     export default {
         name: 'story-list',
@@ -19,6 +20,7 @@
                     {field: 'title', name: 'Title',},
                     {field: 'passages', name: 'Passages #',},
                 ],
+                bugs: pkg.bugs,
             };
         },
 
