@@ -1,11 +1,26 @@
 import {stripIndent,} from 'common-tags';
+import pkg from '../../package.json';
+
+function getStartingPid(story) {
+    const startingPassage = story.passages.find(({starting,}) => starting);
+    if (startingPassage) {
+        return startingPassage.pid;
+    } else {
+        return 1;
+    }
+}
+
+function exportTags(tags) {
+    return tags.map((tag) => tag.replace(' ', '-')).join(' ');
+}
 
 export default function exportStory(story) {
     return stripIndent`
 <tw-storydata 
     name="${story.title}"
-    startnode="1"
-    creator="Aife"
+    startnode="${getStartingPid(story)}"
+    creator="${pkg.name}"
+    creator-version="${pkg.version}"
     ifid="${story.ifid}"
     format="Snowman"
     hidden>
@@ -20,6 +35,6 @@ function exportPassage(passage) {
         <tw-passagedata 
             pid="${passage.pid}" 
             name="${passage.title}" 
-            tags="${passage.tags.join(', ')}"
+            tags="${exportTags(passage.tags)}"
             >${passage.text}</tw-passagedata>`;
 }
