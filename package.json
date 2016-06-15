@@ -4,6 +4,13 @@
   "description": "Aife: An Interactive Fiction Editor",
   "author": "Konstantin Kitmanov <doctor.hogart@gmail.com>",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hogart/aife.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hogart/aife/issues/"
+  },
   "scripts": {
     "watchify": "watchify -v --poll browserify-hmr -e src/aife.js -o dist/aife.js",
     "serve": "http-server -c 1 -a localhost --proxy https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/",
