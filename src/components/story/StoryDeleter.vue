@@ -8,7 +8,7 @@ article.deleteStory.deleter
     button.deleter-confirm(@click="dropStory(story.ifid)") Yes, delete story completely and unrecoverably
 </template>
 
-<script type="module">
+<script>
     import {deleteStory,} from '../../vuex/actions';
     import {getCurrentStory,} from '../../vuex/getters';
     import router from '../../router';

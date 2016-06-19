@@ -11,13 +11,13 @@ div
 
 <style lang="stylus"></style>
 
-<script type="module">
+<script>
     import pkg from '../../../package.json';
     export default {
-        data () {
+        data() {
             return {
                 bugs: pkg.bugs,
             };
-        }
+        },
     };
 </script>

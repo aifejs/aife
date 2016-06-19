@@ -1,4 +1,4 @@
-<script type="module">
+<script>
     import OverviewStats from '../OverviewStats.vue';
     import PassagesList from '../passage/PassagesList.vue';
 

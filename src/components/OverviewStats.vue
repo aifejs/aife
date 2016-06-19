@@ -4,7 +4,7 @@ story-stats("v-bind:stats"="stats").lighter
 
 <style lang="stylus"></style>
 
-<script type="module">
+<script>
     import StoryStats from './common/StoryStats.vue';
     import {stats,} from '../vuex/getters';
 

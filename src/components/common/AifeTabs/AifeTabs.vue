@@ -1,6 +1,13 @@
-<script type="module">
+<script>
     import {addPassage, closePassage, closeStylesheet, closeScript, closeProofRead,} from '../../../vuex/actions';
-    import {tabs, getCurrentIfid, getEditStylesheet, getEditScript, getProofRead, getCurrentStory,} from '../../../vuex/getters';
+    import {
+        tabs,
+        getCurrentIfid,
+        getEditStylesheet,
+        getEditScript,
+        getProofRead,
+        getCurrentStory,
+    } from '../../../vuex/getters';
     import router from '../../../router';
     export default {
         name: 'aife-tabs',
@@ -14,22 +21,22 @@
                 closePassage,
 
                 closeScriptAndGoBack() {
-                    router.go({name: 'overview'});
+                    router.go({name: 'overview',});
                     this.closeScript();
                 },
 
                 closeStylesheetAndGoBack() {
-                    router.go({name: 'overview'});
+                    router.go({name: 'overview',});
                     this.closeStylesheet();
                 },
 
                 closeProofReadAndGoBack() {
-                    router.go({name: 'overview'});
+                    router.go({name: 'overview',});
                     this.closeProofRead();
                 },
 
                 closePassageAndGoBack(store, pid) {
-                    router.go({name: 'overview'});
+                    router.go({name: 'overview',});
                     this.closePassage(pid);
                 },
             },
@@ -43,7 +50,7 @@
                 story: getCurrentStory,
             },
         },
-    }
+    };
 </script>
 
 <template lang="pug" src="./AifeTabs.pug"></template>

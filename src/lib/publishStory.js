@@ -1,5 +1,5 @@
 import {ajax,} from 'jquery';
-import {escape,} from 'lodash';
+import escape from 'lodash/escape';
 import exportStory from './exportStory';
 
 const format = {

@@ -4,20 +4,20 @@ router-view
 
 <style lang="stylus" src="./app.styl"></style>
 
-<script type="module">
+<script>
     import store from './vuex/store';
     import {loadState,} from './vuex/actions';
 
     export default {
         name: 'aife-root',
         store,
-        created () {
+        created() {
             this.loadState();
         },
         vuex: {
             actions: {
                 loadState,
-            }
-        }
-    }
+            },
+        },
+    };
 </script>

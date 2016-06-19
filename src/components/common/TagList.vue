@@ -20,8 +20,8 @@
         margin-left: 1ex
 </style>
 
-<script type="module">
-    import {uniqueId,} from 'lodash';
+<script>
+    import uniqueId from 'lodash/unique-id';
     export default {
         props: {
             pid: Number,

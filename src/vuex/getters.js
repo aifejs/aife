@@ -1,5 +1,7 @@
 import {pickleStory,} from '../lib/pickle';
-import {sortBy, deburr, uniq,} from 'lodash';
+import sortBy from 'lodash/sort-by';
+import deburr from 'lodash/deburr';
+import uniq from 'lodash/uniq';
 import storyStats from '../lib/storyStats';
 
 export function getCurrentStory({route, stories,}) {

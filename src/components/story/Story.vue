@@ -15,7 +15,7 @@ div(v-if="!storiesLoaded")
         i.fa.fa-spinner.fa-spin.fa-4x
 </template>
 
-<script type="module">
+<script>
     import PassageTabs from '../common/AifeTabs/AifeTabs.vue';
     import StoryFooter from './StoryFooter.vue';
     import {getCurrentStory, getStoriesLoaded,} from '../../vuex/getters';

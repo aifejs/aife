@@ -9,7 +9,7 @@
 
 <style lang="stylus" src="../../styles/sorterButtons.styl"></style>
 
-<script type="module">
+<script>
     import SortIcon from '../../directives/SortIcon';
 
     export default {

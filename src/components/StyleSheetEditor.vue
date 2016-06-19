@@ -7,7 +7,7 @@ article.codeEditor
 
 <style lang="stylus"></style>
 
-<script type="module">
+<script>
     import CodeMirror from './common/CodeMirror.vue';
     import 'codemirror/mode/css/css';
     import {cssEditorOptions, getStyleSheet,} from '../vuex/getters';

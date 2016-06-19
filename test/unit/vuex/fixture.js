@@ -1,4 +1,4 @@
-import {cloneDeep,} from 'lodash';
+import cloneDeep from 'lodash/clone-deep';
 export const testState = {
     passages: [
         {

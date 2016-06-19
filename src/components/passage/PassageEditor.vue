@@ -19,7 +19,7 @@ article.codeEditor.passageEditor(v-if="passage")
 
 <style lang="stylus"></style>
 
-<script type="module">
+<script>
     import {getCurrentPassage, tagSuggestionsCounted,} from '../../vuex/getters';
     import {openPassage, editPassage, addTag, removeTag, makeStarting,} from '../../vuex/actions';
     import TagList from '../common/TagList.vue';

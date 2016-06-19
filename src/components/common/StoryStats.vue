@@ -20,7 +20,7 @@ article.storyStats.widget("v-bind:class"="{longForm: longForm, shortForm: !longF
 
 <style lang="stylus" src="../../styles/storyStats.styl"></style>
 
-<script type="module">
+<script>
     export default {
         props: {
             stats: Object,

@@ -12,7 +12,7 @@ article.codeEditor
 
 </style>
 
-<script type="module">
+<script>
     import {proofReadCopy,} from '../vuex/getters';
     import {updateStoryFromProof, openProofRead,} from '../vuex/actions';
 
@@ -36,5 +36,5 @@ article.codeEditor
                 transition.next();
             },
         },
-    }
+    };
 </script>

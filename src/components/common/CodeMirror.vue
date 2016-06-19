@@ -4,7 +4,7 @@ div.codeArea.mirror
 
 <style lang="stylus"></style>
 
-<script type="module">
+<script>
     import CodeMirror from 'codemirror';
     import debounce from 'lodash/debounce';
 
@@ -58,10 +58,10 @@ div.codeArea.mirror
             },
 
             onWindowResize() {
-                const {width, height} = this.$el.getBoundingClientRect();
+                const {width, height,} = this.$el.getBoundingClientRect();
                 this.codeMirror.setSize(`${width}px`, `${height}px`);
                 this.codeMirror.refresh();
-            }
+            },
         },
     };
 </script>
