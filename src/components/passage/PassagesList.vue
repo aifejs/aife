@@ -23,10 +23,10 @@ article.passagesList.widget.lighter
 </style>
 
 <script type="module">
-    import {setPassagesSorting,setPassagesFiltering, makeStarting,} from '../vuex/actions';
-    import {passagesOverview,getPassagesFiltering,} from '../vuex/getters';
-    import SorterButtons from './common/SorterButtons.vue';
-    import HiliteTerm from '../directives/HiliteTerm';
+    import {setPassagesSorting,setPassagesFiltering, makeStarting,} from '../../vuex/actions';
+    import {passagesOverview,getPassagesFiltering,} from '../../vuex/getters';
+    import SorterButtons from '../common/SorterButtons.vue';
+    import HiliteTerm from '../../directives/HiliteTerm';
 
     export default {
         name: 'passages-list',

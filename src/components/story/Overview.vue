@@ -1,15 +1,9 @@
 <script type="module">
-    import OverviewStats from './OverviewStats.vue';
-    import PassagesList from './PassagesList.vue';
-    import pkg from '../../package.json';
+    import OverviewStats from '../OverviewStats.vue';
+    import PassagesList from '../passage/PassagesList.vue';
 
     export default {
         name: 'overview',
-        data() {
-            return {
-                bugs: pkg.bugs,
-            }
-        },
         components: {
             OverviewStats,
             PassagesList,
@@ -39,13 +33,4 @@ article.overview.widget
         overview-stats
         br
         passages-list
-
-    .widget-footer.widget-controlIcons
-        //a()
-        //    i.fa.fa-cog
-        //    | Story settings
-
-        a("v-bind:href"="bugs.url", target="_blank")
-            i.fa.fa-bug
-            | Report a bug
 </template>

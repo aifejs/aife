@@ -1,11 +1,12 @@
 <template lang="pug">
-div.codeEditor.codeArea
+div.codeArea.mirror
 </template>
 
 <style lang="stylus"></style>
 
 <script type="module">
     import CodeMirror from 'codemirror';
+    import debounce from 'lodash/debounce';
 
     /**
      * Generic reusable code editor component, adapted from Twine source
@@ -31,12 +32,21 @@ div.codeEditor.codeArea
 
             this.codeMirror.on('change', this.onCodeMirrorChange.bind(this));
 
+            this.onWindowResizeBound = this.onWindowResize.bind(this);
+            this.onWindowResizeThrottled = debounce(this.onWindowResizeBound);
+
             // this is some hack, without it CodeMirror renders blank
-            setTimeout(this.codeMirror.refresh.bind(this.codeMirror), 100);
+            requestAnimationFrame(this.onWindowResizeBound);
         },
 
         attached() {
             this.codeMirror.focus();
+
+            window.addEventListener('resize', this.onWindowResizeThrottled);
+        },
+
+        detached() {
+            window.removeEventListener('resize', this.onWindowResizeThrottled);
         },
 
         methods: {
@@ -46,6 +56,12 @@ div.codeEditor.codeArea
                 // note kebab-case here, event names are not automatically converted
                 this.$emit('code-changed', this.code);
             },
+
+            onWindowResize() {
+                const {width, height} = this.$el.getBoundingClientRect();
+                this.codeMirror.setSize(`${width}px`, `${height}px`);
+                this.codeMirror.refresh();
+            }
         },
     };
 </script>

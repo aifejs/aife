@@ -9,9 +9,9 @@ article.deleteStory.deleter
 </template>
 
 <script type="module">
-    import {deletePassage,} from '../vuex/actions';
-    import {getCurrentPassage,} from '../vuex/getters';
-    import router from '../router';
+    import {deletePassage,} from '../../vuex/actions';
+    import {getCurrentPassage,} from '../../vuex/getters';
+    import router from '../../router';
 
     export default {
         name: 'passage-deleter',

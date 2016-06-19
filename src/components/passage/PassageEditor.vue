@@ -1,31 +1,28 @@
 <template lang="pug">
-article.passageEditor(v-if="passage")
-    small pid \#{{passage.pid}}
+article.codeEditor.passageEditor(v-if="passage")
     label
-        | Passage title
-        br
+        span Passage \#{{passage.pid}}
+        button("@click"="makeStarting(passage.pid)", ":disabled"="passage.starting") Make this passage starting
+
+    label
+        strong Title
         input(placeholder="Passage title", required, "v-bind:value"="passage.title", @input="editPassage($event, passage.pid, 'title')")
-    tag-list("v-bind:tags"="passage.tags", "v-bind:pid.once"="passage.pid", "v-bind:suggestions"="tagSuggestions", @add-tag="addTag", @remove-tag="removeTag")
-    button("@click"="makeStarting(passage.pid)", ":disabled"="passage.starting") Make this passage starting
+
     label
-        | Passage contents
+        strong Tags
+        tag-list("v-bind:tags"="passage.tags", "v-bind:pid.once"="passage.pid", "v-bind:suggestions"="tagSuggestions", @add-tag="addTag", @remove-tag="removeTag")
+
+    label.codeArea
+        strong Text
         textarea.codeArea("v-bind:value"="passage.text", @input="editPassage($event, passage.pid, 'text')")
 </template>
 
-<style lang="stylus">
-.passageEditor
-    label
-        display: block
-        font-weight: normal
-    textarea
-        height: 400px
-        font-weight: normal
-</style>
+<style lang="stylus"></style>
 
 <script type="module">
-    import {getCurrentPassage, tagSuggestionsCounted,} from '../vuex/getters';
-    import {openPassage, editPassage, addTag, removeTag, makeStarting,} from '../vuex/actions';
-    import TagList from './common/TagList.vue';
+    import {getCurrentPassage, tagSuggestionsCounted,} from '../../vuex/getters';
+    import {openPassage, editPassage, addTag, removeTag, makeStarting,} from '../../vuex/actions';
+    import TagList from '../common/TagList.vue';
     export default {
         name: 'passage-editor',
         vuex: {

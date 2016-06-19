@@ -1,6 +1,6 @@
-import Overview from './components/Overview.vue';
-import PassageEditor from './components/PassageEditor.vue';
-import PassageDeleter from './components/PassageDeleter.vue';
+import Overview from './components/story/Overview.vue';
+import PassageEditor from './components/passage/PassageEditor.vue';
+import PassageDeleter from './components/passage/PassageDeleter.vue';
 import ProofRead from './components/ProofRead.vue';
 
 import ScriptEditor from './components/ScriptEditor.vue';

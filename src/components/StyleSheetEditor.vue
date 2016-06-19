@@ -1,8 +1,8 @@
 <template lang="pug">
-article.cssEditor
-    h3 Edit story stylesheet
-
-    code-mirror("v-bind:options"="cssEditorOptions", "v-bind:code"="getStyleSheet" "@code-changed"="saveStyleSheet")
+article.codeEditor
+    label.codeArea
+        strong Edit story script
+        code-mirror("v-bind:options"="cssEditorOptions", "v-bind:code"="getStyleSheet" "@code-changed"="saveStyleSheet")
 </template>
 
 <style lang="stylus"></style>

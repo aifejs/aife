@@ -1,12 +1,12 @@
 <template lang="pug">
-    .tagList
-        span.tagList-item(v-for="tag of tags")
-            | {{ tag }}
-            i.fa.fa-trash.activeIcon.danger.tagList-remove("@click"="onTagRemoveClick($index)")
+.tagList
+    span.tagList-item(v-for="tag of tags")
+        | {{ tag }}
+        i.fa.fa-trash.activeIcon.danger.tagList-remove("@click"="onTagRemoveClick($index)")
 
-        input(list="{{uuid}}-{{pid}}", placeholder="Press enter to add tag", @keyup="onKeyPress")
-        datalist(id="{{uuid}}-{{pid}}")
-            option(v-for="(suggestion, count) of suggestions", value="{{ suggestion }}") {{count}}
+    input(list="{{uuid}}-{{pid}}", placeholder="Press enter to add tag", @keyup="onKeyPress")
+    datalist(id="{{uuid}}-{{pid}}")
+        option(v-for="(suggestion, count) of suggestions", value="{{ suggestion }}") {{count}}
 </template>
 
 <style lang="stylus">
