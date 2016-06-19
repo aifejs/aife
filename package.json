@@ -16,7 +16,7 @@
     "serve": "http-server -c 1 -a localhost --proxy https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/",
     "dev": "npm-run-all --parallel watchify serve",
     "build": "cross-env NODE_ENV=production browserify -e src/aife.js -o dist/aife.js",
-    "lint": "eslint --ext .js,.vue src test",
+    "lint": "eslint --ext .js,.vue src",
     "test": "watch \"browserify -t babelify test/unit/index.js | tape-run | faucet\"",
     "test-once": "browserify -t babelify test/unit/index.js | tape-run | faucet"
   },
