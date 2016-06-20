@@ -1,4 +1,12 @@
 {
-  "plugins": ["transform-es2015-modules-commonjs", "transform-runtime"],
-  "sourceMaps": "inline"
+  "env": {
+    "development": {
+      "plugins": ["transform-es2015-modules-commonjs", "transform-runtime"],
+      "sourceMaps": "inline"
+    },
+    "production": {
+      "presets": ["es2015"],
+      "plugins": ["transform-runtime"]
+    }
+  }
 }
