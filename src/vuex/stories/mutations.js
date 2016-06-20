@@ -1,6 +1,6 @@
 /* eslint new-cap: [2, {newIsCap: true, capIsNew: false}] */
 
-import cloneDeep from 'lodash/clone-deep';
+import cloneDeep from 'lodash/cloneDeep';
 import uuid from 'tiny-uuid';
 import {unpickleStory, caretPositionToPassage,} from '../../lib/pickle';
 import {UPDATE_PASSAGE,} from '../passages/mutations';

@@ -21,7 +21,7 @@
 </style>
 
 <script>
-    import uniqueId from 'lodash/unique-id';
+    import uniqueId from 'lodash/uniqueId';
     export default {
         props: {
             pid: Number,

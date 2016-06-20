@@ -1,5 +1,5 @@
 import {pickleStory,} from '../lib/pickle';
-import sortBy from 'lodash/sort-by';
+import sortBy from 'lodash/sortBy';
 import deburr from 'lodash/deburr';
 import uniq from 'lodash/uniq';
 import storyStats from '../lib/storyStats';
