@@ -2,7 +2,7 @@
     .widget-header
         .widget-title(title="{{ story.title }}", "v-bind:class"="{editing: editing}")
             a.storyListItem-link(v-link="{name: 'story', params: {ifid: story.ifid}}") {{ story.title }}
-            input.storyListItem-input("v-bind:value.once"="story.title", "@keydown"="processTitleEdit", "@blur"="onBlur", "v-el:input")
+            input.storyListItem-input("v-bind:value.once"="story.title", "@keydown"="processTitleEdit", "@blur"="onBlur", "v-el:input"="")
             span.fa.fa-pencil.activeIcon.storyListItem-editBtn("@click"="toggleEditing", title="Rename story")
         .widget-controls
             .widget-controlIcons
