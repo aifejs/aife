@@ -6,12 +6,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('./package.json');
 
 const entry = `./src/${pkg.name}.js`;
+const distFolder = 'dist';
 
 const config = {
     entry,
     output: {
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
+        path: path.resolve(__dirname, `./${distFolder}`),
+        publicPath: `/${distFolder}/`,
         filename: `${pkg.name}.js`,
     },
 
@@ -43,19 +44,7 @@ const config = {
                 loader: 'vue-html',
             },
             {
-                test: /\.css/,
-                loader: 'css',
-            },
-            {
                 test: /\.(png|jpe?g|gif|svg)$/,
-                loader: 'url',
-                query: {
-                    limit: 10000,
-                    name: '[name].[ext]?[hash]',
-                },
-            },
-            {
-                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url',
                 query: {
                     limit: 10000,
@@ -71,8 +60,26 @@ const config = {
         },
 
         autoprefixer: {
-            browsers: ['last 2 Chrome versions', 'last 2 Firefox versions', 'ChromeAndroid > 50', 'Edge >= 14',],
+            browsers: [
+                'last 2 Chrome versions',
+                'last 2 Firefox versions',
+                'ChromeAndroid > 50',
+                'Edge >= 13',
+                'iOS >=8',
+            ],
+            flexbox: 'no-2009',
         },
+    },
+
+    stylus: {
+        use: [
+            // make @import 'node_modules/smth/smth.css' work as expected
+            (stylus) => {
+                stylus
+                    .include(__dirname)
+                    .set('include css', true);
+            },
+        ],
     },
 };
 

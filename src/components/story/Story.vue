@@ -1,6 +1,6 @@
 <template lang="pug">
-article.widget.screen.story(v-if="storiesLoaded")
-    .widget-body
+article.widget.screen.story
+    .widget-body(v-if="storiesLoaded")
         passage-tabs
         router-view(v-if="story")
         p(v-if="!story")
@@ -8,11 +8,11 @@ article.widget.screen.story(v-if="storiesLoaded")
             a(v-link="{name: 'stories'}") To stories list
             | .
 
-    story-footer.widget-footer.widget-controlIcons
-div(v-if="!storiesLoaded")
-    p.text-center Loading story, please wait...
-        br
-        i.fa.fa-spinner.fa-spin.fa-4x
+    story-footer.widget-footer.widget-controlIcons(v-if="storiesLoaded")
+    .widget-body(v-if="!storiesLoaded")
+        p.text-center Loading story, please wait...
+            br
+            i.fa.fa-spinner.fa-spin.fa-4x
 </template>
 
 <script>

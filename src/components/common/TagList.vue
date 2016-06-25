@@ -4,9 +4,9 @@
         | {{ tag }}
         i.fa.fa-trash.activeIcon.danger.tagList-remove("@click"="onTagRemoveClick($index)")
 
-    input(list="{{uuid}}-{{pid}}", placeholder="Press enter to add tag", @keyup="onKeyPress")
-    datalist(id="{{uuid}}-{{pid}}")
-        option(v-for="(suggestion, count) of suggestions", value="{{ suggestion }}") {{count}}
+    input("v-bind:list"="uuid + '-' + pid", placeholder="Press enter to add tag", @keyup="onKeyPress")
+    datalist("v-bind:id"="uuid + '-' + pid")
+        option(v-for="(suggestion, count) of suggestions", "v-bind:value"="suggestion") {{count}}
 </template>
 
 <style lang="stylus">
