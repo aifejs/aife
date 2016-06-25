@@ -1,5 +1,5 @@
 <template lang="pug">
-article.deleteStory.deleter
+article.deleteStory.deleter(v-if="passage")
     h3 Delete passage?
     p Are you sure you want to delete passage&nbsp;
         strong \#{{ passage.pid }} ({{ passage.title }})
