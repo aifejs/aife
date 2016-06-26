@@ -9,8 +9,15 @@
         getCurrentStory,
     } from '../../../vuex/getters';
     import router from '../../../router';
+
     export default {
         name: 'aife-tabs',
+
+        methods: {
+            tabTitle ({title, pid,}) {
+                return `${title} #${pid}`
+            }
+        },
 
         vuex: {
             actions: {

@@ -2,20 +2,26 @@
 
 .aifeTabs
     margin: 1ex 0
-    padding: 1ex 0 0.5ex;
+    padding: 1ex 0 0;
     border-bottom: 1px solid silver
     overflow-y: hidden
 
     a, a:hover
         text-decoration: none
 
+    &-section
+        display: inline-block
+        margin-right: 1ex
+
     &-item
+        display: inline-block
         background-color: gainsboro
         border: 1px solid gainsboro
         border-radius: 4px 4px 0 0
         border-bottom: 0 none
-        padding: 1ex
+        padding: 0.5ex 1ex
         margin-right: 1px
+        vertical-align: top
 
         &.active
             background-color: white
@@ -26,14 +32,23 @@
             font-weight: bold
 
         &.btn
-            border-radius: 4px;
             cursor: pointer
-
-        &.addPassage
-            margin-left: 1ex
+            &.back
+                margin-right: 1ex
 
         &.special + &.passage
             margin-left: 1ex
 
+        a
+            display: inline-block
+            max-width: 12em
+            vertical-align: top
+            text-overflow: ellipsis
+            overflow: hidden
+            white-space: nowrap
+
     &-close
+        display: inline-block
         margin-left: 1ex
+        vertical-align: middle
+        line-height: 14.3px

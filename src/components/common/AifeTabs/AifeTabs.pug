@@ -2,7 +2,7 @@ nav.aifeTabs
     span.aifeTabs-item.btn.back
         a(v-link="{name: 'stories'}", title="Back to stories list") &lt;&lt;
 
-    span(v-if="story")
+    span.aifeTabs-section(v-if="story")
         span.aifeTabs-item.special(v-link-active)
             a(v-link="{name: 'story'}") Overview
 
@@ -16,9 +16,11 @@ nav.aifeTabs
             a(v-link="{name: 'proofRead'}") Proof-read
             i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeProofReadAndGoBack")
 
+    span.aifeTabs-section(v-if="story")
         span.aifeTabs-item.passage(v-for="tab of tabs", track-by="pid", v-link-active)
-            a(v-link="{name: 'passage', params: {pid: tab.pid}}") {{tab.title}}
+            a(v-link="{name: 'passage', params: {pid: tab.pid}}", v-bind:title="tabTitle(tab)") {{tab.title}}
             i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closePassageAndGoBack(tab.pid)")
 
+    span.aifeTabs-section(v-if="story")
         span.aifeTabs-item.btn.addPassage
             a("@click"="addPassage") Add passage
