@@ -2,7 +2,7 @@
 
 import cloneDeep from 'lodash/cloneDeep';
 import uuid from 'tiny-uuid';
-import {unpickleStory, caretPositionToPassage,} from '../../lib/pickle';
+import {unpickleStory,} from '../../lib/pickle';
 import {UPDATE_PASSAGE,} from '../passages/mutations';
 import createCopyTitle from '../../lib/createCopyTitle';
 import updateStory from '../../lib/updateStory';
@@ -121,17 +121,24 @@ export function OPEN_PROOFREAD(state) {
     updateStory(story);
 }
 
-export function UPDATE_STORY_FROM_PROOF(state, proofCopy, caretPosition) {
-    // Update only changed passages to avoid redrawing every passage
-    const passages = unpickleStory(proofCopy);
-    const changedPassageIndex = caretPositionToPassage(proofCopy, caretPosition);
-    const changedPassage = passages[changedPassageIndex];
+export function UPDATE_STORY_FROM_PROOF(state, proofCopy) {
+    let passages;
+    try {
+        passages = unpickleStory(proofCopy);
+    } catch (e) {
+        state.proofModeError = true;
+    }
 
-    UPDATE_PASSAGE(state, changedPassage);
+    if (passages) {
+        const story = getCurrentStory(state);
+
+        story.passages = passages;
+        state.proofModeError = false;
+        updateStory(story);
+    }
 }
 
 export function CLOSE_PROOFREAD(state) {
     const story = getCurrentStory(state);
     story.proofRead = false;
-    updateStory(story);
 }

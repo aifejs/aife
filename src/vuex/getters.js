@@ -71,6 +71,10 @@ export function proofReadCopy({route, stories,}) {
     };
 }
 
+export function getProofModeError({proofModeError,}) {
+    return proofModeError;
+}
+
 export function cssEditorOptions({codeEditorOptions,}) {
     return Object.assign(
         {},

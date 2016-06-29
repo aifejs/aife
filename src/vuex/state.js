@@ -22,6 +22,7 @@ const state = {
     },
 
     storiesLoaded: false,
+    proofModeError: false,
 };
 
 export default state;
