@@ -14,9 +14,9 @@
         name: 'aife-tabs',
 
         methods: {
-            tabTitle ({title, pid,}) {
-                return `${title} #${pid}`
-            }
+            tabTitle({title, pid,}) {
+                return `${title} #${pid}`;
+            },
         },
 
         vuex: {
