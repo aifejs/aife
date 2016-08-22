@@ -41,7 +41,7 @@
     "browserify": "^13.0.1",
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
-    "eslint": "^2.13.1",
+    "eslint": "^3.3.1",
     "eslint-config-yandex": "^1.0.6",
     "eslint-plugin-html": "^1.5.1",
     "extract-text-webpack-plugin": "^1.0.1",
