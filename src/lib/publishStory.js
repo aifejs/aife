@@ -10,7 +10,7 @@ const format = {
             }
 
             ajax({
-                url: '/storyFormats/Snowman/format.js',
+                url: './storyFormats/Snowman/format.js',
                 dataType: 'jsonp',
                 jsonpCallback: 'storyFormat',
                 crossDomain: true,
@@ -32,6 +32,9 @@ const format = {
         });
     },
 
+    storyNameRe: /\{\{STORY_NAME}}/g,
+    storyDataRe: /\{\{STORY_DATA}}/g,
+
     publish(story, options, startId) {
         return this.load().then(
             () => {
@@ -43,9 +46,9 @@ const format = {
 
                 // builtin placeholders
 
-                output = output.replace(/\{\{STORY_NAME\}\}/g, () => escape(story.title));
+                output = output.replace(this.storyNameRe, () => escape(story.title));
 
-                output = output.replace(/\{\{STORY_DATA\}\}/g, () => exportStory(story));
+                output = output.replace(this.storyDataRe, () => exportStory(story));
 
                 return output;
             }
