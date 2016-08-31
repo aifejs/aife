@@ -13,3 +13,10 @@
                     span.fa.fa-pencil-square-o
     .widget-body
         story-stats("v-bind:stats"="story.stats").lighter
+    .widget-footer
+        .widget-controls
+            .widget-controlIcons
+                a(v-link="{name: 'play', params: {ifid: story.ifid}}", target="_blank", title="Run game (in new window)")
+                    i.fa.fa-play
+                a(v-link="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Download (also export)")
+                    i.fa.fa-download

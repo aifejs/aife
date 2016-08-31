@@ -55,7 +55,7 @@ export function openProofRead({dispatch,}) {
 }
 
 export function updateStoryFromProof({dispatch,}, event) {
-    dispatch('UPDATE_STORY_FROM_PROOF', event.target.value, event.target.selectionStart);
+    dispatch('UPDATE_STORY_FROM_PROOF', event.target.value);
 }
 
 export function closeProofRead({dispatch,}) {

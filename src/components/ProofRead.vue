@@ -2,10 +2,10 @@
 article.codeEditor
     p.
         Editing story in proof-read mode is experimental feature, it's good idea to make duplicate of the story before.
-        Be careful not to delete special characters. In case Aife fails to parse something, text will be put into special paragraph.
+        Red outline means Aife can't parse current copy (be careful with special characters).
 
     label.codeArea
-        textarea.codeArea("v-bind:value"="proofReadCopy.passages", @input="updateStoryFromProof")
+        textarea.codeArea("v-bind:value"="proofReadCopy.passages", @input="updateStoryFromProof", ":class"="{error: getProofModeError}")
 </template>
 
 <style lang="stylus">
@@ -13,8 +13,9 @@ article.codeEditor
 </style>
 
 <script>
-    import {proofReadCopy,} from '../vuex/getters';
+    import {proofReadCopy, getProofModeError,} from '../vuex/getters';
     import {updateStoryFromProof, openProofRead,} from '../vuex/actions';
+    import debounce from 'lodash/debounce';
 
     export default {
         name: 'proof-read',
@@ -22,9 +23,10 @@ article.codeEditor
         vuex: {
             getters: {
                 proofReadCopy,
+                getProofModeError,
             },
             actions: {
-                updateStoryFromProof,
+                updateStoryFromProof: debounce(updateStoryFromProof, 500),
                 openProofRead,
             },
         },

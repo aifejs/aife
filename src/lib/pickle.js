@@ -51,45 +51,6 @@ export function pickleStory(passages) {
 }
 
 export function unpickleStory(storyString) {
-    const unpickled = [];
-    const errors = [];
-
-    storyString.split(passagesDelimiter).map((passage) => {
-        try {
-            unpickled.push(
-                unpicklePassage(passage)
-            );
-        } catch (unpickleException) {
-            errors.push(errors);
-        }
-    });
-
-    if (errors.length) {
-        unpickled.push({
-            title: 'This passage contains passages that we were unable to parse',
-            tags: [],
-            pid: -1,
-            text: errors.join(''),
-        });
-    }
-
-    return unpickled;
-}
-
-export function caretPositionToPassage(pickled, caretPosition) {
-    if (caretPosition === 0) {
-        return 0;
-    }
-
-    const passages = pickled.split(passagesDelimiter);
-    const delimiterLength = passagesDelimiter.length;
-    let passageIndex = 0;
-    let lengthOfPassagesBefore = 0;
-
-    while (caretPosition > lengthOfPassagesBefore && lengthOfPassagesBefore <= pickled.length) {
-        lengthOfPassagesBefore += passages[passageIndex].length + delimiterLength;
-        passageIndex++;
-    }
-
-    return passageIndex - 1;
+    const split = storyString.split(passagesDelimiter);
+    return split.map((passage) => unpicklePassage(passage));
 }

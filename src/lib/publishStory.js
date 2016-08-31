@@ -1,6 +1,7 @@
 import {ajax,} from 'jquery';
 import escape from 'lodash/escape';
 import exportStory from './exportStory';
+import saveAs from 'browser-saveas';
 
 const format = {
     load() {
@@ -10,7 +11,7 @@ const format = {
             }
 
             ajax({
-                url: '/storyFormats/Snowman/format.js',
+                url: './storyFormats/Snowman/format.js',
                 dataType: 'jsonp',
                 jsonpCallback: 'storyFormat',
                 crossDomain: true,
@@ -32,6 +33,9 @@ const format = {
         });
     },
 
+    storyNameRe: /\{\{STORY_NAME}}/g,
+    storyDataRe: /\{\{STORY_DATA}}/g,
+
     publish(story, options, startId) {
         return this.load().then(
             () => {
@@ -43,9 +47,9 @@ const format = {
 
                 // builtin placeholders
 
-                output = output.replace(/\{\{STORY_NAME\}\}/g, () => escape(story.title));
+                output = output.replace(this.storyNameRe, () => escape(story.title));
 
-                output = output.replace(/\{\{STORY_DATA\}\}/g, () => exportStory(story));
+                output = output.replace(this.storyDataRe, () => exportStory(story));
 
                 return output;
             }
@@ -64,13 +68,31 @@ function replaceContent(html) {
     document.close();
 }
 
+function saveFile(output, fileName) {
+    let blob;
+    try {
+        blob = new Blob(
+            [output,],
+            {
+                type: 'text/html;charset=utf-8',
+            }
+        );
+
+        saveAs(blob, fileName);
+    } catch (e) {
+        return Promise.reject(e);
+    }
+
+    return Promise.resolve(blob);
+}
+
 export default function publishStory(story, filename, options = {}) {
     format.publish(story, options.formatOptions, options.startPassageId || 1).then(
-        (output) => {
+        (compiledStory) => {
             if (filename) {
-                saveFile(output, filename);
+                saveFile(compiledStory, filename);
             } else {
-                replaceContent(output);
+                replaceContent(compiledStory);
             }
         },
         (err) => {
