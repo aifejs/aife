@@ -21,6 +21,9 @@ article.overview.widget
             | &nbsp;
             a(v-link="{name: 'play'}", target="_blank", title="Run game (in new window)")
                 i.fa.fa-play
+            | &nbsp;
+            a(v-link="{name: 'publish'}", target="_blank", title="Download (also export)")
+                i.fa.fa-download
         .widget-controls
             .widget-controlIcons
                 a(v-link="{name: 'stylesheet'}", title="Edit styles")

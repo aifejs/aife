@@ -1,6 +1,7 @@
 import {ajax,} from 'jquery';
 import escape from 'lodash/escape';
 import exportStory from './exportStory';
+import saveAs from 'browser-saveas';
 
 const format = {
     load() {
@@ -67,13 +68,31 @@ function replaceContent(html) {
     document.close();
 }
 
+function saveFile(output, fileName) {
+    let blob;
+    try {
+        blob = new Blob(
+            [output,],
+            {
+                type: 'text/html;charset=utf-8',
+            }
+        );
+
+        saveAs(blob, fileName);
+    } catch (e) {
+        return Promise.reject(e);
+    }
+
+    return Promise.resolve(blob);
+}
+
 export default function publishStory(story, filename, options = {}) {
     format.publish(story, options.formatOptions, options.startPassageId || 1).then(
-        (output) => {
+        (compiledStory) => {
             if (filename) {
-                saveFile(output, filename);
+                saveFile(compiledStory, filename);
             } else {
-                replaceContent(output);
+                replaceContent(compiledStory);
             }
         },
         (err) => {

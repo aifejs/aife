@@ -82,6 +82,20 @@ const routerParams = {
                         },
                     },
                 },
+
+                '/publish': {
+                    name: 'publish',
+                    component: {
+                        ready() {
+                            publishStory(this.story, `${this.story.title}.html`);
+                        },
+                        vuex: {
+                            getters: {
+                                story: getCurrentStory,
+                            },
+                        },
+                    },
+                },
             },
         },
 

@@ -19,6 +19,7 @@
     "test-once": "browserify -t babelify test/unit/index.js | tape-run | faucet"
   },
   "dependencies": {
+    "browser-saveas": "^1.0.1",
     "codemirror": "^5.15.2",
     "common-tags": "^1.2.1",
     "jquery": "^3.0.0",
