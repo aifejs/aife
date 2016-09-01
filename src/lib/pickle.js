@@ -1,4 +1,4 @@
-import {stripIndents} from 'common-tags';
+import {stripIndents,} from 'common-tags';
 
 const passagesDelimiter = '\n=========================================================\n';
 
@@ -13,11 +13,11 @@ export function unpickleTags(tagsString) {
 }
 
 
-export function pickleTitleAndPid({title, pid,}) {
-    return `== ${title} (${pid})`;
+export function pickleTitleAndPid({title, pid, starting,}) {
+    return `== ${title} (${pid})${starting ? '*' : ''}`;
 }
 
-const unpickleTitleAndPidRe = /^== (.*) \((\d+)\)$/;
+const unpickleTitleAndPidRe = /^== (.*) \((\d+)\)(\*?)$/;
 
 export function unpickleTitleAndPid(titleLine) {
     const matches = unpickleTitleAndPidRe.exec(titleLine.trim());
@@ -26,10 +26,16 @@ export function unpickleTitleAndPid(titleLine) {
         throw new TypeError(`Wrong title and pid string: "${titleLine}"`);
     }
 
-    return {
+    const unpickled = {
         title: matches[1],
         pid: parseInt(matches[2]),
     };
+
+    if (matches[3]) {
+        unpickled.starting = true;
+    }
+
+    return unpickled;
 }
 
 export function picklePassage(passage) {
