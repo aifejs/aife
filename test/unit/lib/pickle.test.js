@@ -3,7 +3,7 @@ import {stripIndents, stripIndent,} from 'common-tags';
 import {
     picklePassage,
     unpicklePassage,
-    pickleStory,
+    picklePassages,
     unpickleStory,
     caretPositionToPassage,
 } from '../../../src/lib/pickle';
@@ -81,10 +81,10 @@ test('pickle', (assert) => {
         );
     });
 
-    assert.test('pickleStory', (assert) => {
+    assert.test('picklePassages', (assert) => {
         assert.plan(1);
 
-        const pickledStory = pickleStory(testStory);
+        const pickledStory = picklePassages(testStory);
 
         assert.equals(
             pickledStory,
@@ -103,7 +103,7 @@ test('pickle', (assert) => {
             'Correct story unpickled successfully'
         );
 
-        const twoWayTestStory = unpickleStory(pickleStory(testStory));
+        const twoWayTestStory = unpickleStory(picklePassages(testStory));
         assert.deepEquals(
             twoWayTestStory,
             testStory,
