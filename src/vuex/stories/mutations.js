@@ -122,17 +122,18 @@ export function OPEN_PROOFREAD(state) {
 }
 
 export function UPDATE_STORY_FROM_PROOF(state, proofCopy) {
-    let passages;
+    let unpickled;
+
     try {
-        passages = unpickleStory(proofCopy);
+        unpickled = unpickleStory(proofCopy);
     } catch (e) {
         state.proofModeError = true;
     }
 
-    if (passages) {
+    if (unpickled) {
         const story = getCurrentStory(state);
 
-        story.passages = passages;
+        Object.assign(story, unpickled);
         state.proofModeError = false;
         updateStory(story);
     }

@@ -1,3 +1,5 @@
+import {stripIndents} from 'common-tags';
+
 const passagesDelimiter = '\n=========================================================\n';
 
 export function pickleTags(tags) {
@@ -46,11 +48,38 @@ export function unpicklePassage(passage) {
     return unpickled;
 }
 
-export function pickleStory(passages) {
+export function pickleStory(story) {
+    return stripIndents`
+        = ${story.title} {${story.ifid}}
+        
+        ${picklePassages(story.passages)}`;
+}
+
+export function picklePassages(passages) {
     return passages.map(picklePassage).join(passagesDelimiter);
 }
 
+const storyTitleRe = /^= (.+?) {(.+?)}$/;
+
 export function unpickleStory(storyString) {
+    const story = {};
+    let [firstLine, ...rest] = storyString.split('\n');
+    firstLine = firstLine.trim();
+    const matches = storyTitleRe.exec(firstLine);
+
+    if (!matches) {
+        throw new TypeError(`Wrong story title and IFID: "${firstLine}"`);
+    } else {
+        story.title = matches[1];
+        story.ifid = matches[2];
+    }
+
+    story.passages = unpicklePassages(rest.join('\n').trim());
+
+    return story;
+}
+
+export function unpicklePassages(storyString) {
     const split = storyString.split(passagesDelimiter);
     return split.map((passage) => unpicklePassage(passage));
 }

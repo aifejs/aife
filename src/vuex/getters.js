@@ -64,11 +64,7 @@ export function stats({route, stories,}) {
 
 export function proofReadCopy({route, stories,}) {
     const story = getCurrentStory({route, stories,});
-    return {
-        title: story.title,
-        passages: pickleStory(story.passages),
-        ifid: story.ifid,
-    };
+    return pickleStory(story);
 }
 
 export function getProofModeError({proofModeError,}) {
