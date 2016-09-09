@@ -1,17 +1,32 @@
-import cloneDeep from 'lodash/clone-deep';
+import cloneDeep from 'lodash/cloneDeep';
+const ifid = 'some-fake-ifid';
+
 export const testState = {
-    passages: [
-        {
-            pid: 11,
-            tags: [],
-            text: 'Passage paragraph',
-            title: 'Eleventh passage',
+    route: {
+        params: {
+            ifid,
         },
+    },
+
+    stories: [
         {
-            pid: 22,
-            tags: ['some tag',],
-            text: 'Another passage text',
-            title: 'Another passage',
+            title: 'Coolest story evah',
+            ifid,
+            opened: [],
+            passages: [
+                {
+                    pid: 11,
+                    tags: [],
+                    text: 'Passage paragraph',
+                    title: 'Eleventh passage',
+                },
+                {
+                    pid: 22,
+                    tags: ['some tag',],
+                    text: 'Another passage text',
+                    title: 'Another passage',
+                },
+            ],
         },
     ],
 };

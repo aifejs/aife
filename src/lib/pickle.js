@@ -57,7 +57,7 @@ export function unpicklePassage(passage) {
 export function pickleStory(story) {
     return stripIndents`
         = ${story.title} {${story.ifid}}
-        
+
         ${picklePassages(story.passages)}`;
 }
 

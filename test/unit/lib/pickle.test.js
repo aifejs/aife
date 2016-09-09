@@ -5,7 +5,7 @@ import {
     unpicklePassage,
     picklePassages,
     unpickleStory,
-    caretPositionToPassage,
+    pickleStory,
 } from '../../../src/lib/pickle';
 
 const testPassage0 = {
@@ -24,11 +24,15 @@ const testPassage1 = {
     pid: 1,
 };
 
-const testStory = [testPassage0, testPassage1,];
+const testStory = {
+    title: 'Best story ever!',
+    ifid: 'some-fake-ifid',
+    passages: [testPassage0, testPassage1,],
+};
 
 const testPassage0Pickled = stripIndent`
     == Twisty little passages (0)
-    
+
     They're incredibly all alike.`;
 
 const testPassage1Pickled = stripIndent`
@@ -37,10 +41,16 @@ const testPassage1Pickled = stripIndent`
     Biggest cave ever.
     You wonder if you can fit here your mom.`;
 
-const testPickledStory = stripIndents`
+const testPickledPassages = stripIndents`
     ${testPassage0Pickled}
     =========================================================
     ${testPassage1Pickled}
+`;
+
+const testPickledStory = stripIndents`
+    = Best story ever! {some-fake-ifid}
+
+    ${testPickledPassages}
 `;
 
 
@@ -84,12 +94,12 @@ test('pickle', (assert) => {
     assert.test('picklePassages', (assert) => {
         assert.plan(1);
 
-        const pickledStory = picklePassages(testStory);
+        const pickledPassages = picklePassages(testStory.passages);
 
         assert.equals(
-            pickledStory,
-            testPickledStory,
-            'Correct story pickled successfully'
+            pickledPassages,
+            testPickledPassages,
+            'Correct passages pickled successfully'
         );
     });
 
@@ -103,50 +113,11 @@ test('pickle', (assert) => {
             'Correct story unpickled successfully'
         );
 
-        const twoWayTestStory = unpickleStory(picklePassages(testStory));
+        const twoWayTestStory = unpickleStory(pickleStory(testStory));
         assert.deepEquals(
             twoWayTestStory,
             testStory,
             'Correctly pickled/unpickled story'
-        );
-    });
-
-    assert.test('caretPositionToPassage', (assert) => {
-        assert.plan(6);
-
-        const pass0Length = testPassage0Pickled.length;
-        const pass1Length = testPassage1Pickled.length;
-        const delimLength = testPassage1Pickled.length;
-
-        assert.equals(
-            caretPositionToPassage(testPickledStory, 0),
-            0,
-            '0 resolves to 0th passage'
-        );
-        assert.equals(
-            caretPositionToPassage(testPickledStory, pass0Length / 2),
-            0,
-            'Halfway through 0th passage still 0th passage'
-        );
-        assert.equals(
-            caretPositionToPassage(testPickledStory, pass0Length + delimLength),
-            1,
-            '0th passage + delimiter gives 1st passage'
-        );
-        assert.equals(
-            caretPositionToPassage(testPickledStory, pass0Length + delimLength + 10),
-            1,
-            'Delimiter between passages resolves to next passage'
-        );
-        assert.equals(
-            caretPositionToPassage(testPickledStory, pass0Length + delimLength + pass1Length),
-            1,
-            'End of 1st passage gives 1st passage'
-        );
-        assert.equals(
-            caretPositionToPassage(testPickledStory, testPickledStory.length * 2),
-            1,
-            'In a galaxy far away -- 1st passage'
         );
     });
 });
