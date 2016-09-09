@@ -12,7 +12,7 @@
     "url": "https://github.com/hogart/aife/issues/"
   },
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
+    "start": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "lint": "eslint --ext .js,.vue src",
     "test": "watch \"browserify -t babelify test/unit/index.js | tape-run | faucet\"",

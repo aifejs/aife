@@ -100,10 +100,28 @@ if (process.env.NODE_ENV === 'production') {
     ]);
 } else {
     config.devtool = '#eval-source-map';
-    config.devServer ={
-        historyApiFallback: true,
+
+    let devServerConfig = {
         noInfo: true,
+        inline: true,
+        hot: true,
+        colors: true,
+        historyApiFallback: true,
     };
+    try {
+        // create devserver.config.js file to locally override webpack devserver settings
+        devServerConfig = Object.assign(
+            devServerConfig,
+            require('./devserver.config')
+        );
+        console.log('Custom devserver config loaded.');
+    } catch (e) {
+        if (!e.message.startsWith('Cannot find module')) {
+            console.error('Error loading custom config: ', e);
+        }
+    }
+
+    config.devServer = devServerConfig;
 }
 
 module.exports = config;
