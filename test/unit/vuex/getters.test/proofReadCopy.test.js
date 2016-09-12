@@ -7,26 +7,32 @@ import {fixture,} from '../fixture';
 test('proofReadCopy', (assert) => {
     assert.plan(4);
 
-    const testCopy = proofReadCopy(fixture({title: 'I am but a humble fixture',}));
+    const state = fixture();
+
+    const testCopy = proofReadCopy(state);
 
     assert.equals(
         testCopy.title,
-        'I am but a humble fixture',
+        'Coolest story evah',
         'Correctly copied title'
     );
 
     assert.ok(
-        testCopy.passages.includes('Eleventh'),
+        testCopy.includes('Eleventh'),
         'passage titles are in'
     );
 
     assert.ok(
-        testCopy.passages.includes('#some tag'),
+        testCopy.includes('#some tag'),
         'tags are included'
     );
 
     assert.ok(
-        testCopy.passages.includes('Another'),
+        testCopy.includes('Another'),
         'passage bodies are included too'
+    );
+    assert.ok(
+        testCopy.includes('some-fake-ifid'),
+        'ifid included'
     );
 });

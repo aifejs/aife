@@ -7,9 +7,8 @@ import {UPDATE_STORY_FROM_PROOF,} from '../../../../src/vuex/mutations';
 
 test('UPDATE_STORY_FROM_PROOF', (assert) => {
     assert.plan(2);
-    const state = fixture({
-        title: 'Story of my uncle',
-    });
+    const state = fixture();
+
     const copy = proofReadCopy(state);
     const changePosition = copy.passages.indexOf('paragraph');
 

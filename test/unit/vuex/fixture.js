@@ -13,6 +13,8 @@ export const testState = {
             title: 'Coolest story evah',
             ifid,
             opened: [],
+            styleSheet: '',
+            script: '',
             passages: [
                 {
                     pid: 11,
