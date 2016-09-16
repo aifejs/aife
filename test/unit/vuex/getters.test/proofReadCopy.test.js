@@ -11,9 +11,8 @@ test('proofReadCopy', (assert) => {
 
     const testCopy = proofReadCopy(state);
 
-    assert.equals(
-        testCopy.title,
-        'Coolest story evah',
+    assert.ok(
+        testCopy.startsWith('= Coolest story evah'),
         'Correctly copied title'
     );
 
@@ -31,6 +30,7 @@ test('proofReadCopy', (assert) => {
         testCopy.includes('Another'),
         'passage bodies are included too'
     );
+
     assert.ok(
         testCopy.includes('some-fake-ifid'),
         'ifid included'

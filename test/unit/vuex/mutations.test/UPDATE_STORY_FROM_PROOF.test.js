@@ -7,28 +7,24 @@ import {UPDATE_STORY_FROM_PROOF,} from '../../../../src/vuex/mutations';
 
 test('UPDATE_STORY_FROM_PROOF', (assert) => {
     assert.plan(2);
+
     const state = fixture();
-
-    const copy = proofReadCopy(state);
-    const changePosition = copy.passages.indexOf('paragraph');
-
-    copy.passages = copy.passages.replace('paragraph', 'piece');
+    const copy = proofReadCopy(state).replace('paragraph', 'piece');
 
     UPDATE_STORY_FROM_PROOF(
         state,
-        copy.passages,
-        changePosition
+        copy
     );
 
     assert.equals(
-        state.passages[0].text,
+        state.stories[0].passages[0].text,
         'Passage piece',
         'Changed 1st passage'
     );
 
     assert.deepEquals(
-        state.passages[1],
-        testState.passages[1],
+        state.stories[0].passages[1],
+        testState.stories[0].passages[1],
         '2nd pasage unchanged'
     );
 });
