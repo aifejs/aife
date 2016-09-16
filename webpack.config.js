@@ -104,7 +104,6 @@ if (process.env.NODE_ENV === 'production') {
     let devServerConfig = {
         noInfo: true,
         inline: true,
-        hot: true,
         colors: true,
         historyApiFallback: true,
     };
