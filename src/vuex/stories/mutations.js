@@ -27,7 +27,7 @@ export function CREATE_STORY(state, {title,}) {
         {},
         storyBlueprint,
         {
-            title: title ? createCopyTitle(title) : createCopyTitle(storyBlueprint.title),
+            title: createCopyTitle(title || storyBlueprint.title),
             ifid: uuid(),
             lastEdit: Date.now(),
         }

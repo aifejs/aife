@@ -5,6 +5,7 @@
 <script>
     import {editStoryTitle, duplicateStory,} from '../../vuex/actions';
     import StoryStats from '../common/StoryStats.vue';
+    import StoryRun from '../common/StoryRun.vue';
 
     export default {
         props: {
@@ -50,6 +51,7 @@
 
         components: {
             StoryStats,
+            StoryRun,
         },
     };
 </script>

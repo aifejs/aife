@@ -16,7 +16,4 @@
     .widget-footer
         .widget-controls
             .widget-controlIcons
-                a(v-link="{name: 'play', params: {ifid: story.ifid}}", target="_blank", title="Run game (in new window)")
-                    i.fa.fa-play
-                a(v-link="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Download (also export)")
-                    i.fa.fa-download
+                story-run("v-bind:story"="story")

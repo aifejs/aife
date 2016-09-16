@@ -185,3 +185,7 @@ export function getProofRead({stories, route,}) {
 export function getStoriesLoaded({storiesLoaded,}) {
     return storiesLoaded;
 }
+
+export function isStoryRunnable(story) {
+    return story.passages && story.passages.length > 0;
+}

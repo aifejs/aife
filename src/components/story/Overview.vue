@@ -1,12 +1,20 @@
 <script>
     import OverviewStats from '../OverviewStats.vue';
     import PassagesList from '../passage/PassagesList.vue';
+    import StoryRun from '../common/StoryRun.vue';
+    import {getCurrentStory,} from '../../vuex/getters';
 
     export default {
         name: 'overview',
+        vuex: {
+            getters: {
+                story: getCurrentStory,
+            },
+        },
         components: {
             OverviewStats,
             PassagesList,
+            StoryRun,
         },
     };
 </script>
@@ -19,11 +27,7 @@ article.overview.widget
         .widget-title
             | Story overview
             | &nbsp;
-            a(v-link="{name: 'play'}", target="_blank", title="Run game (in new window)")
-                i.fa.fa-play
-            | &nbsp;
-            a(v-link="{name: 'publish'}", target="_blank", title="Download (also export)")
-                i.fa.fa-download
+            story-run("v-bind:story"="story")
         .widget-controls
             .widget-controlIcons
                 a(v-link="{name: 'stylesheet'}", title="Edit styles")
