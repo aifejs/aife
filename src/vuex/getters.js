@@ -160,6 +160,7 @@ export function storiesList({stories, storiesSorting,}) {
         title: story.title,
         stats: storyStats(story),
         ifid: story.ifid,
+        passages: story.passages,
     }));
 }
 

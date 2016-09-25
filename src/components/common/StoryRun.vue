@@ -5,8 +5,6 @@
         props: {
             story: Object,
         },
-        vuex: {
-        },
 
         computed: {
             runnable () {
@@ -20,16 +18,20 @@
 
 <style lang="stylus">
 .storyRun
-    &.disabled
+    a
+        margin-left: 1ex
+        i
+            margin-right: 1ex
+    .disabled
         pointer-events: none
         opacity: 0.3
 </style>
 
 <template lang="pug">
-span.storyRun(":class"="{'disabled': runnable}")
-    a(v-link="{name: 'play', params: {ifid: story.ifid}}", target="_blank", title="Run game (in new window)")
+span.storyRun
+    a(v-link="{name: 'play', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Run game (in new window)")
         i.fa.fa-play
-    a(v-link="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Download (also export)")
+    a(v-link="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Export")
         i.fa.fa-download
 </template>
 
