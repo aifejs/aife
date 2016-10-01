@@ -19,6 +19,8 @@ const state = {
         lineWrapping: true,
         lineNumbers: true,
         indentUnit: 4,
+        gutters: ['CodeMirror-lint-markers',],
+        lint: true,
     },
 
     storiesLoaded: false,

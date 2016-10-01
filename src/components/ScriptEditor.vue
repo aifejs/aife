@@ -10,8 +10,13 @@ article.codeEditor
 <script>
     import CodeMirror from './common/CodeMirror.vue';
     import 'codemirror/mode/javascript/javascript';
+    import {JSHINT,} from 'jshint';
+    import 'codemirror/addon/lint/javascript-lint';
     import {jsEditorOptions, getScript,} from '../vuex/getters';
     import {saveScript, openScript,} from '../vuex/actions';
+
+    window.JSHINT = JSHINT; // javascript-lint expects JSHINT in global scope
+
     export default {
         vuex: {
             getters: {

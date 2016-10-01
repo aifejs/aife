@@ -10,10 +10,11 @@ import {
     makeStarting,
 } from './passages/actions';
 import {
-    addStory,
+    createStory,
     deleteStory,
     editStoryTitle,
     duplicateStory,
+    importStory,
     openStylesheet,
     saveStyleSheet,
     closeStylesheet,
@@ -63,14 +64,20 @@ export {
     removeTag,
     makeStarting,
 
-    addStory,
+    createStory,
     deleteStory,
     editStoryTitle,
     duplicateStory,
+    importStory,
+
     openStylesheet,
     saveStyleSheet,
     closeStylesheet,
-    openScript, saveScript, closeScript,
+
+    openScript,
+    saveScript,
+    closeScript,
+
     openProofRead,
     updateStoryFromProof,
     closeProofRead,

@@ -6,11 +6,7 @@ article.widget.lighter.screen.storyList
     .widget-body.storyList-body
         story-list-item(v-for="story of storiesList", "v-bind:story"="story")
 
-        .storyListItem.addStory
-            .addStory-body
-                p(v-if="storiesList.length") Add new story
-                p(v-if="!storiesList.length") No stories. Go ahead and create one!
-                button.addStory-btn("@click"="onAddStoryClick") +
+        story-add.storyListItem
 
     .widget-footer.widget-controlIcons
         a(v-link="{name: 'settings'}")

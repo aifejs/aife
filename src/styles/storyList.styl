@@ -3,6 +3,8 @@
         padding-left: 1ex
         padding-right: 1ex
         flex-direction: row !important
+        flex-wrap: wrap
+        align-items: flex-start
 
     &-item
         size = 14em
@@ -10,31 +12,5 @@
         width: size * 1.62
         height: size
         overflow-y: auto
-        margin-right: 1ex
+        margin: 0 1ex 1ex 0
         vertical-align: top
-
-    .addStory
-        border: 1px solid silver
-        border-radius 2px
-
-        &-body
-            display: flex
-            flex-direction: column
-            justify-content: center
-            align-items: center
-            width: 100%
-            height: 100%
-
-        &-btn
-            width: 70%
-            height: 70%
-            border: 1px solid silver
-            border-radius: 2px
-            font-size: 400%
-            background: none
-            margin: 0
-            padding: 0
-            cursor: pointer
-
-            &:hover
-                background-color: gainsboro

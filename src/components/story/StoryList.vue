@@ -4,10 +4,11 @@
 
 <script>
     import {storiesList,} from '../../vuex/getters';
-    import {setStoriesSorting, addStory,} from '../../vuex/actions';
+    import {setStoriesSorting,} from '../../vuex/actions';
 
     import StoryListItem from './StoryListItem.vue';
     import SorterButtons from '../common/SorterButtons.vue';
+    import StoryAdd from './StoryAdd.vue';
     import pkg from '../../../package.json';
 
     export default {
@@ -24,24 +25,18 @@
             };
         },
 
-        methods: {
-            onAddStoryClick(event) {
-                this.addStory();
-            },
-        },
-
         vuex: {
             getters: {
                 storiesList,
             },
             actions: {
                 setStoriesSorting,
-                addStory,
             },
         },
         components: {
             SorterButtons,
             StoryListItem,
+            StoryAdd,
         },
     };
 </script>

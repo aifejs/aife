@@ -160,6 +160,7 @@ export function storiesList({stories, storiesSorting,}) {
         title: story.title,
         stats: storyStats(story),
         ifid: story.ifid,
+        passages: story.passages,
     }));
 }
 
@@ -184,4 +185,8 @@ export function getProofRead({stories, route,}) {
 
 export function getStoriesLoaded({storiesLoaded,}) {
     return storiesLoaded;
+}
+
+export function isStoryRunnable(story) {
+    return story.passages && story.passages.length > 0;
 }

@@ -8,14 +8,19 @@ test('getCurrentPassage', (assert) => {
     function state(routeParams) {
         return fixture({
             route: {
-                params: routeParams,
+                params: Object.assign(
+                    {
+                        ifid: 'some-fake-ifid',
+                    },
+                    routeParams
+                ),
             },
         });
     }
 
     assert.deepEquals(
         getCurrentPassage(state({pid: '11',})),
-        testState.passages[0],
+        testState.stories[0].passages[0],
         'Fetches correct passage by pid'
     );
 
@@ -26,8 +31,8 @@ test('getCurrentPassage', (assert) => {
     );
 
     assert.deepEquals(
-        getCurrentPassage(state({passageTitle: testState.passages[1].title,})),
-        testState.passages[1],
+        getCurrentPassage(state({passageTitle: testState.stories[0].passages[1].title,})),
+        testState.stories[0].passages[1],
         'Fetches correct passage by title'
     );
 

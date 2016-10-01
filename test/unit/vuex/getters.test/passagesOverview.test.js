@@ -25,19 +25,19 @@ test('passagesOverview', (assert) => {
 
         assert.deepEquals(
             passagesOverview(sortingState()),
-            [state.passages[1], state.passages[0],],
+            [state.stories[0].passages[1], state.stories[0].passages[0],],
             'Correctly sorting pid-desc'
         );
 
         assert.deepEquals(
             passagesOverview(sortingState('title', 'asc')),
-            [state.passages[1], state.passages[0],],
+            [state.stories[0].passages[1], state.stories[0].passages[0],],
             'Correctly sorting title-asc'
         );
 
         assert.deepEquals(
             passagesOverview(sortingState('title', 'desc')),
-            [state.passages[0], state.passages[1],],
+            [state.stories[0].passages[0], state.stories[0].passages[1],],
             'Correctly sorting title-desc'
         );
     });
@@ -61,7 +61,7 @@ test('passagesOverview', (assert) => {
         assert.deepEquals(
             passagesOverview(filteringState('pàragraph')),
             [
-                state.passages[0],
+                state.stories[0].passages[0],
             ],
             'Filtering successfully finds passages despite diacritics'
         );
@@ -69,7 +69,7 @@ test('passagesOverview', (assert) => {
         assert.deepEquals(
             passagesOverview(filteringState('TEXT')),
             [
-                state.passages[1],
+                state.stories[0].passages[1],
             ],
             'Filtering successfully finds passages case-insensitive'
         );
@@ -77,7 +77,7 @@ test('passagesOverview', (assert) => {
         assert.deepEquals(
             passagesOverview(filteringState('TÈXT')),
             [
-                state.passages[1],
+                state.stories[0].passages[1],
             ],
             'Filtering successfully ignoring case and diacritics'
         );
@@ -98,15 +98,12 @@ test('passagesOverview', (assert) => {
     assert.test('sorting and filtering', (assert) => {
         assert.plan(3);
 
-        const state = fixture({
-            passages: [
-                ...testState.passages,
-                {
-                    pid: 100500,
-                    title: 'Xyzzy',
-                    text: 'ok, you caught me',
-                },
-            ],
+        const state = fixture();
+
+        state.stories[0].passages.push({
+            pid: 100500,
+            title: 'Xyzzy',
+            text: 'ok, you caught me',
         });
 
         function filteringSorting(field = 'pid', sort = 'asc', passagesFiltering = '') {
@@ -122,9 +119,9 @@ test('passagesOverview', (assert) => {
         assert.deepEquals(
             passagesOverview(filteringSorting()),
             [
-                state.passages[0],
-                state.passages[1],
-                state.passages[2],
+                state.stories[0].passages[0],
+                state.stories[0].passages[1],
+                state.stories[0].passages[2],
             ],
             'Without filtering and with default sorting passages list is identical to what is in store'
         );
@@ -132,8 +129,8 @@ test('passagesOverview', (assert) => {
         assert.deepEquals(
             passagesOverview(filteringSorting('pid', 'desc', 'passage')),
             [
-                state.passages[1],
-                state.passages[0],
+                state.stories[0].passages[1],
+                state.stories[0].passages[0],
             ],
             'Correctly sorts by pid-desc'
         );
@@ -141,8 +138,8 @@ test('passagesOverview', (assert) => {
         assert.deepEquals(
             passagesOverview(filteringSorting('pid', 'asc', 'passage')),
             [
-                state.passages[0],
-                state.passages[1],
+                state.stories[0].passages[0],
+                state.stories[0].passages[1],
             ],
             'Correctly sorts by pid-asc'
         );

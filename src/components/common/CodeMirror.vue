@@ -2,11 +2,14 @@
 div.codeArea.mirror
 </template>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+@require '/node_modules/codemirror/addon/lint/lint.css';
+</style>
 
 <script>
     import CodeMirror from 'codemirror';
     import debounce from 'lodash/debounce';
+    import 'codemirror/addon/lint/lint';
 
     /**
      * Generic reusable code editor component, adapted from Twine source

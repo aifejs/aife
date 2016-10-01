@@ -1,17 +1,16 @@
 import {tabs,} from '../../../../src/vuex/getters';
 import test from 'tape';
-import {testState,} from '../fixture';
+import {testState, fixture,} from '../fixture';
 
 test('tabs', (assert) => {
     assert.plan(2);
 
-    const emptyState = {
-        opened: [],
-    };
-
-    const notEmptyState = {
-        opened: testState.passages,
-    };
+    const emptyState = fixture();
+    const notEmptyState = fixture();
+    notEmptyState.stories[0].opened = [
+        notEmptyState.stories[0].passages[0],
+        notEmptyState.stories[0].passages[1],
+    ];
 
     assert.equals(
         tabs(emptyState).length,
@@ -24,8 +23,14 @@ test('tabs', (assert) => {
     assert.deepEquals(
         nonEmptyTabs,
         [
-            {pid: notEmptyState.opened[0].pid, title: notEmptyState.opened[0].title,},
-            {pid: notEmptyState.opened[1].pid, title: notEmptyState.opened[1].title,},
+            {
+                pid: notEmptyState.stories[0].opened[0].pid,
+                title: notEmptyState.stories[0].opened[0].title,
+            },
+            {
+                pid: notEmptyState.stories[0].opened[1].pid,
+                title: notEmptyState.stories[0].opened[1].title,
+            },
         ],
         'correctly extracted only needed properties'
     );

@@ -1,4 +1,4 @@
-export function addStory({dispatch,}, title) {
+export function createStory({dispatch,}, title) {
     dispatch('CREATE_STORY', {title,});
 }
 
@@ -15,6 +15,10 @@ export function editStoryTitle({dispatch,}, title, ifid) {
 
 export function duplicateStory({dispatch,}, ifid) {
     dispatch('DUPLICATE_STORY', ifid);
+}
+
+export function importStory({dispatch,}, story) {
+    dispatch('IMPORT_STORY', story);
 }
 
 

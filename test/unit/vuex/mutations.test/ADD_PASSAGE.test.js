@@ -15,13 +15,13 @@ test('ADD_PASSAGE', (assert) => {
 
 
     assert.equals(
-        state.passages.length,
+        state.stories[0].passages.length,
         3,
         'Added 1 new passage'
     );
 
     assert.equals(
-        state.passages[2].pid,
+        state.stories[0].passages[2].pid,
         23,
         'correctly assigns new pid'
     );
