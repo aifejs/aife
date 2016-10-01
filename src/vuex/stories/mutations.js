@@ -63,6 +63,11 @@ export function DUPLICATE_STORY(state, ifid) {
     state.stories.push(newStory);
 }
 
+export function IMPORT_STORY(state, story) {
+    // TODO: figure out sensible actions in case of ifid and title match
+    state.stories.push(story);
+}
+
 export function LOAD_STORY(state, story) {
     state.stories.push(story);
 }

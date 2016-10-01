@@ -7,9 +7,10 @@ const mutationMap = {
     'ADD_PASSAGE': 'stories',
 
     'SET_STORY_TITLE': 'stories',
-    'DUPLICATE_STORY': 'stories',
     'CREATE_STORY': 'stories',
     'DELETE_STORY': 'stories',
+    'DUPLICATE_STORY': 'stories',
+    'IMPORT_STORY': 'stories',
 
     'OPEN_STYLESHEET': 'stories',
     'SAVE_STYLESHEET': 'stories',

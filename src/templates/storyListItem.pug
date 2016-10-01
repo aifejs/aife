@@ -1,4 +1,4 @@
-.widget.storyListItem
+.widget.storyList-item
     .widget-header
         .widget-title("v-bind:title"="story.title", "v-bind:class"="{editing: editing}")
             a.storyListItem-link(v-link="{name: 'story', params: {ifid: story.ifid}}") {{ story.title }}

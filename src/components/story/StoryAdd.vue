@@ -1,9 +1,9 @@
 <template lang="pug">
 .addStory
     .addStory-body
-        button.addStory-btn("@click"="onAddStoryClick") Create new
+        button.addStory-btn("@click"="onCreateStoryClick") Create new
         label.addStory-btn
-            | Import from file
+            | Import from file(s)
             input(type="file", "@change"="onFilePicked", accept=".html,.htm", multiple)
 </template>
 
@@ -50,27 +50,34 @@
 </style>
 
 <script>
-    import {addStory,} from '../../vuex/actions';
-    import {readFiles, importStories} from '../../lib/importStory';
+    import {createStory, importStory} from '../../vuex/actions';
+    import {readFiles, importStories as importFromFiles} from '../../lib/importStory';
 
     export default {
         methods: {
-            onAddStoryClick(event) {
-                this.addStory();
+            onCreateStoryClick(event) {
+                this.createStory();
             },
 
             onFilePicked({target}) {
                 if (target.files.length) {
                     readFiles(target.files)
-                        .then(importStories)
-                        .then(console.log.bind(console)).catch(console.error.bind(console));
+                        .then(importFromFiles)
+                        .then((stories) => {
+                            stories.map(this.importStory)
+                        })
+                        .catch(
+                            // TODO: show errors if any
+                            console.error.bind(console)
+                        );
                 }
             }
         },
 
         vuex: {
             actions: {
-                addStory,
+                createStory,
+                importStory,
             },
         },
 

@@ -80,11 +80,11 @@ export function importStory(html, lastUpdate = new Date()) {
     ).map((storyEl) => domToObject(storyEl, lastUpdate));
 }
 
-export function convertFromTwine(twineStoryObject) {
+export function convertStory(twineStoryObject) {
     const convertedStory = {
         title: twineStoryObject.name,
         ifid: twineStoryObject.ifid,
-        passages: twineStoryObject.passages,
+        passages: twineStoryObject.passages.map(convertPassage),
         opened: [],
         styleSheet: twineStoryObject.stylesheet,
         editStylesheet: false,
@@ -103,13 +103,23 @@ export function convertFromTwine(twineStoryObject) {
     return convertedStory;
 }
 
+function convertPassage(twinePassage) {
+    return {
+        title: twinePassage.name,
+        text: twinePassage.text,
+        pid: Number(twinePassage.pid),
+        tags: twinePassage.tags,
+        starting: false,
+    };
+}
+
 export function importStories(htmls) {
     const stories = [];
 
     htmls.map(importStory).forEach(
         (imported) => {
             stories.push(
-                ...imported.map(convertFromTwine)
+                ...imported.map(convertStory)
             );
         }
     );
