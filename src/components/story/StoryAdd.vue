@@ -50,8 +50,8 @@
 </style>
 
 <script>
-    import {createStory, importStory} from '../../vuex/actions';
-    import {readFiles, importStories as importFromFiles} from '../../lib/importStory';
+    import {createStory, importStory,} from '../../vuex/actions';
+    import {readFiles, importStories as importFromFiles,} from '../../lib/importStory';
 
     export default {
         methods: {
@@ -59,19 +59,19 @@
                 this.createStory();
             },
 
-            onFilePicked({target}) {
+            onFilePicked({target,}) {
                 if (target.files.length) {
                     readFiles(target.files)
                         .then(importFromFiles)
                         .then((stories) => {
-                            stories.map(this.importStory)
+                            stories.map(this.importStory);
                         })
                         .catch(
                             // TODO: show errors if any
                             console.error.bind(console)
                         );
                 }
-            }
+            },
         },
 
         vuex: {

@@ -7,8 +7,8 @@
         },
 
         computed: {
-            runnable () {
-                return isStoryRunnable(this.story)
+            runnable() {
+                return isStoryRunnable(this.story);
             },
         },
 
