@@ -1,7 +1,6 @@
 import {pickleStory,} from '../lib/pickle';
 import sortBy from 'lodash/sortBy';
 import deburr from 'lodash/deburr';
-import uniq from 'lodash/uniq';
 import storyStats from '../lib/storyStats';
 
 export function getCurrentStory({route, stories,}) {
@@ -97,23 +96,6 @@ export function getStyleSheet({route, stories,}) {
 
 export function getScript({route, stories,}) {
     return getCurrentStory({route, stories,}).script;
-}
-
-export function tagSuggestions({route, stories,}) {
-    const passages = getCurrentStory({route, stories,}).passages;
-    const collectedTags = [];
-    let currentPassageTags = [];
-    passages.forEach(({tags, pid,}) => {
-        if (pid.toString() !== route.params.pid) {
-            collectedTags.push(...tags);
-        } else {
-            currentPassageTags = tags;
-        }
-    });
-
-    collectedTags.push(...currentPassageTags);
-
-    return uniq(collectedTags);
 }
 
 export function tagSuggestionsCounted({route, stories,}) {

@@ -3,7 +3,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import uuid from 'tiny-uuid';
 import {unpickleStory,} from '../../lib/pickle';
-import {UPDATE_PASSAGE,} from '../passages/mutations';
 import createCopyTitle from '../../lib/createCopyTitle';
 import updateStory from '../../lib/updateStory';
 import {getCurrentStory,} from '../getters';
