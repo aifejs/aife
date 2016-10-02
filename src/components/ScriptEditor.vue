@@ -16,7 +16,7 @@ article.codeEditor
 
     export default {
         compiled() {
-            require.ensure(['jshint'], (require) => {
+            require.ensure(['jshint',], (require) => {
                 window.JSHINT = require('jshint').JSHINT; // javascript-lint expects JSHINT in global scope
             });
         },
