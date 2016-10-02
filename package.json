@@ -44,7 +44,7 @@
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
     "eslint": "^3.3.1",
-    "eslint-config-yandex": "^1.0.6",
+    "eslint-config-aifejs": "github:aifejs/eslint-config-aifejs",
     "eslint-plugin-html": "^1.5.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "faucet": "0.0.1",
@@ -82,99 +82,6 @@
     "plugins": [
       "html"
     ],
-    "extends": "eslint-config-yandex",
-    "rules": {
-      "eol-last": [
-        0
-      ],
-      "comma-dangle": [
-        "error",
-        "always"
-      ],
-      "arrow-body-style": [
-        "error",
-        "as-needed"
-      ],
-      "arrow-parens": [
-        "error",
-        "always"
-      ],
-      "constructor-super": [
-        "error"
-      ],
-      "generator-star-spacing": [
-        "error",
-        {
-          "before": false,
-          "after": true
-        }
-      ],
-      "no-class-assign": [
-        "error"
-      ],
-      "no-confusing-arrow": [
-        "error"
-      ],
-      "no-const-assign": [
-        "error"
-      ],
-      "no-dupe-class-members": [
-        "error"
-      ],
-      "no-duplicate-imports": [
-        "error"
-      ],
-      "no-new-symbol": [
-        "error"
-      ],
-      "no-this-before-super": [
-        "error"
-      ],
-      "no-useless-constructor": [
-        "error"
-      ],
-      "no-var": [
-        "error"
-      ],
-      "object-shorthand": [
-        "error",
-        "always"
-      ],
-      "prefer-arrow-callback": [
-        "error",
-        {
-          "allowNamedFunctions": true
-        }
-      ],
-      "prefer-const": [
-        "error",
-        {
-          "destructuring": "all"
-        }
-      ],
-      "prefer-reflect": [
-        "off"
-      ],
-      "prefer-rest-params": [
-        "warn"
-      ],
-      "prefer-spread": [
-        "error"
-      ],
-      "prefer-template": [
-        "error"
-      ],
-      "require-yield": [
-        "error"
-      ],
-      "template-curly-spacing": [
-        "error",
-        "never"
-      ],
-      "yield-star-spacing": [
-        "error",
-        "after"
-      ]
-    }
+    "extends": "eslint-config-aifejs"
   }
 }
