@@ -1,35 +1,37 @@
-import {ajax,} from 'jquery';
+import fetchJsonp from 'fetch-jsonp';
 import escape from 'lodash/escape';
 import exportStory from './exportStory';
 import saveAs from 'browser-saveas';
 
+function fetchFormat(url) {
+    return fetchJsonp(url, {jsonpCallbackFunction: 'storyFormat',})
+        .then((response) => response.json());
+}
+
 const format = {
+    url: './storyFormats/Snowman/format.js',
     load() {
         return new Promise((resolve, reject) => {
             if (this.loaded) {
                 return resolve();
             }
 
-            ajax({
-                url: './storyFormats/Snowman/format.js',
-                dataType: 'jsonp',
-                jsonpCallback: 'storyFormat',
-                crossDomain: true,
-            }).then(
-                (properties) => {
-                    this.properties = properties;
-                    this.loaded = true;
+            fetchFormat(this.url)
+                .then(
+                    (properties) => {
+                        this.properties = properties;
+                        this.loaded = true;
 
-                    if (this.properties.setup) {
-                        this.properties.setup.call(this);
+                        if (this.properties.setup) {
+                            this.properties.setup.call(this);
+                        }
+
+                        resolve();
+                    },
+                    (req, status, error) => {
+                        reject(error);
                     }
-
-                    resolve();
-                },
-                (req, status, error) => {
-                    reject(error);
-                }
-            );
+                );
         });
     },
 
