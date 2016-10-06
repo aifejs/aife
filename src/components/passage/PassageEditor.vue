@@ -14,29 +14,39 @@ article.codeEditor.passageEditor(v-if="passage")
 
     label.codeArea
         strong Text
-        textarea.codeArea("v-bind:value"="passage.text", @input="editPassage($event, passage.pid, 'text')")
+        code-mirror("v-bind:options"="passageEditorOptions", "v-bind:code"="passage.text" "@code-changed"="onCodeChanged")
 </template>
 
 <style lang="stylus"></style>
 
 <script>
-    import {getCurrentPassage, tagSuggestionsCounted,} from '../../vuex/getters';
-    import {openPassage, editPassage, addTag, removeTag, makeStarting,} from '../../vuex/actions';
+    import CodeMirror from '../common/CodeMirror.vue';
+    import 'sugarcube-mode';
+    import {getCurrentPassage, tagSuggestionsCounted, passageEditorOptions,} from '../../vuex/getters';
+    import {openPassage, editPassage, editPassageText, addTag, removeTag, makeStarting,} from '../../vuex/actions';
     import TagList from '../common/TagList.vue';
+
     export default {
         name: 'passage-editor',
         vuex: {
             getters: {
                 passage: getCurrentPassage,
                 tagSuggestions: tagSuggestionsCounted,
+                passageEditorOptions,
             },
             actions: {
                 openPassage,
                 editPassage,
+                editPassageText,
                 addTag,
                 removeTag,
                 makeStarting,
             },
+        },
+        methods: {
+            onCodeChanged(text) {
+                this.editPassageText(this.passage.pid, text)
+            }
         },
         route: {
             data(transition) {
@@ -51,6 +61,7 @@ article.codeEditor.passageEditor(v-if="passage")
         },
         components: {
             TagList,
+            CodeMirror,
         },
     };
 </script>

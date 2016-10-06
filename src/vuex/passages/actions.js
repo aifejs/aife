@@ -9,6 +9,13 @@ export function editPassage({dispatch,}, {target,}, pid, field) {
     });
 }
 
+export function editPassageText({dispatch,}, pid, text) {
+    dispatch('UPDATE_PASSAGE', {
+        text,
+        pid,
+    });
+}
+
 export function closePassage({dispatch,}, pid) {
     dispatch('CLOSE_PASSAGE', pid);
 }

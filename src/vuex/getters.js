@@ -90,6 +90,21 @@ export function jsEditorOptions({codeEditorOptions,}) {
     );
 }
 
+export function passageEditorOptions({codeEditorOptions, route, stories,}) {
+    const currentStory = getCurrentStory({route, stories,});
+    const options = {};
+
+    if (currentStory.format.startsWith === 'SugarCube') { // can be SugarCube 1 too
+        options.mode = 'sugarcube';
+    }
+
+    return Object.assign(
+        {},
+        codeEditorOptions,
+        options
+    );
+}
+
 export function getStyleSheet({route, stories,}) {
     return getCurrentStory({route, stories,}).styleSheet;
 }

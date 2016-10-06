@@ -12,7 +12,7 @@ import StoryDeleter from './components/story/StoryDeleter.vue';
 
 import Settings from './components/settings/Settings.vue';
 
-import publishStory from './lib/publishStory';
+import {playStory, publishStory,} from './lib/publishStory';
 import {getCurrentStory,} from './vuex/getters';
 
 const routerParams = {
@@ -72,7 +72,7 @@ const routerParams = {
                     name: 'play',
                     component: {
                         ready() {
-                            publishStory(this.story);
+                            playStory(this.story, {});
                         },
 
                         vuex: {
@@ -87,7 +87,7 @@ const routerParams = {
                     name: 'publish',
                     component: {
                         ready() {
-                            publishStory(this.story, `${this.story.title}.html`);
+                            publishStory(this.story, {}, `${this.story.title}.html`);
                         },
                         vuex: {
                             getters: {

@@ -18,6 +18,7 @@ const storyBlueprint = {
     editScript: false,
     editProof: false,
     lastEdit: 0,
+    format: 'SugarCube 2',
 };
 
 

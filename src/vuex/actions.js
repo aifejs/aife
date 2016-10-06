@@ -2,6 +2,7 @@ import storage from '../lib/asyncStorage';
 import {
     openPassage,
     editPassage,
+    editPassageText,
     closePassage,
     addPassage,
     deletePassage,
@@ -57,6 +58,7 @@ export function loadState({dispatch,}) {
 export {
     openPassage,
     editPassage,
+    editPassageText,
     closePassage,
     addPassage,
     deletePassage,
