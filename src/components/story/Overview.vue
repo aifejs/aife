@@ -17,11 +17,11 @@
             PassagesList,
             StoryRun,
         },
-        data () {
+        data() {
             return {
                 formats,
-            }
-        }
+            };
+        },
     };
 </script>
 

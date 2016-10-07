@@ -14,25 +14,43 @@ article.codeEditor.passageEditor(v-if="passage")
 
     label.codeArea
         strong Text
+            small.passageEditor-docs
+                a(":href"="docs[story.format]", target="_blank") format documentation
         code-mirror("v-bind:options"="passageEditorOptions", "v-bind:code"="passage.text" "@code-changed"="onCodeChanged")
 </template>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+.passageEditor
+    &-docs
+        margin-left: 1ex
+        &::before
+            content: '('
+        &::after
+            content: ')'
+
+</style>
 
 <script>
     import CodeMirror from '../common/CodeMirror.vue';
     import 'sugarcube-mode';
-    import {getCurrentPassage, tagSuggestionsCounted, passageEditorOptions,} from '../../vuex/getters';
+    import {getCurrentPassage, tagSuggestionsCounted, passageEditorOptions, getCurrentStory,} from '../../vuex/getters';
     import {openPassage, editPassage, editPassageText, addTag, removeTag, makeStarting,} from '../../vuex/actions';
     import TagList from '../common/TagList.vue';
+    import {documentations as docs,} from '../../lib/formatManager';
 
     export default {
         name: 'passage-editor',
+        data() {
+            return {
+                docs,
+            };
+        },
         vuex: {
             getters: {
                 passage: getCurrentPassage,
                 tagSuggestions: tagSuggestionsCounted,
                 passageEditorOptions,
+                story: getCurrentStory,
             },
             actions: {
                 openPassage,
@@ -45,8 +63,8 @@ article.codeEditor.passageEditor(v-if="passage")
         },
         methods: {
             onCodeChanged(text) {
-                this.editPassageText(this.passage.pid, text)
-            }
+                this.editPassageText(this.passage.pid, text);
+            },
         },
         route: {
             data(transition) {

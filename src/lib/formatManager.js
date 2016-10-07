@@ -74,6 +74,13 @@ class Format {
     }
 }
 
+export const documentations = {
+    'SugarCube': 'http://www.motoslave.net/sugarcube/1/',
+    'SugarCube 2': 'http://www.motoslave.net/sugarcube/2/',
+    'Snowman': 'https://bitbucket.org/klembot/snowman-2',
+    'Harlowe': 'https://twine2.neocities.org/',
+};
+
 export const formats = {
     'SugarCube': new Format('SugarCube'),
     'SugarCube 2': new Format('SugarCube 2'),
