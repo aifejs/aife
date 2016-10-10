@@ -1,4 +1,4 @@
-import formats from './formatManager';
+import {formats, Format,} from './formatManager';
 import saveAs from 'browser-saveas';
 
 function replaceContent(html) {
@@ -41,6 +41,8 @@ function getFormat(story) {
 Currently supported formats: ${Object.keys(formats).join(', ')}`);
         }
     }
+
+    return format;
 }
 
 export function publishStory(story, options = {}, fileName) {

@@ -83,6 +83,21 @@ const routerParams = {
                     },
                 },
 
+                '/debug': {
+                    name: 'debug',
+                    component: {
+                        ready() {
+                            playStory(this.story, {formatOptions: ['debug',],});
+                        },
+
+                        vuex: {
+                            getters: {
+                                story: getCurrentStory,
+                            },
+                        },
+                    },
+                },
+
                 '/publish': {
                     name: 'publish',
                     component: {

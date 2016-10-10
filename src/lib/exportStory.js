@@ -14,7 +14,7 @@ function exportTags(tags) {
     return tags.map((tag) => tag.replace(' ', '-')).join(' ');
 }
 
-export default function exportStory(story) {
+export default function exportStory(story, formatOptions) {
     return stripIndent`
 <tw-storydata 
     name="${story.title}"
@@ -22,7 +22,8 @@ export default function exportStory(story) {
     creator="${pkg.name}"
     creator-version="${pkg.version}"
     ifid="${story.ifid}"
-    format="Snowman"
+    format="SugarCube 2"
+    ${formatOptions.includes('debug') ? 'options="debug"' : ''}
     hidden>
     <style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">${story.styleSheet}</style>
     <script role="script" id="twine-user-script" type="text/twine-javascript">${story.script}</script>

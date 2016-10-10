@@ -7,7 +7,7 @@ function fetchFormat(url) {
         .then((response) => response.json());
 }
 
-class Format {
+export class Format {
     constructor(url) {
         if (url.startsWith('http://') || url.startsWith('https://')) {
             this.url = url;
@@ -41,7 +41,7 @@ class Format {
         });
     }
 
-    publish(story, options, startId) {
+    publish(story, formatOptions, startId) {
         return this.load().then(
             () => {
                 let output = this.properties.source;
@@ -54,7 +54,7 @@ class Format {
 
                 output = output.replace(Format.storyNameRe, () => escape(story.title));
 
-                output = output.replace(Format.storyDataRe, () => exportStory(story));
+                output = output.replace(Format.storyDataRe, () => exportStory(story, formatOptions));
 
                 return output;
             }

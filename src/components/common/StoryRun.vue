@@ -29,8 +29,10 @@
 
 <template lang="pug">
 span.storyRun
-    a(v-link="{name: 'play', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Run game (in new window)")
+    a(v-link="{name: 'play', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Play story (in new window)")
         i.fa.fa-play
+    a(v-link="{name: 'debug', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Debug story (in new window)")
+        i.fa.fa-bug
     a(v-link="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Export")
         i.fa.fa-download
 </template>
