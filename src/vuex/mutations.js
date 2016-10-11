@@ -30,15 +30,15 @@ import {
     CLOSE_PROOFREAD,
 } from './stories/mutations';
 
-export function PASSAGES_SORTING(state, sorting) {
+function PASSAGES_SORTING(state, sorting) {
     state.passagesSorting = sorting;
 }
 
-export function STORIES_SORTING(state, sorting) {
+function STORIES_SORTING(state, sorting) {
     state.storiesSorting = sorting;
 }
 
-export function PASSAGES_FILTERING(state, filtering) {
+function PASSAGES_FILTERING(state, filtering) {
     state.passagesFiltering = filtering;
 }
 

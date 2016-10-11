@@ -27,19 +27,19 @@ import {
     closeProofRead,
 } from './stories/actions';
 
-export function setPassagesSorting({dispatch,}, sorting) {
+function setPassagesSorting({dispatch,}, sorting) {
     dispatch('PASSAGES_SORTING', sorting);
 }
 
-export function setStoriesSorting({dispatch,}, sorting) {
+function setStoriesSorting({dispatch,}, sorting) {
     dispatch('STORIES_SORTING', sorting);
 }
 
-export function setPassagesFiltering({dispatch,}, event) {
+function setPassagesFiltering({dispatch,}, event) {
     dispatch('PASSAGES_FILTERING', event.target.value);
 }
 
-export function loadState({dispatch,}) {
+function loadState({dispatch,}) {
     Promise.all([
         storage.getItem('stories', []),
     ]).then(
@@ -86,5 +86,6 @@ export {
 
     setPassagesSorting,
     setStoriesSorting,
+    setPassagesFiltering,
     loadState,
 };
