@@ -5,7 +5,7 @@ import {fixture,} from '../fixture';
 // more thorough tests located in /test/unit/lib/pickle.test.js, this is just simple integration
 
 test('proofReadCopy', (assert) => {
-    assert.plan(4);
+    assert.plan(5);
 
     const state = fixture();
 
