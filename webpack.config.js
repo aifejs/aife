@@ -33,6 +33,11 @@ const config = {
             {
                 test: /\.js$/,
                 loader: 'babel',
+                include: /node_modules(?:\\|\/)sugarcube-mode/,
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel',
                 exclude: /node_modules/,
             },
             {
