@@ -19,6 +19,9 @@ import {
     openStylesheet,
     saveStyleSheet,
     closeStylesheet,
+    openHtml,
+    saveHtml,
+    closeHtml,
     openScript,
     saveScript,
     closeScript,
@@ -75,6 +78,10 @@ export {
     openStylesheet,
     saveStyleSheet,
     closeStylesheet,
+
+    openHtml,
+    saveHtml,
+    closeHtml,
 
     openScript,
     saveScript,

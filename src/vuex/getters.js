@@ -90,6 +90,16 @@ export function jsEditorOptions({codeEditorOptions,}) {
     );
 }
 
+export function htmlEditorOptions({codeEditorOptions,}) {
+    return Object.assign(
+        {},
+        codeEditorOptions,
+        {
+            mode: 'html',
+        }
+    );
+}
+
 export function passageEditorOptions({codeEditorOptions, route, stories,}) {
     const currentStory = getCurrentStory({route, stories,});
     const options = {};
@@ -111,6 +121,10 @@ export function getStyleSheet({route, stories,}) {
 
 export function getScript({route, stories,}) {
     return getCurrentStory({route, stories,}).script;
+}
+
+export function getHtml({route, stories,}) {
+    return getCurrentStory({route, stories,}).customHtml;
 }
 
 export function tagSuggestionsCounted({route, stories,}) {

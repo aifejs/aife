@@ -12,6 +12,9 @@ nav.aifeTabs
         span.aifeTabs-item.special(v-if="editStylesheet", v-link-active)
             a(v-link="{name: 'stylesheet'}") Style
             i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeStylesheetAndGoBack")
+        span.aifeTabs-item.special(v-if="editHtml", v-link-active)
+            a(v-link="{name: 'html'}") HTML
+            i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeHtmlAndGoBack")
         span.aifeTabs-item.special(v-if="proofRead", v-link-active)
             a(v-link="{name: 'proofRead'}") Proof-read
             i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeProofReadAndGoBack")

@@ -17,6 +17,8 @@ const storyBlueprint = {
     script: '',
     editScript: false,
     editProof: false,
+    customHtml: '',
+    editCustomHtml: false,
     lastEdit: 0,
     format: 'SugarCube 2',
 };
@@ -114,6 +116,26 @@ export function SAVE_SCRIPT(state, script) {
 export function CLOSE_SCRIPT(state) {
     const story = getCurrentStory(state);
     story.editScript = false;
+    updateStory(story);
+}
+
+// Custom html mutations
+
+export function OPEN_HTML(state) {
+    const story = getCurrentStory(state);
+    story.editCustomHtml = true;
+    updateStory(story);
+}
+
+export function SAVE_HTML(state, htmlString) {
+    const story = getCurrentStory(state);
+    story.customHtml = htmlString;
+    updateStory(story);
+}
+
+export function CLOSE_HTML(state) {
+    const story = getCurrentStory(state);
+    story.editCustomHtml = false;
     updateStory(story);
 }
 

@@ -37,6 +37,21 @@ export function closeStylesheet({dispatch,}) {
 }
 
 
+// Html actions
+
+export function openHtml({dispatch,}) {
+    dispatch('OPEN_HTML');
+}
+
+export function saveHtml({dispatch,}, html) {
+    dispatch('SAVE_HTML', html);
+}
+
+export function closeHtml({dispatch,}) {
+    dispatch('CLOSE_HTML');
+}
+
+
 // Script actions
 
 export function openScript({dispatch,}) {

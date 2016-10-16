@@ -1,5 +1,5 @@
 <script>
-    import {addPassage, closePassage, closeStylesheet, closeScript, closeProofRead,} from '../../../vuex/actions';
+    import {addPassage, closePassage, closeStylesheet, closeScript, closeHtml, closeProofRead,} from '../../../vuex/actions';
     import {
         tabs,
         getCurrentIfid,
@@ -24,6 +24,7 @@
                 addPassage,
                 closeScript,
                 closeStylesheet,
+                closeHtml,
                 closeProofRead,
                 closePassage,
 
@@ -35,6 +36,11 @@
                 closeStylesheetAndGoBack() {
                     router.go({name: 'overview',});
                     this.closeStylesheet();
+                },
+
+                closeHtmlAndGoBack() {
+                    router.go({name: 'overview',});
+                    this.closeHtml();
                 },
 
                 closeProofReadAndGoBack() {

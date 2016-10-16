@@ -7,6 +7,14 @@ function fetchFormat(url) {
         .then((response) => response.json());
 }
 
+function getCustomHtml(story) {
+    if (story.customHtml && story.customHtml.trim().length) {
+        return story.customHtml;
+    } else {
+        return false;
+    }
+}
+
 export class Format {
     constructor(url) {
         if (url.startsWith('http://') || url.startsWith('https://')) {
@@ -44,7 +52,7 @@ export class Format {
     publish(story, formatOptions, startId) {
         return this.load().then(
             () => {
-                let output = this.properties.source;
+                let output = getCustomHtml(story) || this.properties.source;
 
                 // use function replacements to protect the data from
                 // accidental interactions with the special string

@@ -5,6 +5,7 @@ import ProofRead from './components/ProofRead.vue';
 
 import ScriptEditor from './components/ScriptEditor.vue';
 import StyleSheetEditor from './components/StyleSheetEditor.vue';
+import HtmlEditor from './components/HtmlEditor.vue';
 
 import StoryList from './components/story/StoryList.vue';
 import Story from './components/story/Story.vue';
@@ -61,6 +62,11 @@ const routerParams = {
                 '/stylesheet': {
                     name: 'stylesheet',
                     component: StyleSheetEditor,
+                },
+
+                '/html': {
+                    name: 'html',
+                    component: HtmlEditor,
                 },
 
                 '/deleteStory': {
