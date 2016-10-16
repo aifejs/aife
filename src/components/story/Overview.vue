@@ -2,6 +2,7 @@
     import OverviewStats from '../OverviewStats.vue';
     import PassagesList from '../passage/PassagesList.vue';
     import StoryRun from '../common/StoryRun.vue';
+    import StoryEditCode from './StoryEditCode.vue';
     import {getCurrentStory,} from '../../vuex/getters';
     import {formats,} from '../../lib/formatManager';
 
@@ -16,6 +17,7 @@
             OverviewStats,
             PassagesList,
             StoryRun,
+            StoryEditCode,
         },
         data() {
             return {
@@ -41,13 +43,7 @@ article.overview.widget
             | &nbsp;
             story-run("v-bind:story"="story")
         .widget-controls
-            .widget-controlIcons
-                a(v-link="{name: 'stylesheet'}", title="Edit styles")
-                    i.fa.fa-css3
-                a(v-link="{name: 'script'}", title="Edit script")
-                    i.fa.fa-terminal
-                a(v-link="{name: 'proofRead'}", title="Proof-read copy")
-                    span.fa.fa-pencil-square-o
+            story-edit-code("v-bind:story"="story")
     .widget-body
         overview-stats
         br
