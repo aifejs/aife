@@ -1,14 +1,23 @@
 <script>
-    import {addPassage, closePassage, closeStylesheet, closeScript, closeHtml, closeProofRead,} from '../../../vuex/actions';
+    import {
+        addPassage,
+        closePassage,
+        closeStylesheet,
+        closeScript,
+        closeHtml,
+        closeProofRead,
+    } from '../../../vuex/actions';
     import {
         tabs,
         getCurrentIfid,
         getEditStylesheet,
         getEditScript,
+        getEditHtml,
         getProofRead,
         getCurrentStory,
     } from '../../../vuex/getters';
     import router from '../../../router';
+    import SpecialTab from './SpecialTab.vue';
 
     export default {
         name: 'aife-tabs',
@@ -57,11 +66,16 @@
             getters: {
                 tabs,
                 ifid: getCurrentIfid,
-                editStylesheet: getEditStylesheet,
-                editScript: getEditScript,
-                proofRead: getProofRead,
+                stylesheetEditing: getEditStylesheet,
+                scriptEditing: getEditScript,
+                htmlEditing: getEditHtml,
+                proofReadEditing: getProofRead,
                 story: getCurrentStory,
             },
+        },
+
+        components: {
+            SpecialTab,
         },
     };
 </script>

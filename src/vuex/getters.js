@@ -3,6 +3,11 @@ import sortBy from 'lodash/sortBy';
 import deburr from 'lodash/deburr';
 import storyStats from '../lib/storyStats';
 
+/**
+ * @param route
+ * @param {IStory[]} stories
+ * @returns {IStory}
+ */
 export function getCurrentStory({route, stories,}) {
     return stories.find(({ifid,}) => ifid === route.params.ifid);
 }
@@ -187,6 +192,11 @@ export function getEditStylesheet({stories, route,}) {
 export function getEditScript({stories, route,}) {
     const currentStory = getCurrentStory({stories, route,});
     return currentStory.editScript;
+}
+
+export function getEditHtml({stories, route,}) {
+    const currentStory = getCurrentStory({stories, route,});
+    return currentStory.editCustomHtml;
 }
 
 export function getProofRead({stories, route,}) {

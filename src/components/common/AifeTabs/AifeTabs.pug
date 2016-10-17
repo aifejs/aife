@@ -6,22 +6,14 @@ nav.aifeTabs
         span.aifeTabs-item.special(v-link-active)
             a(v-link="{name: 'story'}") Overview
 
-        span.aifeTabs-item.special(v-if="editScript", v-link-active)
-            a(v-link="{name: 'script'}") Script
-            i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeScriptAndGoBack")
-        span.aifeTabs-item.special(v-if="editStylesheet", v-link-active)
-            a(v-link="{name: 'stylesheet'}") Style
-            i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeStylesheetAndGoBack")
-        span.aifeTabs-item.special(v-if="editHtml", v-link-active)
-            a(v-link="{name: 'html'}") HTML
-            i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeHtmlAndGoBack")
-        span.aifeTabs-item.special(v-if="proofRead", v-link-active)
-            a(v-link="{name: 'proofRead'}") Proof-read
-            i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closeProofReadAndGoBack")
+        special-tab(v-if="scriptEditing", ":route-name"="'script'", ":title"="'Script'", ":close"="closeScriptAndGoBack")
+        special-tab(v-if="stylesheetEditing", ":route-name"="'stylesheet'", ":title"="'Style'", ":close"="closeStylesheetAndGoBack")
+        special-tab(v-if="htmlEditing", ":route-name"="'html'", ":title"="'HTML'", ":close"="closeHtmlAndGoBack")
+        special-tab(v-if="proofReadEditing", ":route-name"="'proofRead'", ":title"="'Proof-read'", ":close"="closeProofReadAndGoBack")
 
     span.aifeTabs-section(v-if="story")
         span.aifeTabs-item.passage(v-for="tab of tabs", track-by="pid", v-link-active)
-            a(v-link="{name: 'passage', params: {pid: tab.pid}}", v-bind:title="tabTitle(tab)") {{tab.title}}
+            a(v-link="{name: 'passage', params: {pid: tab.pid}}", ":title"="tabTitle(tab)") {{tab.title}}
             i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closePassageAndGoBack(tab.pid)")
 
     span.aifeTabs-section(v-if="story")
