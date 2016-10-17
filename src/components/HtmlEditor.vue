@@ -7,7 +7,7 @@ article.codeEditor.htmlEditor
             | This will completely replace built-in markup, don't forget to add scripts and styles from format (or provide your own).
             // | Place #[code {{STORY_NAME}}] and #[code {{STORY_NAME}}] markers where you want story name and data to be.
 
-        code-mirror("v-bind:options"="htmlEditorOptions", "v-bind:code"="getHtml" "@code-changed"="saveHtml")
+        code-mirror("v-bind:options"="htmlEditorOptions", "v-bind:code"="getHtml", "@code-changed"="saveHtml")
 </template>
 
 <style lang="stylus">

@@ -2,7 +2,7 @@
 article.codeEditor
     label.codeArea
         strong Edit story script
-        code-mirror("v-bind:options"="cssEditorOptions", "v-bind:code"="getStyleSheet" "@code-changed"="saveStyleSheet")
+        code-mirror("v-bind:options"="cssEditorOptions", "v-bind:code"="getStyleSheet", "@code-changed"="saveStyleSheet")
 </template>
 
 <style lang="stylus"></style>
