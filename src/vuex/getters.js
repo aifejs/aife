@@ -100,7 +100,7 @@ export function htmlEditorOptions({codeEditorOptions,}) {
         {},
         codeEditorOptions,
         {
-            mode: 'html',
+            mode: 'htmlmixed',
         }
     );
 }
