@@ -22,8 +22,8 @@ export default function exportStory(story, formatOptions) {
     creator="${pkg.name}"
     creator-version="${pkg.version}"
     ifid="${story.ifid}"
-    format="SugarCube 2"
-    ${formatOptions.includes('debug') ? 'options="debug"' : ''}
+    format="${story.format}"
+    ${formatOptions && formatOptions.includes('debug') ? 'options="debug"' : ''}
     hidden>
     <style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">${story.styleSheet}</style>
     <script role="script" id="twine-user-script" type="text/twine-javascript">${story.script}</script>
