@@ -9,7 +9,7 @@
         option(v-for="(suggestion, count) of suggestions", "v-bind:value"="suggestion") {{count}}
 </template>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 .tagList
     &-item
         margin-right: 1em

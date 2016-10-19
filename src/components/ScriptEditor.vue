@@ -5,8 +5,6 @@ article.codeEditor
         code-mirror("v-bind:options"="jsEditorOptions", "v-bind:code"="getScript", "@code-changed"="saveScript")
 </template>
 
-<style lang="stylus"></style>
-
 <script>
     import CodeMirror from './common/CodeMirror.vue';
     import 'codemirror/mode/javascript/javascript';

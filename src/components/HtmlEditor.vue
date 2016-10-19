@@ -12,7 +12,7 @@ article.codeEditor.htmlEditor
         code-mirror("v-bind:options"="htmlEditorOptions", "v-bind:code"="getHtml", "@code-changed"="saveHtml")
 </template>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 @import '../styles/colors'
 .htmlEditor
     label.codeArea

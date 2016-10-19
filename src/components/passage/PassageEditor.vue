@@ -19,7 +19,7 @@ article.codeEditor.passageEditor(v-if="passage")
         code-mirror("v-bind:options"="passageEditorOptions", "v-bind:code"="passage.text" "@code-changed"="onCodeChanged")
 </template>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 .passageEditor
     &-docs
         margin-left: 1ex

@@ -15,11 +15,10 @@ article.passagesList.widget.lighter
                 p(v-hilite-term="getPassagesFiltering") {{passage.text}}
 </template>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 .passagesList
     &-remove
         margin-left: 1ex
-
 </style>
 
 <script>

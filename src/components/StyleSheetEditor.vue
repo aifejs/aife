@@ -5,8 +5,6 @@ article.codeEditor
         code-mirror("v-bind:options"="cssEditorOptions", "v-bind:code"="getStyleSheet", "@code-changed"="saveStyleSheet")
 </template>
 
-<style lang="stylus"></style>
-
 <script>
     import CodeMirror from './common/CodeMirror.vue';
     import 'codemirror/mode/css/css';

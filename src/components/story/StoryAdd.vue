@@ -7,7 +7,7 @@
             input(type="file", "@change"="onFilePicked", accept=".html,.htm", multiple)
 </template>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 .addStory
     border: 1px solid silver
     border-radius 2px

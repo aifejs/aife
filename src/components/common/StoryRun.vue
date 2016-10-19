@@ -16,7 +16,7 @@
     };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 .storyRun
     a
         margin-left: 1ex

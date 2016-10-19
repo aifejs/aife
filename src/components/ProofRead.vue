@@ -8,10 +8,6 @@ article.codeEditor
         textarea.codeArea("v-bind:value"="proofReadCopy", @input="updateStoryFromProof", ":class"="{error: getProofModeError}")
 </template>
 
-<style lang="stylus">
-
-</style>
-
 <script>
     import {proofReadCopy, getProofModeError,} from '../vuex/getters';
     import {updateStoryFromProof, openProofRead,} from '../vuex/actions';

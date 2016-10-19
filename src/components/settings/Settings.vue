@@ -11,8 +11,6 @@
             | Back to stories
 </template>
 
-<style lang="stylus"></style>
-
 <script>
     export default {
         vuex: {

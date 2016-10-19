@@ -27,7 +27,7 @@
     };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 .overview
     &-format
         height: 2em

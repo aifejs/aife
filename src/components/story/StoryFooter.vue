@@ -9,8 +9,6 @@ div
         | Report a bug
 </template>
 
-<style lang="stylus"></style>
-
 <script>
     import pkg from '../../../package.json';
     export default {
