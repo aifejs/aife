@@ -79,26 +79,6 @@ export function SET_STORIES_LOADED(state, status) {
 }
 
 
-// Stylesheet mutations
-
-export function OPEN_STYLESHEET(state) {
-    const story = getCurrentStory(state);
-    story.editStylesheet = true;
-}
-
-export function SAVE_STYLESHEET(state, styleSheet) {
-    const story = getCurrentStory(state);
-    story.styleSheet = styleSheet;
-    updateStory(story);
-}
-
-export function CLOSE_STYLESHEET(state) {
-    const story = getCurrentStory(state);
-    story.editStylesheet = false;
-    updateStory(story);
-}
-
-
 // Script mutations
 
 export function OPEN_SCRIPT(state) {
@@ -118,6 +98,27 @@ export function CLOSE_SCRIPT(state) {
     story.editScript = false;
     updateStory(story);
 }
+
+
+// Stylesheet mutations
+
+export function OPEN_STYLESHEET(state) {
+    const story = getCurrentStory(state);
+    story.editStylesheet = true;
+}
+
+export function SAVE_STYLESHEET(state, styleSheet) {
+    const story = getCurrentStory(state);
+    story.styleSheet = styleSheet;
+    updateStory(story);
+}
+
+export function CLOSE_STYLESHEET(state) {
+    const story = getCurrentStory(state);
+    story.editStylesheet = false;
+    updateStory(story);
+}
+
 
 // Custom html mutations
 

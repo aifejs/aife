@@ -75,22 +75,22 @@ export function getProofModeError({proofModeError,}) {
     return proofModeError;
 }
 
-export function cssEditorOptions({codeEditorOptions,}) {
-    return Object.assign(
-        {},
-        codeEditorOptions,
-        {
-            mode: 'css',
-        }
-    );
-}
-
 export function jsEditorOptions({codeEditorOptions,}) {
     return Object.assign(
         {},
         codeEditorOptions,
         {
             mode: 'javascript',
+        }
+    );
+}
+
+export function cssEditorOptions({codeEditorOptions,}) {
+    return Object.assign(
+        {},
+        codeEditorOptions,
+        {
+            mode: 'css',
         }
     );
 }
@@ -120,12 +120,12 @@ export function passageEditorOptions({codeEditorOptions, route, stories,}) {
     );
 }
 
-export function getStyleSheet({route, stories,}) {
-    return getCurrentStory({route, stories,}).styleSheet;
-}
-
 export function getScript({route, stories,}) {
     return getCurrentStory({route, stories,}).script;
+}
+
+export function getStyleSheet({route, stories,}) {
+    return getCurrentStory({route, stories,}).styleSheet;
 }
 
 export function getHtml({route, stories,}) {
@@ -184,14 +184,14 @@ export function getCurrentIfid({route,}) {
     return route.params.ifid;
 }
 
-export function getEditStylesheet({stories, route,}) {
-    const currentStory = getCurrentStory({stories, route,});
-    return currentStory.editStylesheet;
-}
-
 export function getEditScript({stories, route,}) {
     const currentStory = getCurrentStory({stories, route,});
     return currentStory.editScript;
+}
+
+export function getEditStylesheet({stories, route,}) {
+    const currentStory = getCurrentStory({stories, route,});
+    return currentStory.editStylesheet;
 }
 
 export function getEditHtml({stories, route,}) {

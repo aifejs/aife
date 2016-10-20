@@ -16,15 +16,19 @@ import {
     editStoryTitle,
     duplicateStory,
     importStory,
-    openStylesheet,
-    saveStyleSheet,
-    closeStylesheet,
-    openHtml,
-    saveHtml,
-    closeHtml,
+
     openScript,
     saveScript,
     closeScript,
+
+    openStylesheet,
+    saveStyleSheet,
+    closeStylesheet,
+
+    openHtml,
+    saveHtml,
+    closeHtml,
+
     openProofRead,
     updateStoryFromProof,
     closeProofRead,
@@ -75,6 +79,10 @@ export {
     duplicateStory,
     importStory,
 
+    openScript,
+    saveScript,
+    closeScript,
+
     openStylesheet,
     saveStyleSheet,
     closeStylesheet,
@@ -82,10 +90,6 @@ export {
     openHtml,
     saveHtml,
     closeHtml,
-
-    openScript,
-    saveScript,
-    closeScript,
 
     openProofRead,
     updateStoryFromProof,

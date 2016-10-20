@@ -22,6 +22,21 @@ export function importStory({dispatch,}, story) {
 }
 
 
+// Script actions
+
+export function openScript({dispatch,}) {
+    dispatch('OPEN_SCRIPT');
+}
+
+export function saveScript({dispatch,}, script) {
+    dispatch('SAVE_SCRIPT', script);
+}
+
+export function closeScript({dispatch,}) {
+    dispatch('CLOSE_SCRIPT');
+}
+
+
 // Stylesheet actions
 
 export function openStylesheet({dispatch,}) {
@@ -49,21 +64,6 @@ export function saveHtml({dispatch,}, html) {
 
 export function closeHtml({dispatch,}) {
     dispatch('CLOSE_HTML');
-}
-
-
-// Script actions
-
-export function openScript({dispatch,}) {
-    dispatch('OPEN_SCRIPT');
-}
-
-export function saveScript({dispatch,}, script) {
-    dispatch('SAVE_SCRIPT', script);
-}
-
-export function closeScript({dispatch,}) {
-    dispatch('CLOSE_SCRIPT');
 }
 
 
