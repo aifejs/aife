@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const webpack = require('webpack');
+const {DefinePlugin, optimize: {UglifyJsPlugin, OccurenceOrderPlugin,},} = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('./package.json');
 
@@ -91,20 +91,20 @@ const config = {
 if (process.env.NODE_ENV === 'production') {
     config.devtool = '#source-map';
     config.plugins.push(...[
-        new webpack.DefinePlugin({
+        new DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"',
             },
         }),
-        new webpack.optimize.UglifyJsPlugin({
+        new UglifyJsPlugin({
             compress: {
                 warnings: false,
             },
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new OccurenceOrderPlugin(),
     ]);
 } else {
-    config.devtool = '#eval-source-map';
+    config.devtool = '#cheap-eval-source-map'; // nice stacktraces
 
     let devServerConfig = {
         noInfo: true,
