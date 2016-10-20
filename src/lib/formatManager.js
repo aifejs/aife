@@ -41,11 +41,9 @@ export class Format {
                         }
 
                         resolve();
-                    },
-                    (req, status, error) => {
-                        reject(error);
                     }
-                );
+                )
+                .catch(reject);
         });
     }
 
