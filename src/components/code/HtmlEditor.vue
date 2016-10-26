@@ -34,6 +34,8 @@ article.codeEditor.htmlEditor
     import {formats,} from '../../lib/formatManager';
 
     export default {
+        name: 'html-editor',
+
         computed: mapGetters({
             htmlEditorOptions: 'htmlEditorOptions',
             getHtml: 'getHtml',
@@ -50,20 +52,16 @@ article.codeEditor.htmlEditor
                 );
             },
 
-            onData(transition) {
-                this.openHtml();
-
-                transition.next();
-            },
-
             ...mapActions([
                 'saveHtml',
                 'openHtml',
             ]),
         },
 
-        watch: {
-            $route: 'onData',
+        beforeRouteEnter(to, from, next) {
+            next((vm) => {
+                vm.openHtml();
+            });
         },
 
         components: {

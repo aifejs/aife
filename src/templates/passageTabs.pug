@@ -6,8 +6,8 @@ nav.aifeTabs
         router-link.aifeTabs-item.special("v-bind:to"="{name: 'overview', params: {ifid: ifid}}", tag="span")
             a Overview
 
-        special-tab(v-if="scriptEditing", ":route-name"="'script'", ":title"="'Script'", ":close"="closeScriptAndGoBack", ":ifid"="ifid")
         special-tab(v-if="stylesheetEditing", ":route-name"="'stylesheet'", ":title"="'Style'", ":close"="closeStylesheetAndGoBack", ":ifid"="ifid")
+        special-tab(v-if="scriptEditing", ":route-name"="'script'", ":title"="'Script'", ":close"="closeScriptAndGoBack", ":ifid"="ifid")
         special-tab(v-if="htmlEditing", ":route-name"="'html'", ":title"="'HTML'", ":close"="closeHtmlAndGoBack", ":ifid"="ifid")
         special-tab(v-if="proofReadEditing", ":route-name"="'proofRead'", ":title"="'Proof-read'", ":close"="closeProofReadAndGoBack", ":ifid"="ifid")
 

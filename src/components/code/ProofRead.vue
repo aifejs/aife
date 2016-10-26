@@ -28,12 +28,6 @@ article.codeEditor
                 500
             ),
 
-            onData(transition) {
-                this.openProofRead();
-
-                transition.next();
-            },
-
             ...mapActions({
                 openProofRead: 'openProofRead',
             }),

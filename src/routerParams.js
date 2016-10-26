@@ -4,7 +4,7 @@ import PassageDeleter from './components/passage/PassageDeleter.vue';
 import ProofRead from './components/code/ProofRead.vue';
 
 import ScriptEditor from './components/code/ScriptEditor.vue';
-import StyleSheetEditor from './components/code/StyleSheetEditor.vue';
+import StyleEditor from './components/code/StyleEditor.vue';
 import HtmlEditor from './components/code/HtmlEditor.vue';
 
 import StoryList from './components/storyList/StoryList.vue';
@@ -67,7 +67,7 @@ const routerParams = {
                 {
                     path: 'stylesheet',
                     name: 'stylesheet',
-                    component: StyleSheetEditor,
+                    component: StyleEditor,
                 },
 
                 {

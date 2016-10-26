@@ -12,6 +12,8 @@ article.codeEditor
     import {mapGetters, mapActions,} from 'vuex';
 
     export default {
+        name: 'script-editor',
+
         mounted() {
             require.ensure([], function (require) { // eslint-disable-line prefer-arrow-callback
                 window.JSHINT = require('jshint').JSHINT; // javascript-lint expects JSHINT in global scope
@@ -24,20 +26,16 @@ article.codeEditor
         ]),
 
         methods: {
-            onData(transition) {
-                this.openScript();
-
-                transition.next();
-            },
-
             ...mapActions([
                 'saveScript',
                 'openScript',
             ]),
         },
 
-        watch: {
-            $route: 'onData',
+        beforeRouteEnter(to, from, next) {
+            next((vm) => {
+                vm.openScript();
+            });
         },
 
         components: {
