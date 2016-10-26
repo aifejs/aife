@@ -9,7 +9,7 @@ article.widget.lighter.screen.storyList
         story-add.storyListItem
 
     .widget-footer.widget-controlIcons
-        a(v-link="{name: 'settings'}")
+        router-link("v-bind:to"="{name: 'settings'}")
             i.fa.fa-cog
             | Settings
 

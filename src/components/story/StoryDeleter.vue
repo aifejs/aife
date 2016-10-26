@@ -1,34 +1,32 @@
 <template lang="pug">
-article.deleteStory.deleter
+article.deleteStory.deleter(v-if="story")
     h3 Delete story?
-    p.deleter-notice Are you sure you want to delete story&nbsp;
-        strong "{{ story.title }}"
-        | ? This can't be undone.
-    a.deleter-cancel(v-link="{name: 'stories'}") No, take me back
+    p.deleter-notice Are you sure you want to delete story #[strong "{{ story.title }}"]? This can't be undone.
+
+    router-link.deleter-cancel("v-bind:to"="{name: 'stories'}") No, take me back
     button.deleter-confirm(@click="dropStory(story.ifid)") Yes, delete story completely and unrecoverably
 </template>
 
 <script>
-    import {deleteStory,} from '../../vuex/actions';
-    import {getCurrentStory,} from '../../vuex/getters';
+    import {mapGetters, mapActions,} from 'vuex';
     import router from '../../router';
 
     export default {
+        name: 'story-deleter',
+
         methods: {
             dropStory(ifid) {
                 this.deleteStory(ifid);
-                router.go({name: 'stories',});
-            },
-        },
-
-        vuex: {
-            actions: {
-                deleteStory,
+                router.push({name: 'stories',});
             },
 
-            getters: {
-                story: getCurrentStory,
-            },
+            ...mapActions([
+                'deleteStory',
+            ]),
         },
+
+        computed: mapGetters({
+            story: 'getCurrentStory',
+        }),
     };
 </script>

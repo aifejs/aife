@@ -50,7 +50,7 @@
 </style>
 
 <script>
-    import {createStory, importStory,} from '../../vuex/actions';
+    import {mapActions,} from 'vuex';
     import {readFiles, importStories as importFromFiles,} from '../../lib/importStory';
 
     export default {
@@ -72,13 +72,11 @@
                         );
                 }
             },
-        },
 
-        vuex: {
-            actions: {
-                createStory,
-                importStory,
-            },
+            ...mapActions([
+                'createStory',
+                'importStory',
+            ]),
         },
 
         name: 'story-add',

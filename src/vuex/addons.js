@@ -38,3 +38,10 @@ export const persistenceMw = {
         asyncStorage.setItem(key, state[key]);
     },
 };
+
+export function persistencePlugin(store) {
+    store.subscribe((mutation, state) => {
+        const key = mutationMap[mutation.type];
+        asyncStorage.setItem(key, state[key]);
+    });
+}

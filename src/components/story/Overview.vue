@@ -1,28 +1,29 @@
 <script>
-    import OverviewStats from '../OverviewStats.vue';
+    import OverviewStats from './OverviewStats.vue';
     import PassagesList from '../passage/PassagesList.vue';
-    import StoryRun from '../common/StoryRun.vue';
+    import StoryRun from './StoryRun.vue';
     import StoryEditCode from './StoryEditCode.vue';
-    import {getCurrentStory,} from '../../vuex/getters';
+    import {mapGetters,} from 'vuex';
     import {formats,} from '../../lib/formatManager';
 
     export default {
         name: 'overview',
-        vuex: {
-            getters: {
-                story: getCurrentStory,
-            },
+
+        computed: mapGetters({
+            story: 'getCurrentStory',
+        }),
+
+        data() {
+            return {
+                formats,
+            };
         },
+
         components: {
             OverviewStats,
             PassagesList,
             StoryRun,
             StoryEditCode,
-        },
-        data() {
-            return {
-                formats,
-            };
         },
     };
 </script>

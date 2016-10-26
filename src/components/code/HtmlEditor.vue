@@ -13,7 +13,7 @@ article.codeEditor.htmlEditor
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
-@import '../styles/colors'
+@import '../../styles/colors'
 .htmlEditor
     label.codeArea
         code
@@ -28,29 +28,17 @@ article.codeEditor.htmlEditor
 </style>
 
 <script>
-    import CodeMirror from './common/CodeMirror.vue';
+    import CodeMirror from './CodeMirror.vue';
     import 'codemirror/mode/htmlmixed/htmlmixed';
-    import {htmlEditorOptions, getHtml, getCurrentStory,} from '../vuex/getters';
-    import {saveHtml, openHtml,} from '../vuex/actions';
-    import {formats,} from '../lib/formatManager';
+    import {mapGetters, mapActions,} from 'vuex';
+    import {formats,} from '../../lib/formatManager';
 
     export default {
-        vuex: {
-            getters: {
-                htmlEditorOptions,
-                getHtml,
-                story: getCurrentStory,
-            },
-
-            actions: {
-                saveHtml,
-                openHtml,
-            },
-        },
-
-        components: {
-            CodeMirror,
-        },
+        computed: mapGetters({
+            htmlEditorOptions: 'htmlEditorOptions',
+            getHtml: 'getHtml',
+            story: 'getCurrentStory',
+        }),
 
         methods: {
             insertFormatSource() {
@@ -59,16 +47,27 @@ article.codeEditor.htmlEditor
                     () => {
                         this.saveHtml(format.properties.source);
                     }
-                )
-            }
-        },
+                );
+            },
 
-        route: {
-            data(transition) {
+            onData(transition) {
                 this.openHtml();
 
                 transition.next();
             },
+
+            ...mapActions([
+                'saveHtml',
+                'openHtml',
+            ]),
+        },
+
+        watch: {
+            $route: 'onData',
+        },
+
+        components: {
+            CodeMirror,
         },
     };
 </script>

@@ -1,82 +1,82 @@
-export function createStory({dispatch,}, title) {
-    dispatch('CREATE_STORY', {title,});
+export function createStory({commit,}, title) {
+    commit('CREATE_STORY', {title,});
 }
 
-export function deleteStory({dispatch,}, ifid) {
-    dispatch('DELETE_STORY', ifid);
+export function deleteStory({commit,}, ifid) {
+    commit('DELETE_STORY', ifid);
 }
 
-export function editStoryTitle({dispatch,}, title, ifid) {
-    dispatch('SET_STORY_TITLE', {
+export function editStoryTitle({commit,}, {title, ifid,}) {
+    commit('SET_STORY_TITLE', {
         title,
         ifid,
     });
 }
 
-export function duplicateStory({dispatch,}, ifid) {
-    dispatch('DUPLICATE_STORY', ifid);
+export function duplicateStory({commit,}, ifid) {
+    commit('DUPLICATE_STORY', ifid);
 }
 
-export function importStory({dispatch,}, story) {
-    dispatch('IMPORT_STORY', story);
+export function importStory({commit,}, story) {
+    commit('IMPORT_STORY', story);
 }
 
 
 // Script actions
 
-export function openScript({dispatch,}) {
-    dispatch('OPEN_SCRIPT');
+export function openScript({commit,}) {
+    commit('OPEN_SCRIPT');
 }
 
-export function saveScript({dispatch,}, script) {
-    dispatch('SAVE_SCRIPT', script);
+export function saveScript({commit,}, script) {
+    commit('SAVE_SCRIPT', script);
 }
 
-export function closeScript({dispatch,}) {
-    dispatch('CLOSE_SCRIPT');
+export function closeScript({commit,}) {
+    commit('CLOSE_SCRIPT');
 }
 
 
 // Stylesheet actions
 
-export function openStylesheet({dispatch,}) {
-    dispatch('OPEN_STYLESHEET');
+export function openStylesheet({commit,}) {
+    commit('OPEN_STYLESHEET');
 }
 
-export function saveStyleSheet({dispatch,}, styleSheet) {
-    dispatch('SAVE_STYLESHEET', styleSheet);
+export function saveStyleSheet({commit,}, styleSheet) {
+    commit('SAVE_STYLESHEET', styleSheet);
 }
 
-export function closeStylesheet({dispatch,}) {
-    dispatch('CLOSE_STYLESHEET');
+export function closeStylesheet({commit,}) {
+    commit('CLOSE_STYLESHEET');
 }
 
 
 // Html actions
 
-export function openHtml({dispatch,}) {
-    dispatch('OPEN_HTML');
+export function openHtml({commit,}) {
+    commit('OPEN_HTML');
 }
 
-export function saveHtml({dispatch,}, html) {
-    dispatch('SAVE_HTML', html);
+export function saveHtml({commit,}, html) {
+    commit('SAVE_HTML', html);
 }
 
-export function closeHtml({dispatch,}) {
-    dispatch('CLOSE_HTML');
+export function closeHtml({commit,}) {
+    commit('CLOSE_HTML');
 }
 
 
 // Proof-read actions
 
-export function openProofRead({dispatch,}) {
-    dispatch('OPEN_PROOFREAD');
+export function openProofRead({commit,}) {
+    commit('OPEN_PROOFREAD');
 }
 
-export function updateStoryFromProof({dispatch,}, event) {
-    dispatch('UPDATE_STORY_FROM_PROOF', event.target.value);
+export function updateStoryFromProof({commit,}, value) {
+    commit('UPDATE_STORY_FROM_PROOF', value);
 }
 
-export function closeProofRead({dispatch,}) {
-    dispatch('CLOSE_PROOFREAD');
+export function closeProofRead({commit,}) {
+    commit('CLOSE_PROOFREAD');
 }

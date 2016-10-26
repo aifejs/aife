@@ -6,7 +6,7 @@ article.codeEditor.passageEditor(v-if="passage")
 
     label
         strong Title
-        input(placeholder="Passage title", required, "v-bind:value"="passage.title", @input="editPassage($event, passage.pid, 'title')")
+        input(placeholder="Passage title", required, "v-bind:value"="passage.title", @input="onTitleChanged")
 
     label
         strong Tags
@@ -31,52 +31,57 @@ article.codeEditor.passageEditor(v-if="passage")
 </style>
 
 <script>
-    import CodeMirror from '../common/CodeMirror.vue';
+    import CodeMirror from '../code/CodeMirror.vue';
     import 'sugarcube-mode';
-    import {getCurrentPassage, tagSuggestionsCounted, passageEditorOptions, getCurrentStory,} from '../../vuex/getters';
-    import {openPassage, editPassage, editPassageText, addTag, removeTag, makeStarting,} from '../../vuex/actions';
-    import TagList from '../common/TagList.vue';
+    import {mapGetters, mapActions,} from 'vuex';
+    import TagList from './TagList.vue';
     import {documentations as docs,} from '../../lib/formatManager';
 
     export default {
         name: 'passage-editor',
+
         data() {
             return {
                 docs,
             };
         },
-        vuex: {
-            getters: {
-                passage: getCurrentPassage,
-                tagSuggestions: tagSuggestionsCounted,
-                passageEditorOptions,
-                story: getCurrentStory,
-            },
-            actions: {
-                openPassage,
-                editPassage,
-                editPassageText,
-                addTag,
-                removeTag,
-                makeStarting,
-            },
-        },
+
+        computed: mapGetters({
+            passage: 'getCurrentPassage',
+            tagSuggestions: 'tagSuggestionsCounted',
+            passageEditorOptions: 'passageEditorOptions',
+            story: 'getCurrentStory',
+        }),
+
         methods: {
             onCodeChanged(text) {
                 this.editPassageText(this.passage.pid, text);
             },
-        },
-        route: {
-            data(transition) {
-                this.openPassage(parseInt(transition.to.params.pid));
 
-                if (this.passage === undefined) {
-                    transition.abort('no such passage');
-                } else {
-                    transition.next();
-                }
+            onTitleChanged(event) {
+                this.editPassage({
+                    value: event.target.value,
+                    pid: this.passage.pid,
+                    field: 'title',
+                });
             },
+
+            ...mapActions([
+                'openPassage',
+                'editPassage',
+                'editPassageText',
+                'addTag',
+                'removeTag',
+                'makeStarting',
+            ]),
         },
+
+        beforeRouteEnter(to, from, next) {
+            next((vm) => {
+                vm.openPassage(to.params.pid);
+            });
+        },
+
         components: {
             TagList,
             CodeMirror,

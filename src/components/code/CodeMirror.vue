@@ -21,15 +21,7 @@ div.codeArea.mirror
             code: String,
         },
 
-        watch: {
-            code() {
-                if (this.code !== this.codeMirror.getValue()) {
-                    this.codeMirror.setValue(this.code);
-                }
-            },
-        },
-
-        compiled() {
+        mounted() {
             this.codeMirror = new CodeMirror(this.$el, this.options);
             this.codeMirror.setValue(this.code);
 
@@ -40,30 +32,38 @@ div.codeArea.mirror
 
             // this is some hack, without it CodeMirror renders blank
             requestAnimationFrame(this.onWindowResizeBound);
+
+            this.$nextTick(() => {
+                this.onAttached();
+            });
         },
 
-        attached() {
-            this.codeMirror.focus();
-
-            window.addEventListener('resize', this.onWindowResizeThrottled);
-        },
-
-        detached() {
-            window.removeEventListener('resize', this.onWindowResizeThrottled);
+        destroyed() {
+            this.$nextTick(() => {
+                this.onDetached();
+            });
         },
 
         methods: {
             onCodeMirrorChange() {
-                this.code = this.codeMirror.getValue();
-
                 // note kebab-case here, event names are not automatically converted
-                this.$emit('code-changed', this.code);
+                this.$emit('code-changed', this.codeMirror.getValue());
             },
 
             onWindowResize() {
                 const {width, height,} = this.$el.getBoundingClientRect();
                 this.codeMirror.setSize(`${width}px`, `${height}px`);
                 this.codeMirror.refresh();
+            },
+
+            onAttached() {
+                this.codeMirror.focus();
+
+                window.addEventListener('resize', this.onWindowResizeThrottled);
+            },
+
+            onDetached() {
+                window.removeEventListener('resize', this.onWindowResizeThrottled);
             },
         },
     };

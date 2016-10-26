@@ -1,7 +1,10 @@
 <script>
     import {isStoryRunnable,} from '../../vuex/getters';
+    import RLink from '../common/RLink.vue';
 
     export default {
+        name: 'story-run',
+
         props: {
             story: Object,
         },
@@ -12,7 +15,9 @@
             },
         },
 
-        name: 'story-run',
+        components: {
+            RLink,
+        },
     };
 </script>
 
@@ -29,11 +34,11 @@
 
 <template lang="pug">
 span.storyRun
-    a(v-link="{name: 'play', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Play story (in new window)")
+    r-link("v-bind:to"="{name: 'play', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Play story (in new window)")
         i.fa.fa-play
-    a(v-link="{name: 'debug', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Debug story (in new window)")
+    r-link("v-bind:to"="{name: 'debug', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Debug story (in new window)")
         i.fa.fa-bug
-    a(v-link="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Export")
+    r-link("v-bind:to"="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Export")
         i.fa.fa-download
 </template>
 

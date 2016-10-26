@@ -1,11 +1,11 @@
 export default {
     name: 'sort-icon',
-    bind() {
-        this.el.classList.add('fa');
+    bind(el) {
+        el.classList.add('fa');
     },
 
-    update(newValue) {
-        this.el.classList.toggle('fa-sort-amount-asc', newValue === 'asc');
-        this.el.classList.toggle('fa-sort-amount-desc', newValue === 'desc');
+    update(el, {value,}) {
+        el.classList.toggle('fa-sort-amount-asc', value === 'asc');
+        el.classList.toggle('fa-sort-amount-desc', value === 'desc');
     },
 };

@@ -16,6 +16,12 @@ const config = {
         filename: `${pkg.name}.js`,
     },
 
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.js',
+        },
+    },
+
     resolveLoader: {
         root: path.join(__dirname, 'node_modules'),
     },

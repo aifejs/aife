@@ -1,36 +1,32 @@
 <template lang="pug">
 article.deleteStory.deleter(v-if="passage")
     h3 Delete passage?
-    p Are you sure you want to delete passage&nbsp;
-        strong \#{{ passage.pid }} ({{ passage.title }})
-        | ? This can't be undone.
-    a.deleter-cancel(v-link="{name: 'overview'}") No, take me back
+    p.deleter-notice Are you sure you want to delete passage #[strong \#{{ passage.pid }}] ({{ passage.title }})? This can't be undone.
+
+    router-link.deleter-cancel("v-bind:to"="{name: 'overview', params: {ifid: $route.params.ifid}}") No, take me back
     button.deleter-confirm(@click="dropPassage(passage.pid)") Yes, delete passage completely and unrecoverably
 </template>
 
 <script>
-    import {deletePassage,} from '../../vuex/actions';
-    import {getCurrentPassage,} from '../../vuex/getters';
+    import {mapGetters, mapActions,} from 'vuex';
     import router from '../../router';
 
     export default {
         name: 'passage-deleter',
+
         methods: {
             dropPassage(pid) {
                 this.deletePassage(pid);
-                router.go({
-                    name: 'overview',
-                });
+                router.push({name: 'overview', params: {ifid: this.$route.params.ifid,},});
             },
+
+            ...mapActions([
+                'deletePassage',
+            ]),
         },
 
-        vuex: {
-            actions: {
-                deletePassage,
-            },
-            getters: {
-                passage: getCurrentPassage,
-            },
-        },
+        computed: mapGetters({
+            passage: 'getCurrentPassage',
+        }),
     };
 </script>

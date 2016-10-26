@@ -1,130 +1,113 @@
 import Overview from './components/story/Overview.vue';
 import PassageEditor from './components/passage/PassageEditor.vue';
 import PassageDeleter from './components/passage/PassageDeleter.vue';
-import ProofRead from './components/ProofRead.vue';
+import ProofRead from './components/code/ProofRead.vue';
 
-import ScriptEditor from './components/ScriptEditor.vue';
-import StyleSheetEditor from './components/StyleSheetEditor.vue';
-import HtmlEditor from './components/HtmlEditor.vue';
+import ScriptEditor from './components/code/ScriptEditor.vue';
+import StyleSheetEditor from './components/code/StyleSheetEditor.vue';
+import HtmlEditor from './components/code/HtmlEditor.vue';
 
-import StoryList from './components/story/StoryList.vue';
+import StoryList from './components/storyList/StoryList.vue';
 import Story from './components/story/Story.vue';
 import StoryDeleter from './components/story/StoryDeleter.vue';
+import StoryPlay from './components/story/export/StoryPlay.vue';
+import StoryDebug from './components/story/export/StoryDebug.vue';
+import StoryPublish from './components/story/export/StoryPublish.vue';
 
 import Settings from './components/settings/Settings.vue';
 
-import {playStory, publishStory,} from './lib/publishStory';
-import {getCurrentStory,} from './vuex/getters';
-
 const routerParams = {
-    options: {
-        root: '/',
-        history: false,
-        linkActiveClass: 'active',
-    },
+    base: '/',
+    history: false,
+    linkActiveClass: 'active',
 
-    routes: {
-        '/': {
+    routes: [
+        {
+            path: '/',
             name: 'stories',
             component: StoryList,
         },
 
-        '/story/:ifid': {
+        {
+            path: '/story/:ifid',
             name: 'story',
             component: Story,
 
-            subRoutes: {
-                '/': {
+            children: [
+                {
+                    path: 'dashboard',
                     name: 'overview',
                     component: Overview,
                 },
 
-                '/deletePassage/:pid': {
+                {
+                    path: 'deletePassage/:pid',
                     name: 'deletePassage',
                     component: PassageDeleter,
                 },
 
-                '/proofRead': {
+                {
+                    path: 'proofRead',
                     name: 'proofRead',
                     component: ProofRead,
                 },
 
-                '/passage/:pid': {
+                {
+                    path: 'passage/:pid',
                     name: 'passage',
                     component: PassageEditor,
                 },
 
-                '/script': {
+                {
+                    path: 'script',
                     name: 'script',
                     component: ScriptEditor,
                 },
 
-                '/stylesheet': {
+                {
+                    path: 'stylesheet',
                     name: 'stylesheet',
                     component: StyleSheetEditor,
                 },
 
-                '/html': {
+                {
+                    path: 'html',
                     name: 'html',
                     component: HtmlEditor,
                 },
 
-                '/deleteStory': {
+                {
+                    path: 'deleteStory',
                     name: 'deleteStory',
                     component: StoryDeleter,
                 },
 
-                '/play': {
+                {
+                    path: 'play',
                     name: 'play',
-                    component: {
-                        ready() {
-                            playStory(this.story, {});
-                        },
-
-                        vuex: {
-                            getters: {
-                                story: getCurrentStory,
-                            },
-                        },
-                    },
+                    component: StoryPlay,
                 },
 
-                '/debug': {
+                {
+                    path: 'debug',
                     name: 'debug',
-                    component: {
-                        ready() {
-                            playStory(this.story, {formatOptions: ['debug',],});
-                        },
-
-                        vuex: {
-                            getters: {
-                                story: getCurrentStory,
-                            },
-                        },
-                    },
+                    component: StoryDebug,
                 },
 
-                '/publish': {
+                {
+                    path: 'publish',
                     name: 'publish',
-                    component: {
-                        ready() {
-                            publishStory(this.story, {}, `${this.story.title}.html`);
-                        },
-                        vuex: {
-                            getters: {
-                                story: getCurrentStory,
-                            },
-                        },
-                    },
+                    component: StoryPublish,
                 },
-            },
+            ],
         },
 
-        '/settings/': {
+        {
+            path: '/settings',
             name: 'settings',
             component: Settings,
         },
-    },
+    ],
 };
 
 export default routerParams;

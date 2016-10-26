@@ -3,9 +3,25 @@ import AifeRoot from './AifeRoot.vue';
 import router from './router';
 import store from './vuex/store';
 import {sync,} from 'vuex-router-sync';
-
-Vue.config.debug = true;
+import {mapActions,} from 'vuex';
 
 sync(store, router);
 
-router.start(AifeRoot, 'aife-root');
+const aifeApp = new Vue({
+    router,
+    store,
+
+    created() {
+        this.loadState();
+    },
+
+    methods: mapActions([
+        'loadState',
+    ]),
+
+    components: {
+        AifeRoot,
+    },
+});
+
+aifeApp.$mount('aife-root');

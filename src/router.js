@@ -1,6 +1,9 @@
-import routerSetup from './lib/routerSetup';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 import routerParams from './routerParams';
 
-const router = routerSetup(routerParams);
+Vue.use(VueRouter);
+
+const router = new VueRouter(routerParams);
 
 export default router;

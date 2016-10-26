@@ -2,11 +2,9 @@
 article.widget.screen.story
     .widget-body(v-if="storiesLoaded")
         passage-tabs
-        router-view(v-if="story")
+        router-view
         p(v-if="!story")
-            | No such story available. Have you changed IFID?&nbsp;
-            a(v-link="{name: 'stories'}") To stories list
-            | .
+            | No such story available. Have you changed IFID? #[router-link("v-bind:to"="{name: 'stories'}") To stories list].
 
     story-footer.widget-footer.widget-controlIcons(v-if="storiesLoaded")
     .widget-body(v-if="!storiesLoaded")
@@ -16,17 +14,15 @@ article.widget.screen.story
 </template>
 
 <script>
-    import PassageTabs from '../common/AifeTabs/AifeTabs.vue';
+    import PassageTabs from './PassageTabs.vue';
     import StoryFooter from './StoryFooter.vue';
-    import {getCurrentStory, getStoriesLoaded,} from '../../vuex/getters';
+    import {mapGetters,} from 'vuex';
 
     export default {
-        vuex: {
-            getters: {
-                story: getCurrentStory,
-                storiesLoaded: getStoriesLoaded,
-            },
-        },
+        computed: mapGetters({
+            story: 'getCurrentStory',
+            storiesLoaded: 'getStoriesLoaded',
+        }),
 
         components: {
             PassageTabs,

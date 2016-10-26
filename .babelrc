@@ -1,12 +1,19 @@
 {
   "env": {
     "development": {
-      "plugins": ["transform-es2015-modules-commonjs", "transform-runtime"],
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "transform-object-rest-spread",
+        "transform-runtime"
+      ],
       "sourceMaps": "inline"
     },
     "production": {
       "presets": ["es2015"],
-      "plugins": ["transform-runtime"]
+      "plugins": [
+        "transform-object-rest-spread",
+        "transform-runtime"
+      ]
     }
   }
 }

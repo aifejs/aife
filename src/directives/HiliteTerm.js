@@ -7,25 +7,27 @@ export default {
 
     priority: 100,
 
-    bind() {
-        this.originalText = this.el.innerHTML;
+    bind(el) {
+        el.dataset.originalText = el.innerHTML;
     },
 
-    update(newTermValue) {
-        if (newTermValue.length) {
-            const re = new RegExp(newTermValue, 'img');
+    update(el, {value,}) {
+        const originalText = el.dataset.originalText;
 
-            if (this.originalText.match(re)) {
-                this.el.innerHTML = this.originalText.replace(re, `<strong>${newTermValue}</strong>`);
+        if (value.length) {
+            const re = new RegExp(value, 'img');
+
+            if (originalText.match(re)) {
+                el.innerHTML = originalText.replace(re, `<strong>${value}</strong>`);
             } else {
-                this.el.innerHTML = this.originalText;
+                el.innerHTML = originalText;
             }
         } else {
-            this.el.innerHTML = this.originalText;
+            el.innerHTML = originalText;
         }
     },
 
-    unbind() {
-        this.el.innerHTML = this.originalText;
+    unbind(el) {
+        el.innerHTML = el.dataset.originalText;
     },
 };

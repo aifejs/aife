@@ -34,30 +34,30 @@ import {
     closeProofRead,
 } from './stories/actions';
 
-function setPassagesSorting({dispatch,}, sorting) {
-    dispatch('PASSAGES_SORTING', sorting);
+function setPassagesSorting({commit,}, sorting) {
+    commit('PASSAGES_SORTING', sorting);
 }
 
-function setStoriesSorting({dispatch,}, sorting) {
-    dispatch('STORIES_SORTING', sorting);
+function setStoriesSorting({commit,}, sorting) {
+    commit('STORIES_SORTING', sorting);
 }
 
-function setPassagesFiltering({dispatch,}, event) {
-    dispatch('PASSAGES_FILTERING', event.target.value);
+function setPassagesFiltering({commit,}, event) {
+    commit('PASSAGES_FILTERING', event.target.value);
 }
 
-function loadState({dispatch,}) {
+function loadState({commit,}) {
     Promise.all([
         storage.getItem('stories', []),
     ]).then(
         ([stories,]) => {
             stories.forEach(
                 (story) => {
-                    dispatch('LOAD_STORY', story);
+                    commit('LOAD_STORY', story);
                 }
             );
 
-            dispatch('SET_STORIES_LOADED', true);
+            commit('SET_STORIES_LOADED', true);
         }
     );
 }

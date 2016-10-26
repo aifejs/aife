@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-    //a(v-link="{name: storySettings}")
+    //router-link("v-bind:to"="{name: 'storySettings'}")
     //    i.fa.fa-cog
     //    | Story settings
 

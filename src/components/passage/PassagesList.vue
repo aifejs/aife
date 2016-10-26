@@ -8,8 +8,8 @@ article.passagesList.widget.lighter
     .widget-body
         ul.unstyled
             li(v-for="passage of passagesOverview")
-                a(v-link="{name: 'passage', params: {pid: passage.pid}}", v-hilite-term="getPassagesFiltering") {{passage.title}}
-                a(v-link="{name: 'deletePassage', params: {pid: passage.pid}}")
+                router-link("v-bind:to"="{name: 'passage', params: {pid: passage.pid, ifid: ifid}}", v-hilite-term="getPassagesFiltering") {{passage.title}}
+                router-link("v-bind:to"="{name: 'deletePassage', params: {pid: passage.pid, ifid: ifid}}")
                     i.fa.fa-trash.activeIcon.danger.passagesList-remove
                 i.fa.fa-rocket.activeIcon("@click"="makeStarting(passage.pid)", ":class"="{'disabled': passage.starting}")
                 p(v-hilite-term="getPassagesFiltering") {{passage.text}}
@@ -22,8 +22,7 @@ article.passagesList.widget.lighter
 </style>
 
 <script>
-    import {setPassagesSorting, setPassagesFiltering, makeStarting,} from '../../vuex/actions';
-    import {passagesOverview, getPassagesFiltering,} from '../../vuex/getters';
+    import {mapGetters, mapActions,} from 'vuex';
     import SorterButtons from '../common/SorterButtons.vue';
     import HiliteTerm from '../../directives/HiliteTerm';
 
@@ -39,17 +38,17 @@ article.passagesList.widget.lighter
             };
         },
 
-        vuex: {
-            getters: {
-                passagesOverview,
-                getPassagesFiltering,
-            },
-            actions: {
-                setPassagesSorting,
-                setPassagesFiltering,
-                makeStarting,
-            },
-        },
+        computed: mapGetters({
+            ifid: 'getCurrentIfid',
+            passagesOverview: 'passagesOverview',
+            getPassagesFiltering: 'getPassagesFiltering',
+        }),
+
+        methods: mapActions([
+            'setPassagesSorting',
+            'setPassagesFiltering',
+            'makeStarting',
+        ]),
 
         components: {
             SorterButtons,

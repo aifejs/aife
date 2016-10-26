@@ -1,47 +1,47 @@
-export function openPassage({dispatch,}, pid) {
-    dispatch('OPEN_PASSAGE', pid);
+export function openPassage({commit,}, pid) {
+    commit('OPEN_PASSAGE', pid);
 }
 
-export function editPassage({dispatch,}, {target,}, pid, field) {
-    dispatch('UPDATE_PASSAGE', {
-        [field]: target.value,
+export function editPassage({commit,}, {value, pid, field,}) {
+    commit('UPDATE_PASSAGE', {
+        [field]: value,
         pid,
     });
 }
 
-export function editPassageText({dispatch,}, pid, text) {
-    dispatch('UPDATE_PASSAGE', {
+export function editPassageText({commit,}, pid, text) {
+    commit('UPDATE_PASSAGE', {
         text,
         pid,
     });
 }
 
-export function closePassage({dispatch,}, pid) {
-    dispatch('CLOSE_PASSAGE', pid);
+export function closePassage({commit,}, pid) {
+    commit('CLOSE_PASSAGE', pid);
 }
 
-export function addPassage({dispatch,}) {
-    dispatch('ADD_PASSAGE', {});
+export function addPassage({commit,}) {
+    commit('ADD_PASSAGE', {});
 }
 
-export function deletePassage({dispatch,}, pid) {
-    dispatch('DELETE_PASSAGE', pid);
+export function deletePassage({commit,}, pid) {
+    commit('DELETE_PASSAGE', pid);
 }
 
-export function addTag({dispatch,}, pid, tag) {
-    dispatch('ADD_TAG', {
+export function addTag({commit,}, {pid, tag,}) {
+    commit('ADD_TAG', {
         pid,
         tag,
     });
 }
 
-export function removeTag({dispatch,}, pid, index) {
-    dispatch('REMOVE_TAG', {
+export function removeTag({commit,}, {pid, index,}) {
+    commit('REMOVE_TAG', {
         pid,
         index,
     });
 }
 
-export function makeStarting({dispatch,}, pid) {
-    dispatch('MAKE_PASSAGE_STARTING', pid);
+export function makeStarting({commit,}, pid) {
+    commit('MAKE_PASSAGE_STARTING', pid);
 }

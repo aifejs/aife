@@ -52,13 +52,16 @@ export function getPassagesFiltering({passagesFiltering,}) {
 
 export function getCurrentPassage({route, stories,}) {
     const passages = getCurrentStory({route, stories,}).passages;
-    return passages.find((passage) => {
-        if ('pid' in route.params) {
-            return passage.pid.toString() === route.params.pid;
-        } else {
-            return passage.title === route.params.passageTitle;
-        }
-    });
+    let currentPassage;
+
+    if ('pid' in route.params) {
+        const pid = parseInt(route.params.pid); // sometimes it comes as string, sometimes as number
+        currentPassage = passages.find((passage) => passage.pid === pid);
+    } else {
+        currentPassage = passages.find((passage) => passage.title === route.params.passageTitle);
+    }
+
+    return currentPassage;
 }
 
 export function stats({route, stories,}) {

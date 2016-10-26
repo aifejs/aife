@@ -6,14 +6,12 @@
         p Various settings
 
     .widget-footer.widget-controlIcons
-        a(v-link="{name: 'stories'}")
+        router-link("v-bind:to"="{name: 'stories'}")
             i.fa.fa-list-ul
             | Back to stories
 </template>
 
 <script>
     export default {
-        vuex: {
-        },
     };
 </script>

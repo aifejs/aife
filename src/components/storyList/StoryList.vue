@@ -3,8 +3,7 @@
 <style lang="stylus" src="../../styles/storyList.styl"></style>
 
 <script>
-    import {storiesList,} from '../../vuex/getters';
-    import {setStoriesSorting,} from '../../vuex/actions';
+    import {mapGetters, mapActions,} from 'vuex';
 
     import StoryListItem from './StoryListItem.vue';
     import SorterButtons from '../common/SorterButtons.vue';
@@ -25,14 +24,14 @@
             };
         },
 
-        vuex: {
-            getters: {
-                storiesList,
-            },
-            actions: {
-                setStoriesSorting,
-            },
-        },
+        computed: mapGetters([
+            'storiesList',
+        ]),
+
+        methods: mapActions([
+            'setStoriesSorting',
+        ]),
+
         components: {
             SorterButtons,
             StoryListItem,
