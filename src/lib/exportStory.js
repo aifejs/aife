@@ -1,6 +1,10 @@
 import {stripIndent,} from 'common-tags';
 import pkg from '../../package.json';
 
+/**
+ * @param {IStory} story
+ * @return {number}
+ */
 function getStartingPid(story) {
     const startingPassage = story.passages.find(({starting,}) => starting);
     if (startingPassage) {
@@ -10,10 +14,19 @@ function getStartingPid(story) {
     }
 }
 
+/**
+ * @param {string[]} tags
+ * @return {string}
+ */
 function exportTags(tags) {
     return tags.map((tag) => tag.replace(' ', '-')).join(' ');
 }
 
+/**
+ * @param {IStory} story
+ * @param {Array} formatOptions
+ * @return {string}
+ */
 export default function exportStory(story, formatOptions) {
     return stripIndent`
 <tw-storydata 
@@ -31,6 +44,10 @@ export default function exportStory(story, formatOptions) {
 </tw-storydata>`;
 }
 
+/**
+ * @param {IPassage} passage
+ * @return {string}
+ */
 function exportPassage(passage) {
     return stripIndent`
         <tw-passagedata 

@@ -12,6 +12,11 @@ function replaceContent(html) {
     document.close();
 }
 
+/**
+ * @param {string} output
+ * @param {string} fileName
+ * @return {Promise<Blob>}
+ */
 function saveFile(output, fileName) {
     let blob;
     try {
@@ -30,6 +35,10 @@ function saveFile(output, fileName) {
     return Promise.resolve(blob);
 }
 
+/**
+ * @param {IStory} story
+ * @return Format
+ */
 function getFormat(story) {
     let format = formats['SugarCube 2'];
 
@@ -45,6 +54,11 @@ Currently supported formats: ${Object.keys(formats).join(', ')}`);
     return format;
 }
 
+/**
+ * @param {IStory} story
+ * @param {IPublishOptions} options
+ * @param {string} fileName
+ */
 export function publishStory(story, options = {}, fileName) {
     let format;
 
@@ -62,6 +76,10 @@ export function publishStory(story, options = {}, fileName) {
     );
 }
 
+/**
+ * @param {IStory} story
+ * @param {IPublishOptions} options
+ */
 export function playStory(story, options = {}) {
     let format;
 

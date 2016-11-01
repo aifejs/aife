@@ -20,7 +20,7 @@ article.widget.screen.story
 
     export default {
         computed: mapGetters({
-            story: 'getCurrentStory',
+            story: 'story',
             storiesLoaded: 'getStoriesLoaded',
         }),
 

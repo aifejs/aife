@@ -9,9 +9,7 @@
     export default {
         name: 'overview',
 
-        computed: mapGetters({
-            story: 'getCurrentStory',
-        }),
+        computed: mapGetters(['story',]),
 
         data() {
             return {

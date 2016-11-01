@@ -1,7 +1,6 @@
 /* eslint new-cap: [2, {newIsCap: true, capIsNew: false}] */
 
-import {getCurrentStory,} from '../getters';
-import updateStory from '../../lib/updateStory';
+import {updateStory, findByPid, findIndexByPid, getCurrentStory} from '../utils';
 
 const passageBlueprint = {
     title: 'New passage',
@@ -9,14 +8,6 @@ const passageBlueprint = {
     tags: [],
     starting: false,
 };
-
-function findByPid(passages, pid) {
-    return passages.find((passage) => passage.pid === pid);
-}
-
-function findIndexByPid(passages, pid) {
-    return passages.findIndex((passage) => passage.pid === pid);
-}
 
 export function OPEN_PASSAGE(state, pid) {
     const story = getCurrentStory(state);
@@ -100,4 +91,3 @@ export function MAKE_PASSAGE_STARTING(state, pid) {
 
     updateStory(story);
 }
-

@@ -2,17 +2,30 @@ import {stripIndents,} from 'common-tags';
 
 const passagesDelimiter = '\n=========================================================\n';
 
+/**
+ * @param {string[]} tags
+ * @return {string}
+ */
 export function pickleTags(tags) {
     return tags.map((tag) => `#${tag}`).join(' ');
 }
 
 const unpickleTagsRe = /(?:^| *)\#/;
 
+/**
+ * @param {string} tagsString
+ * @return {string[]}
+ */
 export function unpickleTags(tagsString) {
     return tagsString.split(unpickleTagsRe).filter((tag) => tag);
 }
 
-
+/**
+ * @param {string} title
+ * @param {number} pid
+ * @param {boolean} starting
+ * @return {string}
+ */
 export function pickleTitleAndPid({title, pid, starting,}) {
     return `== ${title} (${pid})${starting ? '*' : ''}`;
 }
@@ -38,12 +51,20 @@ export function unpickleTitleAndPid(titleLine) {
     return unpickled;
 }
 
+/**
+ * @param {IPassage} passage
+ * @return {string}
+ */
 export function picklePassage(passage) {
     return `${pickleTitleAndPid(passage)}\n${pickleTags(passage.tags)}\n${passage.text}`;
 }
 
-export function unpicklePassage(passage) {
-    const [titleLine, tagLine, ...paragraphs] = passage.split('\n');
+/**
+ * @param passageString
+ * @return IPassage
+ */
+export function unpicklePassage(passageString) {
+    const [titleLine, tagLine, ...paragraphs] = passageString.split('\n');
 
     const unpickled = unpickleTitleAndPid(titleLine);
 
@@ -54,6 +75,10 @@ export function unpicklePassage(passage) {
     return unpickled;
 }
 
+/**
+ * @param {IStory} story
+ * @return {string}
+ */
 export function pickleStory(story) {
     return stripIndents`
         = ${story.title} {${story.ifid}}
@@ -61,12 +86,20 @@ export function pickleStory(story) {
         ${picklePassages(story.passages)}`;
 }
 
+/**
+ * @param {IPassage[]} passages
+ * @return {string}
+ */
 export function picklePassages(passages) {
     return passages.map(picklePassage).join(passagesDelimiter);
 }
 
 const storyTitleRe = /^= (.+?) {(.+?)}$/;
 
+/**
+ * @param storyString
+ * @return {IStory}
+ */
 export function unpickleStory(storyString) {
     const story = {};
     let [firstLine, ...rest] = storyString.split('\n');
@@ -85,6 +118,10 @@ export function unpickleStory(storyString) {
     return story;
 }
 
+/**
+ * @param {string} storyString
+ * @return {IPassage[]}
+ */
 export function unpicklePassages(storyString) {
     const split = storyString.split(passagesDelimiter);
     return split.map((passage) => unpicklePassage(passage));

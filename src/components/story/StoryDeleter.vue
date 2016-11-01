@@ -25,8 +25,6 @@ article.deleteStory.deleter(v-if="story")
             ]),
         },
 
-        computed: mapGetters({
-            story: 'getCurrentStory',
-        }),
+        computed: mapGetters(['story',]),
     };
 </script>

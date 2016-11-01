@@ -16,6 +16,7 @@ import StoryPublish from './components/story/export/StoryPublish.vue';
 
 import Settings from './components/settings/Settings.vue';
 
+/** @type VueRouter.RouterOptions */
 const routerParams = {
     base: '/',
     history: false,

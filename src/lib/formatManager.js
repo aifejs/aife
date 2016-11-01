@@ -2,11 +2,19 @@ import fetchJsonp from 'fetch-jsonp';
 import escape from 'lodash/escape';
 import exportStory from './exportStory';
 
+/**
+ * @param {string} url
+ * @return {Promise<IFormatProperties>}
+ */
 function fetchFormat(url) {
     return fetchJsonp(url, {jsonpCallbackFunction: 'storyFormat',})
         .then((response) => response.json());
 }
 
+/**
+ * @param {IStory} story
+ * @return {string|boolean}
+ */
 function getCustomHtml(story) {
     if (story.customHtml && story.customHtml.trim().length) {
         return story.customHtml;
@@ -16,6 +24,9 @@ function getCustomHtml(story) {
 }
 
 export class Format {
+    /**
+     * @param {string} url
+     */
     constructor(url) {
         if (url.startsWith('http://') || url.startsWith('https://')) {
             this.url = url;
@@ -24,6 +35,9 @@ export class Format {
         }
     }
 
+    /**
+     * @return {Promise}
+     */
     load() {
         return new Promise((resolve, reject) => {
             if (this.loaded) {
@@ -47,6 +61,12 @@ export class Format {
         });
     }
 
+    /**
+     * @param {IStory} story
+     * @param {Array} formatOptions
+     * @param {number} startId
+     * @return {Promise<string>}
+     */
     publish(story, formatOptions, startId) {
         return this.load().then(
             () => {

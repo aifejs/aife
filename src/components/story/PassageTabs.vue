@@ -57,7 +57,7 @@
             scriptEditing: 'getEditScript',
             htmlEditing: 'getEditHtml',
             proofReadEditing: 'getProofRead',
-            story: 'getCurrentStory',
+            story: 'story',
         }),
 
         components: {

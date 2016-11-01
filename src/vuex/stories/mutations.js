@@ -4,8 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import uuid from 'tiny-uuid';
 import {unpickleStory,} from '../../lib/pickle';
 import createCopyTitle from '../../lib/createCopyTitle';
-import updateStory from '../../lib/updateStory';
-import {getCurrentStory,} from '../getters';
+import {updateStory, hasPid, getCurrentStory,} from '../utils';
 
 const storyBlueprint = {
     title: 'Untitled story',
@@ -149,6 +148,13 @@ export function OPEN_PROOFREAD(state) {
     updateStory(story);
 }
 
+// delete missing passages from list of opened
+function syncOpenedPassages(story) {
+    if (story.opened.length) {
+        story.opened = story.opened.filter(({pid,}) => hasPid(story.passages, pid));
+    }
+}
+
 export function UPDATE_STORY_FROM_PROOF(state, proofCopy) {
     let unpickled;
 
@@ -162,6 +168,9 @@ export function UPDATE_STORY_FROM_PROOF(state, proofCopy) {
         const story = getCurrentStory(state);
 
         Object.assign(story, unpickled);
+
+        syncOpenedPassages(story);
+
         state.proofModeError = false;
         updateStory(story);
     }

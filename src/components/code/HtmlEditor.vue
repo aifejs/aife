@@ -39,7 +39,7 @@ article.codeEditor.htmlEditor
         computed: mapGetters({
             htmlEditorOptions: 'htmlEditorOptions',
             getHtml: 'getHtml',
-            story: 'getCurrentStory',
+            story: 'story',
         }),
 
         methods: {

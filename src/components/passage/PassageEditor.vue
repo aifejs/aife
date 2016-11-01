@@ -50,7 +50,7 @@ article.codeEditor.passageEditor(v-if="passage")
             passage: 'getCurrentPassage',
             tagSuggestions: 'tagSuggestionsCounted',
             passageEditorOptions: 'passageEditorOptions',
-            story: 'getCurrentStory',
+            story: 'story',
         }),
 
         methods: {

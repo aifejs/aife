@@ -5,6 +5,7 @@ const mutationMap = {
     'OPEN_PASSAGE': 'stories',
     'DELETE_PASSAGE': 'stories',
     'ADD_PASSAGE': 'stories',
+    'SYNC_OPENED_PASSAGES': 'stories',
 
     'SET_STORY_TITLE': 'stories',
     'CREATE_STORY': 'stories',

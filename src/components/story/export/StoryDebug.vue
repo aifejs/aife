@@ -9,9 +9,7 @@
         },
 
         computed: {
-            ...mapGetters({
-                story: 'getCurrentStory',
-            }),
+            ...mapGetters(['story',]),
         },
     };
 </script>

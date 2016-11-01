@@ -1,9 +1,17 @@
 import countWords from './countWords';
 
+/**
+ * @param {IPassage} passage
+ * @return {number}
+ */
 function countPassageWords(passage) {
     return countWords(passage.text) + countWords(passage.title) + countWords(passage.tags);
 }
 
+/**
+ * @param passage
+ * @return {ITextStats}
+ */
 function passageStats(passage) {
     const allText = passage.text + passage.title + passage.tags.join('');
     const withoutSpaces = allText.replace(/\s/mg, '');
@@ -14,6 +22,12 @@ function passageStats(passage) {
     };
 }
 
+/**
+ * @param {IPassage[]} passages
+ * @param {string} styleSheet
+ * @param {string} script
+ * @return {IStoryStats}
+ */
 export default function storyStats({passages, styleSheet, script,}) {
     const storyStatistics = passages.reduce(
         (accumulator, passage) => {

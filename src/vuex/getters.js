@@ -2,14 +2,14 @@ import {pickleStory,} from '../lib/pickle';
 import sortBy from 'lodash/sortBy';
 import deburr from 'lodash/deburr';
 import storyStats from '../lib/storyStats';
+import {getCurrentStory,} from './utils';
 
 /**
- * @param route
- * @param {IStory[]} stories
- * @returns {IStory}
+ * @param {IState} state
+ * @return {IStory}
  */
-export function getCurrentStory({route, stories,}) {
-    return stories.find(({ifid,}) => ifid === route.params.ifid);
+export function story(state) {
+    return getCurrentStory(state);
 }
 
 export function tabs(state) {
@@ -64,11 +64,21 @@ export function getCurrentPassage({route, stories,}) {
     return currentPassage;
 }
 
+/**
+ * @param {IRoute} route
+ * @param {IStory[]} stories
+ * @return {IStoryStats}
+ */
 export function stats({route, stories,}) {
     const story = getCurrentStory({route, stories,});
     return storyStats(story);
 }
 
+/**
+ * @param {IRoute} route
+ * @param {IStory[]} stories
+ * @return string
+ */
 export function proofReadCopy({route, stories,}) {
     const story = getCurrentStory({route, stories,});
     return pickleStory(story);
@@ -78,6 +88,10 @@ export function getProofModeError({proofModeError,}) {
     return proofModeError;
 }
 
+/**
+ * @param {IEditorOptions} codeEditorOptions
+ * @return {IEditorOptions}
+ */
 export function jsEditorOptions({codeEditorOptions,}) {
     return Object.assign(
         {},
@@ -88,6 +102,10 @@ export function jsEditorOptions({codeEditorOptions,}) {
     );
 }
 
+/**
+ * @param {IEditorOptions} codeEditorOptions
+ * @return {IEditorOptions}
+ */
 export function cssEditorOptions({codeEditorOptions,}) {
     return Object.assign(
         {},
@@ -98,6 +116,10 @@ export function cssEditorOptions({codeEditorOptions,}) {
     );
 }
 
+/**
+ * @param {IEditorOptions} codeEditorOptions
+ * @return {IEditorOptions}
+ */
 export function htmlEditorOptions({codeEditorOptions,}) {
     return Object.assign(
         {},
@@ -108,6 +130,12 @@ export function htmlEditorOptions({codeEditorOptions,}) {
     );
 }
 
+/**
+ * @param {IEditorOptions} codeEditorOptions
+ * @param {IRoute} route
+ * @param {IStory[]} stories
+ * @return {IEditorOptions}
+ */
 export function passageEditorOptions({codeEditorOptions, route, stories,}) {
     const currentStory = getCurrentStory({route, stories,});
     const options = {};
@@ -123,18 +151,38 @@ export function passageEditorOptions({codeEditorOptions, route, stories,}) {
     );
 }
 
+/**
+ * @param {IRoute} route
+ * @param {IStory[]} stories
+ * @return {string}
+ */
 export function getScript({route, stories,}) {
     return getCurrentStory({route, stories,}).script;
 }
 
+/**
+ * @param {IRoute} route
+ * @param {IStory[]} stories
+ * @return {string}
+ */
 export function getStyleSheet({route, stories,}) {
     return getCurrentStory({route, stories,}).styleSheet;
 }
 
+/**
+ * @param {IRoute} route
+ * @param {IStory[]} stories
+ * @return {string}
+ */
 export function getHtml({route, stories,}) {
     return getCurrentStory({route, stories,}).customHtml;
 }
 
+/**
+ * @param {IRoute} route
+ * @param {IStory[]} stories
+ * @return {Dictionary<number>}
+ */
 export function tagSuggestionsCounted({route, stories,}) {
     const passages = getCurrentStory({route, stories,}).passages;
     const collectedTags = {};
@@ -164,6 +212,11 @@ const storySorters = {
     },
 };
 
+/**
+ * @param {IStory} stories
+ * @param {ISorting} storiesSorting
+ * @return {IStoryItem[]}
+ */
 export function storiesList({stories, storiesSorting,}) {
     if (!stories) {
         return [];
@@ -211,6 +264,10 @@ export function getStoriesLoaded({storiesLoaded,}) {
     return storiesLoaded;
 }
 
+/**
+ * @param {IStoryItem} story
+ * @return {boolean}
+ */
 export function isStoryRunnable(story) {
     return story.passages && story.passages.length > 0;
 }

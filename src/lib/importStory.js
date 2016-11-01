@@ -1,3 +1,7 @@
+/**
+ * @param {Blob} file
+ * @return {Promise<string>}
+ */
 function readFile(file) {
     const reader = new FileReader();
 
@@ -8,6 +12,10 @@ function readFile(file) {
     });
 }
 
+/**
+ * @param {FileList} files
+ * @return {Promise<string[]>}
+ */
 export function readFiles(files) {
     const processed = [];
 
@@ -27,6 +35,11 @@ const selectors = {
     passageData: 'tw-passagedata',
 };
 
+/**
+ * @param {Element} storyEl
+ * @param {string} type
+ * @return {string}
+ */
 function extractCode(storyEl, type) {
     return Array.from(storyEl.querySelectorAll(selectors[type]))
         .reduce(
@@ -52,9 +65,12 @@ function extractPassage({attributes, textContent,}) {
     };
 }
 
-// Converts a DOM <tw-storydata> element to a story object matching the format
-// in the store.
-
+/**
+ * Converts a DOM <tw-storydata> element to a story object matching the internals Twine format.
+ * @param {Element} storyEl
+ * @param {boolean} forceLastUpdate
+ * @return {ITwineStory}
+ */
 function domToObject(storyEl, forceLastUpdate) {
     return {
         // Important: this is the passage's pid (a one-off id created at
@@ -70,6 +86,11 @@ function domToObject(storyEl, forceLastUpdate) {
     };
 }
 
+/**
+ * @param {Element} html
+ * @param {Date} [lastUpdate = new Date()]
+ * @return {ITwineStory[]}
+ */
 export function importStory(html, lastUpdate = new Date()) {
     const nodes = document.createElement('div');
 
@@ -80,6 +101,10 @@ export function importStory(html, lastUpdate = new Date()) {
     ).map((storyEl) => domToObject(storyEl, lastUpdate));
 }
 
+/**
+ * @param {ITwineStory} twineStoryObject
+ * @return {IStory}
+ */
 export function convertStory(twineStoryObject) {
     const convertedStory = {
         title: twineStoryObject.name,
@@ -103,6 +128,10 @@ export function convertStory(twineStoryObject) {
     return convertedStory;
 }
 
+/**
+ * @param {ITwinePassage} twinePassage
+ * @return {IPassage}
+ */
 function convertPassage(twinePassage) {
     return {
         title: twinePassage.name,
