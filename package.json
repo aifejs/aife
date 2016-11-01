@@ -69,6 +69,7 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   },
+  "types": "./types/index.d.ts",
   "eslintConfig": {
     "root": true,
     "parserOptions": {
