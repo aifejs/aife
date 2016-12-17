@@ -72,17 +72,20 @@ function extractPassage({attributes, textContent,}) {
  * @return {ITwineStory}
  */
 function domToObject(storyEl, forceLastUpdate) {
+    const attribs = storyEl.attributes;
+
     return {
         // Important: this is the passage's pid (a one-off id created at
         // publish time), *not* a database id.
-        startPassagePid: storyEl.attributes.startnode.value,
-        name: storyEl.attributes.name.value,
-        ifid: storyEl.attributes.ifid.value,
+        startPassagePid: attribs.startnode.value,
+        name: attribs.name.value,
+        ifid: attribs.ifid.value,
         lastUpdate: forceLastUpdate || new Date(),
         script: extractCode(storyEl, 'script'),
         stylesheet: extractCode(storyEl, 'stylesheet'),
         zoom: 1,
         passages: Array.from(storyEl.querySelectorAll(selectors.passageData)).map(extractPassage),
+        format: attribs.format.value,
     };
 }
 
@@ -102,6 +105,19 @@ export function importStory(html, lastUpdate = new Date()) {
 }
 
 /**
+ * Smooth importing SC2 stories from twinery
+ * @param {string} format
+ * @return {string}
+ */
+function normalizeFormat(format) {
+    if (format === 'SugarCube 2 (local/offline)') {
+        return 'SugarCube 2';
+    } else {
+        return format;
+    }
+}
+
+/**
  * @param {ITwineStory} twineStoryObject
  * @return {IStory}
  */
@@ -117,6 +133,7 @@ export function convertStory(twineStoryObject) {
         editScript: false,
         editProof: false,
         lastEdit: twineStoryObject.lastUpdate,
+        format: normalizeFormat(twineStoryObject.format),
     };
 
     const startingPid = parseInt(twineStoryObject.startPassagePid);

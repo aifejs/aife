@@ -33,6 +33,7 @@ interface ITwineStory {
     stylesheet: string,
     zoom: number,
     passages: ITwinePassage[],
+    format: string,
 }
 
 interface ITwinePassage {
