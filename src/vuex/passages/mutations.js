@@ -1,6 +1,6 @@
 /* eslint new-cap: [2, {newIsCap: true, capIsNew: false}] */
 
-import {updateStory, findByPid, findIndexByPid, getCurrentStory} from '../utils';
+import {updateStory, findByPid, findIndexByPid, getCurrentStory,} from '../utils';
 
 const passageBlueprint = {
     title: 'New passage',
