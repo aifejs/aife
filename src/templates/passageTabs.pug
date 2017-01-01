@@ -1,9 +1,9 @@
-nav.aifeTabs
-    span.aifeTabs-item.btn.back
+nav.passageTabs
+    span.passageTabs-item.btn.back
         router-link("v-bind:to"="{name: 'stories'}", title="Back to stories list") &lt;&lt;
 
-    span.aifeTabs-section(v-if="story")
-        router-link.aifeTabs-item.special("v-bind:to"="{name: 'overview', params: {ifid: ifid}}", tag="span")
+    span.passageTabs-section(v-if="story")
+        router-link.passageTabs-item.special("v-bind:to"="{name: 'overview', params: {ifid: ifid}}", tag="span")
             a Overview
 
         special-tab(v-if="stylesheetEditing", ":route-name"="'stylesheet'", ":title"="'Style'", ":close"="closeStylesheetAndGoBack", ":ifid"="ifid")
@@ -11,11 +11,11 @@ nav.aifeTabs
         special-tab(v-if="htmlEditing", ":route-name"="'html'", ":title"="'HTML'", ":close"="closeHtmlAndGoBack", ":ifid"="ifid")
         special-tab(v-if="proofReadEditing", ":route-name"="'proofRead'", ":title"="'Proof-read'", ":close"="closeProofReadAndGoBack", ":ifid"="ifid")
 
-    span.aifeTabs-section(v-if="story")
-        router-link.aifeTabs-item.passage(v-for="tab of tabs", track-by="pid", tag="span", "v-bind:to"="{name: 'passage', params: {pid: tab.pid, ifid: ifid}}")
+    span.passageTabs-section(v-if="story")
+        router-link.passageTabs-item.passage(v-for="tab of tabs", track-by="pid", tag="span", "v-bind:to"="{name: 'passage', params: {pid: tab.pid, ifid: ifid}}")
             a(":title"="tabTitle(tab)") {{tab.title}}
-            i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="closePassageAndGoBack(tab.pid)")
+            i.fa.fa-times-circle.activeIcon.danger.passageTabs-close("@click"="closePassageAndGoBack(tab.pid)")
 
-    span.aifeTabs-section(v-if="story")
-        span.aifeTabs-item.btn.addPassage
+    span.passageTabs-section(v-if="story")
+        span.passageTabs-item.btn.addPassage
             a("@click"="addPassage") Add passage

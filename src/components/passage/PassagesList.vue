@@ -18,6 +18,8 @@ article.passagesList.widget.lighter
 
 <style lang="stylus" rel="stylesheet/stylus">
 .passagesList
+    margin-top: 1ex
+
     &-remove
         margin-left: 1ex
 

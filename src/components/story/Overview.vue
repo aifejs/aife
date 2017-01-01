@@ -45,6 +45,5 @@ article.overview.widget
             story-edit-code("v-bind:story"="story")
     .widget-body
         overview-stats
-        br
         passages-list
 </template>
