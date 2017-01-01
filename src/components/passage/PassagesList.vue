@@ -6,19 +6,46 @@ article.passagesList.widget.lighter
         .widget-controls
             sorter-buttons("v-bind:sort-properties"="sortProperties", "@sort"="setPassagesSorting")
     .widget-body
-        ul.unstyled
-            li(v-for="passage of passagesOverview")
+        ul.passagesList-list
+            li.passagesList-item(v-for="passage of passagesOverview", ":class"="{special: passage.special}")
                 router-link("v-bind:to"="{name: 'passage', params: {pid: passage.pid, ifid: ifid}}", v-hilite-term="getPassagesFiltering") {{passage.title}}
-                router-link("v-bind:to"="{name: 'deletePassage', params: {pid: passage.pid, ifid: ifid}}")
-                    i.fa.fa-trash.activeIcon.danger.passagesList-remove
-                i.fa.fa-rocket.activeIcon("@click"="makeStarting(passage.pid)", ":class"="{'disabled': passage.starting}")
-                p(v-hilite-term="getPassagesFiltering") {{passage.text}}
+                span.actions
+                    router-link.passagesList("v-bind:to"="{name: 'deletePassage', params: {pid: passage.pid, ifid: ifid}}")
+                        i.fa.fa-trash.activeIcon.danger.passagesList-remove
+                    i.fa.fa-rocket.activeIcon("@click"="makeStarting(passage.pid)", ":class"="{disabled: passage.starting}")
+                p.passagesList-text(v-hilite-term="getPassagesFiltering", ":title"="passage.text") {{passage.text}}
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
 .passagesList
     &-remove
         margin-left: 1ex
+
+    &-list
+        padding-left: 0
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+
+    &-item
+        overflow: hidden
+        height: 5.5em
+        width: calc(20% - 1ex)
+        margin-right: 1ex
+        margin-bottom: 1ex
+
+        .actions
+            opacity: 0
+
+        &:hover .actions
+            opacity: 1
+
+    &-text
+        font-size: 80%
+        white-space: pre
+
+    .special
+        font-weight: bold
 </style>
 
 <script>

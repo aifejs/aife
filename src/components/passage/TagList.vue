@@ -1,6 +1,6 @@
 <template lang="pug">
 .tagList
-    span.tagList-item(v-for="(tag, index) of tags")
+    span.tagList-item(v-for="(tag, index) of tags", ":class"="{special: isSpecial(tag)}")
         | {{ tag }}
         i.fa.fa-trash.activeIcon.danger.tagList-remove("@click"="onTagRemoveClick(index)")
 
@@ -16,6 +16,8 @@
         &::before
             content: '#'
             color: silver
+        &.special
+            font-weight: bold
     &-remove
         margin-left: 1ex
 </style>
@@ -27,6 +29,7 @@
             pid: Number,
             suggestions: Object,
             tags: Array,
+            specialTags: Array,
         },
         data() {
             return {
@@ -35,6 +38,9 @@
             };
         },
         methods: {
+            isSpecial(tag) {
+                return this.specialTags.includes(tag);
+            },
             onKeyPress({keyCode, target,}) {
                 if (keyCode === 13) {
                     this.$emit('add-tag', {

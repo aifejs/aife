@@ -115,3 +115,8 @@ interface IStoryItem {
     ifid: string,
     passages: IPassage[],
 }
+
+interface ISpecial {
+    passages: string[],
+    tags: string[]
+}

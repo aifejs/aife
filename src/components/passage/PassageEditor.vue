@@ -10,7 +10,7 @@ article.codeEditor.passageEditor(v-if="passage")
 
     label
         strong Tags
-        tag-list("v-bind:tags"="passage.tags", "v-bind:pid.once"="passage.pid", "v-bind:suggestions"="tagSuggestions", @add-tag="addTag", @remove-tag="removeTag")
+        tag-list(":tags"="passage.tags", ":pid.once"="passage.pid", ":suggestions"="tagSuggestions", ":special-tags"="specialNames[story.format].tags", @add-tag="addTag", @remove-tag="removeTag")
 
     label.codeArea
         strong Text
@@ -36,6 +36,7 @@ article.codeEditor.passageEditor(v-if="passage")
     import {mapGetters, mapActions,} from 'vuex';
     import TagList from './TagList.vue';
     import {documentations as docs,} from '../../lib/formatManager';
+    import {specialNames,} from '../../lib/specialNames';
 
     export default {
         name: 'passage-editor',
@@ -43,6 +44,7 @@ article.codeEditor.passageEditor(v-if="passage")
         data() {
             return {
                 docs,
+                specialNames,
             };
         },
 

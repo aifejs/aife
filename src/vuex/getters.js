@@ -3,6 +3,7 @@ import sortBy from 'lodash/sortBy';
 import deburr from 'lodash/deburr';
 import storyStats from '../lib/storyStats';
 import {getCurrentStory,} from './utils';
+import {specialNames, isSpecial,} from '../lib/specialNames';
 
 /**
  * @param {IState} state
@@ -13,8 +14,8 @@ export function story(state) {
 }
 
 export function tabs(state) {
-    const story = getCurrentStory(state);
-    return story.opened
+    const currentStory = getCurrentStory(state);
+    return currentStory.opened
         .map((passage) => ({
             title: passage.title,
             pid: passage.pid,
@@ -28,7 +29,10 @@ function passageCheckerFactory(term) {
 }
 
 export function passagesOverview({route, stories, passagesSorting, passagesFiltering,}) {
-    const passages = getCurrentStory({route, stories,}).passages;
+    const currentStory = getCurrentStory({route, stories,});
+    const passages = currentStory.passages;
+    const specials = specialNames[currentStory.format];
+
     let passagesToSort;
     const termTrimmed = passagesFiltering.trim();
     if (termTrimmed === '') {
@@ -40,10 +44,18 @@ export function passagesOverview({route, stories, passagesSorting, passagesFilte
 
     const sorted = sortBy(passagesToSort, (passage) => passage[passagesSorting.field]);
 
+    const marked = sorted.map((/** IPassage */passage) => ({
+        special: isSpecial(passage, specials),
+        title: passage.title,
+        text: passage.text,
+        starting: passage.starting,
+        pid: passage.pid,
+    }));
+
     if (passagesSorting.sort === 'desc') {
-        return sorted.reverse();
+        return marked.reverse();
     } else {
-        return sorted;
+        return marked;
     }
 }
 export function getPassagesFiltering({passagesFiltering,}) {
@@ -70,8 +82,8 @@ export function getCurrentPassage({route, stories,}) {
  * @return {IStoryStats}
  */
 export function stats({route, stories,}) {
-    const story = getCurrentStory({route, stories,});
-    return storyStats(story);
+    const currentStory = getCurrentStory({route, stories,});
+    return storyStats(currentStory);
 }
 
 /**
@@ -80,8 +92,8 @@ export function stats({route, stories,}) {
  * @return string
  */
 export function proofReadCopy({route, stories,}) {
-    const story = getCurrentStory({route, stories,});
-    return pickleStory(story);
+    const currentStory = getCurrentStory({route, stories,});
+    return pickleStory(currentStory);
 }
 
 export function getProofModeError({proofModeError,}) {
@@ -201,14 +213,14 @@ export function tagSuggestionsCounted({route, stories,}) {
 }
 
 const storySorters = {
-    passages(story) {
-        return story.passages.length;
+    passages(storyToSort) {
+        return storyToSort.passages.length;
     },
-    title(story) {
-        return story.title;
+    title(storyToSort) {
+        return storyToSort.title;
     },
-    lastEdit(story) {
-        return story.lastEdit;
+    lastEdit(storyToSort) {
+        return storyToSort.lastEdit;
     },
 };
 
@@ -228,11 +240,11 @@ export function storiesList({stories, storiesSorting,}) {
         sorted = sorted.reverse();
     }
 
-    return sorted.map((story) => ({
-        title: story.title,
-        stats: storyStats(story),
-        ifid: story.ifid,
-        passages: story.passages,
+    return sorted.map((sortedStory) => ({
+        title: sortedStory.title,
+        stats: storyStats(sortedStory),
+        ifid: sortedStory.ifid,
+        passages: sortedStory.passages,
     }));
 }
 
@@ -265,9 +277,9 @@ export function getStoriesLoaded({storiesLoaded,}) {
 }
 
 /**
- * @param {IStoryItem} story
+ * @param {IStoryItem} runnableStory
  * @return {boolean}
  */
-export function isStoryRunnable(story) {
-    return story.passages && story.passages.length > 0;
+export function isStoryRunnable(runnableStory) {
+    return runnableStory.passages && runnableStory.passages.length > 0;
 }
