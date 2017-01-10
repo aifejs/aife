@@ -31,11 +31,13 @@
     &-format
         height: 2em
         margin-right: 1em
+    &-header
+        flex-shrink: 0
 </style>
 
 <template lang="pug">
 article.overview.widget
-    .widget-header
+    .widget-header.overview-header
         .widget-title
             img.overview-format("v-bind:src"="formats[story.format].iconUrl", ":title"="story.format")
             span.overview-title(v-text="story.title")
