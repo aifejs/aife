@@ -4,15 +4,15 @@ export function openPassage({commit,}, pid) {
 
 export function editPassage({commit,}, {value, pid, field,}) {
     commit('UPDATE_PASSAGE', {
-        [field]: value,
         pid,
+        [field]: value,
     });
 }
 
-export function editPassageText({commit,}, pid, text) {
+export function editPassageText({commit,}, {pid, text,}) {
     commit('UPDATE_PASSAGE', {
-        text,
         pid,
+        text,
     });
 }
 
