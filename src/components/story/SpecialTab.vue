@@ -1,7 +1,7 @@
 <template lang="pug">
-router-link.aifeTabs-item.special(tag="span", "v-bind:to"="{name: routeName, params: {ifid: ifid}}")
+router-link.passageTabs-item.special(tag="span", "v-bind:to"="{name: routeName, params: {ifid: ifid}}")
     a(v-text="title")
-    i.fa.fa-times-circle.activeIcon.danger.aifeTabs-close("@click"="close")
+    i.fa.fa-times-circle.activeIcon.danger.passageTabs-close("@click"="close")
 </template>
 
 <script>
