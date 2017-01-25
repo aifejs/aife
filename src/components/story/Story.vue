@@ -1,6 +1,6 @@
 <template lang="pug">
 article.widget.screen.story
-    .widget-body(v-if="storiesLoaded")
+    .widget-body.story-body(v-if="storiesLoaded")
         passage-tabs
         router-view
         p(v-if="!story")
@@ -12,6 +12,12 @@ article.widget.screen.story
             br
             i.fa.fa-spinner.fa-spin.fa-4x
 </template>
+
+<style lang="stylus" rel="stylesheet/stylus">
+.story
+    &-body
+        padding-top: 0
+</style>
 
 <script>
     import PassageTabs from './PassageTabs.vue';

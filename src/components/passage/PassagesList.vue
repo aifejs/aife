@@ -44,7 +44,7 @@ article.passagesList.widget.lighter
 
     &-text
         font-size: 80%
-        white-space: pre
+        white-space: pre-wrap
 
     .special
         font-weight: bold

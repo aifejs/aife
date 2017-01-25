@@ -33,6 +33,8 @@
         margin-right: 1em
     &-header
         flex-shrink: 0
+    &-title
+        font-weight: bold
 </style>
 
 <template lang="pug">
