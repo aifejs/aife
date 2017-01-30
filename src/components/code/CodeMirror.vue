@@ -3,7 +3,7 @@ div.codeArea.mirror
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
-@require '/node_modules/codemirror/addon/lint/lint.css';
+@require '~codemirror/addon/lint/lint.css';
 </style>
 
 <script>

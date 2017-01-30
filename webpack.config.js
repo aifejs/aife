@@ -1,12 +1,60 @@
 'use strict';
 
 const path = require('path');
-const {DefinePlugin, optimize: {UglifyJsPlugin, OccurenceOrderPlugin,},} = require('webpack');
+const {DefinePlugin, optimize: {UglifyJsPlugin, OccurenceOrderPlugin,}, NoErrorsPlugin,} = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('./package.json');
 
 const entry = `./src/${pkg.name}.js`;
 const distFolder = 'dist';
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+// generate loader string to be used with extract text plugin
+function generateLoaders(loaders, sourceMap, extract) {
+    const sourceLoader = loaders.map((loader) => {
+        let extraParamChar;
+        if (/\?/.test(loader)) {
+            loader = loader.replace(/\?/, '-loader?');
+            extraParamChar = '&';
+        } else {
+            loader = `${loader}-loader`;
+            extraParamChar = '?';
+        }
+        return loader + (sourceMap ? `${extraParamChar}sourceMap` : '');
+    }).join('!');
+
+    // Extract CSS when that option is specified
+    // (which is the case during production build)
+    if (extract) {
+        return ExtractTextPlugin.extract('vue-style-loader', sourceLoader);
+    } else {
+        return ['vue-style-loader', sourceLoader,].join('!');
+    }
+}
+
+function cssLoaders(options = {}) {
+    // http://vuejs.github.io/vue-loader/en/configurations/extract-css.html
+    return {
+        css: generateLoaders(['css',]),
+        postcss: generateLoaders(['css',]),
+        stylus: generateLoaders(['css', 'stylus',]),
+        styl: generateLoaders(['css', 'stylus',]),
+    };
+}
+
+function styleLoaders(options) {
+    const output = [];
+    const loaders = cssLoaders(options);
+    for (const extension in loaders) {
+        const loader = loaders[extension];
+        output.push({
+            test: new RegExp(`\\.${extension}$`),
+            loader,
+        });
+    }
+    return output;
+}
 
 const config = {
     entry,
@@ -28,9 +76,25 @@ const config = {
 
     plugins: [
         new ExtractTextPlugin(`${pkg.name}.css`),
+        new DefinePlugin({
+            'process.env': {
+                NODE_ENV: isProduction ? '"production"' : '"development"',
+            },
+        }),
     ],
 
     module: {
+        preLoaders: [
+            {
+                test: /\.vue|js$/,
+                loader: 'eslint',
+                include: [
+                    path.join(__dirname, 'src'),
+                ],
+                exclude: /node_modules/,
+            },
+        ],
+
         loaders: [
             {
                 test: /\.vue$/,
@@ -62,13 +126,22 @@ const config = {
                     name: '[name].[ext]?[hash]',
                 },
             },
+            ...styleLoaders({
+                sourceMap: true,
+                extract: isProduction,
+            }),
         ],
     },
+
+    eslint: {
+        formatter: require('eslint-friendly-formatter'),
+    },
+
     vue: {
-        loaders: {
-            css: ExtractTextPlugin.extract('css'),
-            stylus: ExtractTextPlugin.extract('css!stylus'),
-        },
+        loaders: cssLoaders({
+            sourceMap: true,
+            extract: isProduction,
+        }),
 
         autoprefixer: {
             browsers: [
@@ -84,24 +157,18 @@ const config = {
 
     stylus: {
         use: [
-            // make @import 'node_modules/smth/smth.css' work as expected
+            // make @import css actually include them
             (stylus) => {
                 stylus
-                    .include(__dirname)
                     .set('include css', true);
             },
         ],
     },
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (isProduction) {
     config.devtool = '#source-map';
     config.plugins.push(...[
-        new DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"',
-            },
-        }),
         new UglifyJsPlugin({
             compress: {
                 warnings: false,
@@ -110,7 +177,7 @@ if (process.env.NODE_ENV === 'production') {
         new OccurenceOrderPlugin(),
     ]);
 } else {
-    config.devtool = '#cheap-eval-source-map'; // nice stacktraces
+    config.devtool = '#eval-source-map'; // nice stacktraces
 
     let devServerConfig = {
         noInfo: true,
@@ -132,6 +199,10 @@ if (process.env.NODE_ENV === 'production') {
     }
 
     config.devServer = devServerConfig;
+
+    config.plugins.push(...[
+        new NoErrorsPlugin(),
+    ]);
 }
 
 module.exports = config;
