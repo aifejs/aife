@@ -4,16 +4,16 @@ class PositionTracker {
         this.remember(x, y);
     }
 
-    get active () {
+    get active() {
         return this.x !== null && this.y !== null;
     }
 
-    remember (x, y) {
+    remember(x, y) {
         this.x = x;
         this.y = y;
     }
 
-    diff (x, y) {
+    diff(x, y) {
         const result = {
             x: x - this.x,
             y: y - this.y,
@@ -24,7 +24,7 @@ class PositionTracker {
         return result;
     }
 
-    off () {
+    off() {
         this.x = null;
         this.y = null;
     }
@@ -45,7 +45,7 @@ export default {
         dragButton: {
             type: Number,
             default: 1, // 1 for middle, 2 for right
-        }
+        },
     },
 
     data() {
@@ -57,7 +57,7 @@ export default {
 
             mouseDrag: new PositionTracker(),
             swipeDrag: new PositionTracker(),
-        }
+        };
     },
 
     mounted() {
@@ -82,7 +82,7 @@ export default {
             }
         },
 
-        onKeyUp({keyCode, shiftKey}) {
+        onKeyUp({keyCode, shiftKey,}) {
             const offset = shiftKey ? this.offsetByKeyLarge : this.offsetByKey;
 
             if (keyCode === 39) {
@@ -134,9 +134,9 @@ export default {
     computed: {
         bgTransform() {
             return `translateX(${this.pannablePosition.x}px) translateY(${this.pannablePosition.y}px)`;
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <template lang="pug">

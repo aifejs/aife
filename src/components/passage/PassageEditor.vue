@@ -57,7 +57,7 @@ article.codeEditor.passageEditor(v-if="passage")
 
         methods: {
             onCodeChanged(text) {
-                this.editPassageText({pid: this.passage.pid, text});
+                this.editPassageText({pid: this.passage.pid, text,});
             },
 
             onTitleChanged(event) {
