@@ -104,6 +104,7 @@ export function CLOSE_SCRIPT(state) {
 export function OPEN_STYLESHEET(state) {
     const story = getCurrentStory(state);
     story.editStylesheet = true;
+    updateStory(story);
 }
 
 export function SAVE_STYLESHEET(state, styleSheet) {
