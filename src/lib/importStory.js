@@ -131,6 +131,8 @@ export function convertStory(twineStoryObject) {
         editStylesheet: false,
         script: twineStoryObject.script,
         editScript: false,
+        customHtml: '',
+        editCustomHtml: false,
         editProof: false,
         lastEdit: twineStoryObject.lastUpdate,
         format: normalizeFormat(twineStoryObject.format),
