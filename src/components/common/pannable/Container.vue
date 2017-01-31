@@ -1,23 +1,21 @@
 <script>
+import {Vector2,} from '../../../lib/Vector2';
+
 class PositionTracker {
     constructor(x = null, y = null) {
-        this.remember(x, y);
-    }
-
-    get active() {
-        return this.x !== null && this.y !== null;
+        this.v = new Vector2(x, y);
+        this.active = false;
     }
 
     remember(x, y) {
-        this.x = x;
-        this.y = y;
+        this.v = new Vector2(x, y);
+        this.active = true;
     }
 
     diff(x, y) {
-        const result = {
-            x: x - this.x,
-            y: y - this.y,
-        };
+        const other = new Vector2(x, y);
+
+        const result = other.subtract(this.v);
 
         this.remember(x, y);
 
@@ -25,10 +23,16 @@ class PositionTracker {
     }
 
     off() {
-        this.x = null;
-        this.y = null;
+        this.active = false;
     }
 }
+
+const keyCodeVectors = {
+    39: Vector2.Right(),
+    37: Vector2.Left(),
+    38: Vector2.Up(),
+    40: Vector2.Down(),
+};
 
 export default {
     name: 'pannable-container',
@@ -50,10 +54,7 @@ export default {
 
     data() {
         return {
-            pannablePosition: {
-                x: 0,
-                y: 0,
-            },
+            pannablePosition: Vector2.Zero(),
 
             mouseDrag: new PositionTracker(),
             swipeDrag: new PositionTracker(),
@@ -72,8 +73,7 @@ export default {
             if (this.swipeDrag.active) {
                 const diff = this.swipeDrag.diff(event.touches[0].clientX, event.touches[0].clientY);
 
-                this.pannablePosition.x += diff.x;
-                this.pannablePosition.y += diff.y;
+                this.pannablePosition.add(diff);
             }
         },
         onTouchEnd(event) {
@@ -83,22 +83,11 @@ export default {
         },
 
         onKeyUp({keyCode, shiftKey,}) {
-            const offset = shiftKey ? this.offsetByKeyLarge : this.offsetByKey;
+            if (keyCodeVectors.hasOwnProperty(keyCode)) {
+                const magnitude = shiftKey ? this.offsetByKeyLarge : this.offsetByKey;
+                const vector = keyCodeVectors[keyCode];
 
-            if (keyCode === 39) {
-                this.pannablePosition.x += offset;
-            }
-
-            if (keyCode === 37) {
-                this.pannablePosition.x -= offset;
-            }
-
-            if (keyCode === 38) {
-                this.pannablePosition.y -= offset;
-            }
-
-            if (keyCode === 40) {
-                this.pannablePosition.y = offset;
+                this.pannablePosition.add(vector.clone().multiply(magnitude));
             }
         },
 
@@ -114,8 +103,7 @@ export default {
             if (this.mouseDrag.active) {
                 const diff = this.mouseDrag.diff(event.clientX, event.clientY);
 
-                this.pannablePosition.x += diff.x;
-                this.pannablePosition.y += diff.y;
+                this.pannablePosition.add(diff);
 
                 event.preventDefault();
                 event.stopPropagation();
