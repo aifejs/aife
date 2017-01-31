@@ -79,23 +79,23 @@ export class Vector2 {
         return new Vector2(this.x, this.y);
     }
 
-    static Zero() {
+    static zero() {
         return new Vector2(0, 0);
     }
 
-    static Up() {
+    static up() {
         return new Vector2(0, 1);
     }
 
-    static Right() {
+    static right() {
         return new Vector2(1, 0);
     }
 
-    static Down() {
+    static down() {
         return new Vector2(0, -1);
     }
 
-    static Left() {
+    static left() {
         return new Vector2(-1, 0);
     }
 }

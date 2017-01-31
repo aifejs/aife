@@ -28,10 +28,10 @@ class PositionTracker {
 }
 
 const keyCodeVectors = {
-    39: Vector2.Right(),
-    37: Vector2.Left(),
-    38: Vector2.Up(),
-    40: Vector2.Down(),
+    39: Vector2.right(),
+    37: Vector2.left(),
+    38: Vector2.down(),
+    40: Vector2.up(),
 };
 
 export default {
@@ -54,7 +54,7 @@ export default {
 
     data() {
         return {
-            pannablePosition: Vector2.Zero(),
+            pannablePosition: Vector2.zero(),
 
             mouseDrag: new PositionTracker(),
             swipeDrag: new PositionTracker(),
@@ -82,10 +82,10 @@ export default {
             }
         },
 
-        onKeyUp({keyCode, shiftKey,}) {
-            if (keyCodeVectors.hasOwnProperty(keyCode)) {
-                const magnitude = shiftKey ? this.offsetByKeyLarge : this.offsetByKey;
-                const vector = keyCodeVectors[keyCode];
+        onKeyUp(event) {
+            if (keyCodeVectors.hasOwnProperty(event.keyCode)) {
+                const magnitude = event.shiftKey ? this.offsetByKeyLarge : this.offsetByKey;
+                const vector = keyCodeVectors[event.keyCode];
 
                 this.pannablePosition.add(vector.clone().multiply(magnitude));
             }
@@ -94,6 +94,7 @@ export default {
         onMouseDown(event) {
             if (event.button === this.dragButton) {
                 this.mouseDrag.remember(event.clientX, event.clientY);
+                this.$el.focus();
 
                 event.preventDefault();
                 event.stopPropagation();

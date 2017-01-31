@@ -3,6 +3,7 @@
     import PassagesList from '../passage/PassagesList.vue';
     import StoryRun from './StoryRun.vue';
     import StoryEditCode from './StoryEditCode.vue';
+    import PannableContainer from '../common/pannable/Container.vue';
     import {mapGetters,} from 'vuex';
     import {formats,} from '../../lib/formatManager';
 
@@ -22,6 +23,7 @@
             PassagesList,
             StoryRun,
             StoryEditCode,
+            PannableContainer,
         },
     };
 </script>
@@ -48,6 +50,7 @@ article.overview.widget
         .widget-controls
             story-edit-code("v-bind:story"="story")
     .widget-body
+        // pannable-container()
         overview-stats
         passages-list
 </template>
