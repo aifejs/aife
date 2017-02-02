@@ -50,7 +50,7 @@ article.overview.widget
         .widget-controls
             story-edit-code("v-bind:story"="story")
     .widget-body
-        // pannable-container()
+        // pannable-container(":viewportWidth"="500", ":viewportHeight"="300")
         overview-stats
         passages-list
 </template>

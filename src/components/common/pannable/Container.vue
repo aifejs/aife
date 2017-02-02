@@ -1,5 +1,7 @@
 <script>
 import {Vector2,} from '../../../lib/Vector2';
+import bgGrid from './BgGrid';
+import PannableItem from './Item.vue';
 
 class PositionTracker {
     constructor(x = null, y = null) {
@@ -49,6 +51,14 @@ export default {
         dragButton: {
             type: Number,
             default: 1, // 1 for middle, 2 for right
+        },
+
+        viewportWidth: Number,
+        viewportHeight: Number,
+
+        gridSize: {
+            type: Number,
+            default: 50,
         },
     },
 
@@ -125,49 +135,42 @@ export default {
             return `translateX(${this.pannablePosition.x}px) translateY(${this.pannablePosition.y}px)`;
         },
     },
+
+    directives: {
+        bgGrid,
+    },
+
+    components: {
+        PannableItem,
+    },
 };
 </script>
 
 <template lang="pug">
 .pannable(tabindex="0",
+    ":style"="{width: viewportWidth + 'px', height: viewportHeight + 'px',}"
     @touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd",
     @keyup="onKeyUp",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
-    .pannable-bg(":style"="{transform: bgTransform}")
-    .pannable-item(tabindex="0")
+    .pannable-bg(":style"="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'silver'}")
+        pannable-item(":x"="0", ":y"="0")
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
-fieldWidth = 300px
-fieldHeight = 300px
 canvasWidth = 3000px
 canvasHeight = 3000px
-itemHeight = 40px
-itemWidth = 60px
 
 .pannable
     position: relative
     overflow: hidden
-    width: fieldWidth
-    height: fieldHeight
     outline: 1px solid silver
 
     &-bg
         position: absolute;
-        left: "calc((%s - %s)/2)" % (fieldWidth canvasWidth)
-        top: "calc((%s - %s)/2)" % (fieldHeight canvasHeight)
+        left: 0//"calc((%s - %s)/2)" % (fieldWidth canvasWidth)
+        top: 0//"calc((%s - %s)/2)" % (fieldHeight canvasHeight)
         width: canvasWidth
         height: canvasHeight
-        background-image: url('http://66.media.tumblr.com/c6eaa1ead770be2c765028ad082609db/tumblr_inline_nn85trR7U21rewzq7_500.png')
-        transition: all 150ms linear
 
-    &-item
-        position: absolute
-        width: itemWidth
-        height: itemHeight
-        outline: 2px solid olive
-        top: ((canvasHeight - itemHeight)/2)px
-        left: ((canvasWidth - itemWidth)/2)px
-        &:focus
-            outline: 2px solid navy
+        transition: all 150ms linear
 </style>
