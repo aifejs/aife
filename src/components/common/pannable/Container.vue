@@ -1,40 +1,9 @@
 <script>
 import {Vector2,} from '../../../lib/Vector2';
+import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
+import {PositionTracker,} from './PositionTracker';
 import bgGrid from './BgGrid';
 import PannableItem from './Item.vue';
-
-class PositionTracker {
-    constructor(x = null, y = null) {
-        this.v = new Vector2(x, y);
-        this.active = false;
-    }
-
-    remember(x, y) {
-        this.v = new Vector2(x, y);
-        this.active = true;
-    }
-
-    diff(x, y) {
-        const other = new Vector2(x, y);
-
-        const result = other.subtract(this.v);
-
-        this.remember(x, y);
-
-        return result;
-    }
-
-    off() {
-        this.active = false;
-    }
-}
-
-const keyCodeVectors = {
-    39: Vector2.right(),
-    37: Vector2.left(),
-    38: Vector2.down(),
-    40: Vector2.up(),
-};
 
 export default {
     name: 'pannable-container',
@@ -64,10 +33,10 @@ export default {
 
     data() {
         return {
-            pannablePosition: Vector2.zero(),
+            position: Vector2.zero(),
 
             mouseDrag: new PositionTracker(),
-            swipeDrag: new PositionTracker(),
+            touchDrag: new PositionTracker(),
         };
     },
 
@@ -77,18 +46,18 @@ export default {
 
     methods: {
         onTouchStart(event) {
-            this.swipeDrag.remember(event.touches[0].clientX, event.touches[0].clientY);
+            this.touchDrag.remember(event.touches[0].clientX, event.touches[0].clientY);
         },
         onTouchMove(event) {
-            if (this.swipeDrag.active) {
-                const diff = this.swipeDrag.diff(event.touches[0].clientX, event.touches[0].clientY);
+            if (this.touchDrag.active) {
+                const diff = this.touchDrag.diff(event.touches[0].clientX, event.touches[0].clientY);
 
-                this.pannablePosition.add(diff);
+                this.position.add(diff);
             }
         },
         onTouchEnd(event) {
-            if (this.swipeDrag.active) {
-                this.swipeDrag.off();
+            if (this.touchDrag.active) {
+                this.touchDrag.off();
             }
         },
 
@@ -97,7 +66,8 @@ export default {
                 const magnitude = event.shiftKey ? this.offsetByKeyLarge : this.offsetByKey;
                 const vector = keyCodeVectors[event.keyCode];
 
-                this.pannablePosition.add(vector.clone().multiply(magnitude));
+                this.position.add(vector.clone().multiply(magnitude));
+                event.stopPropagation();
             }
         },
 
@@ -114,7 +84,7 @@ export default {
             if (this.mouseDrag.active) {
                 const diff = this.mouseDrag.diff(event.clientX, event.clientY);
 
-                this.pannablePosition.add(diff);
+                this.position.add(diff);
 
                 event.preventDefault();
                 event.stopPropagation();
@@ -132,7 +102,7 @@ export default {
 
     computed: {
         bgTransform() {
-            return `translateX(${this.pannablePosition.x}px) translateY(${this.pannablePosition.y}px)`;
+            return `translateX(${this.position.x}px) translateY(${this.position.y}px)`;
         },
     },
 
@@ -148,7 +118,7 @@ export default {
 
 <template lang="pug">
 .pannable(tabindex="0",
-    ":style"="{width: viewportWidth + 'px', height: viewportHeight + 'px',}"
+    ":style"="{width: viewportWidth + 'px', height: viewportHeight + 'px',}",
     @touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd",
     @keyup="onKeyUp",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
