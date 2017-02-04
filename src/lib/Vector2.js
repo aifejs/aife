@@ -79,6 +79,10 @@ export class Vector2 {
         return new Vector2(this.x, this.y);
     }
 
+    toString() {
+        return `(${this.x},${this.y})`;
+    }
+
     static zero() {
         return new Vector2(0, 0);
     }
