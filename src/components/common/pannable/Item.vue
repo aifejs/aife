@@ -1,6 +1,7 @@
 <script>
 import {Vector2,} from '../../../lib/Vector2';
 import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
+import {mouseButtons,} from '../../../lib/mouseButtons';
 import {PositionTracker,} from './PositionTracker';
 
 export default {
@@ -12,7 +13,11 @@ export default {
 
         dragButton: {
             type: Number,
-            default: 1, // 1 for middle, 2 for right
+            default: mouseButtons.main,
+        },
+        selectButton: {
+            type: Number,
+            default: mouseButtons.main,
         },
 
         offsetByKey: {
@@ -31,6 +36,8 @@ export default {
 
             mouseDrag: new PositionTracker(),
             touchDrag: new PositionTracker(),
+
+            selected: false,
         };
     },
 
@@ -87,11 +94,15 @@ export default {
             }
         },
         onMouseUp(event) {
-            if (this.mouseDrag.active) {
-                this.mouseDrag.off();
+            if (event.button === this.dragButton) {
+                if (this.mouseDrag.active) {
+                    this.mouseDrag.off();
 
-                event.preventDefault();
-                event.stopPropagation();
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            } else if (event.button === this.selectButton) {
+                this.selected = !this.selected;
             }
         },
     },
@@ -108,7 +119,7 @@ export default {
 </script>
 
 <template lang="pug">
-.pannable-item(tabindex="0", ":style"="style",
+.pannable-item(":style"="style", ":class"="{selected: selected}",
     @touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd",
     @keyup="onKeyUp",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
@@ -123,9 +134,8 @@ itemWidth = 60px
         position: absolute
         width: itemWidth
         height: itemHeight
-        outline: 2px solid olive
-        top: 0px
-        left: 0px
-        &:focus
-            outline: 2px solid navy
+        color: olive;
+        box-shadow: inset 2px 2px, inset -2px -2px;
+        &.selected
+            color: navy
 </style>

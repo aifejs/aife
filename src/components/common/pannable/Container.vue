@@ -1,6 +1,7 @@
 <script>
 import {Vector2,} from '../../../lib/Vector2';
 import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
+import {mouseButtons,} from '../../../lib/mouseButtons';
 import {PositionTracker,} from './PositionTracker';
 import bgGrid from './BgGrid';
 import PannableItem from './Item.vue';
@@ -19,7 +20,11 @@ export default {
         },
         dragButton: {
             type: Number,
-            default: 1, // 1 for middle, 2 for right
+            default: mouseButtons.aux,
+        },
+        selectButton: {
+            type: Number,
+            default: mouseButtons.main,
         },
 
         viewportWidth: Number,
@@ -124,6 +129,7 @@ export default {
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
     .pannable-bg(":style"="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'silver'}")
         pannable-item(":x"="0", ":y"="0")
+        pannable-item(":x"="70", ":y"="70")
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
