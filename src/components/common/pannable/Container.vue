@@ -5,6 +5,7 @@ import {mouseButtons,} from '../../../lib/mouseButtons';
 import {PositionTracker,} from './PositionTracker';
 import bgGrid from './BgGrid';
 import PannableItem from './Item.vue';
+import PannableMarquee from './Marquee.vue';
 
 export default {
     name: 'pannable-container',
@@ -40,13 +41,21 @@ export default {
         return {
             position: Vector2.zero(),
 
+            dragMode: false,
             mouseDrag: new PositionTracker(),
             touchDrag: new PositionTracker(),
+
+            marqueeMode: false,
+            marqueeStart: Vector2.zero(),
+            marqueeEnd: Vector2.zero(),
+
+            offset: Vector2.zero(),
         };
     },
 
     mounted() {
         document.addEventListener('mouseup', this.onMouseUp.bind(this), false);
+        this.offset = Vector2.fromDOMRect(this.$el.getBoundingClientRect()); // TODO: update on dimension changes
     },
 
     methods: {
@@ -80,27 +89,45 @@ export default {
             if (event.button === this.dragButton) {
                 this.mouseDrag.remember(event.clientX, event.clientY);
                 this.$el.focus();
+                this.dragMode = true;
 
                 event.preventDefault();
                 event.stopPropagation();
+            } else if (event.button === this.selectButton) {
+                this.marqueeMode = true;
+                this.marqueeStart = new Vector2(event.clientX, event.clientY)
+                    .subtract(this.offset)
+                    .subtract(this.position);
+                this.marqueeEnd = this.marqueeStart.clone();
             }
         },
         onMouseMove(event) {
-            if (this.mouseDrag.active) {
-                const diff = this.mouseDrag.diff(event.clientX, event.clientY);
+            if (event.button === this.dragButton) {
+                if (this.mouseDrag.active) {
+                    const diff = this.mouseDrag.diff(event.clientX, event.clientY);
 
-                this.position.add(diff);
+                    this.position.add(diff);
 
-                event.preventDefault();
-                event.stopPropagation();
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            } else if (event.button === this.selectButton) {
+                this.marqueeEnd = new Vector2(event.clientX, event.clientY)
+                    .subtract(this.offset)
+                    .subtract(this.position);
             }
         },
         onMouseUp(event) {
-            if (this.mouseDrag.active) {
-                this.mouseDrag.off();
+            if (event.button === this.dragButton) {
+                if (this.mouseDrag.active) {
+                    this.mouseDrag.off();
+                    this.dragMode = false;
 
-                event.preventDefault();
-                event.stopPropagation();
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            } else if (event.button === this.selectButton) {
+                this.marqueeMode = false;
             }
         },
     },
@@ -117,17 +144,19 @@ export default {
 
     components: {
         PannableItem,
+        PannableMarquee,
     },
 };
 </script>
 
 <template lang="pug">
 .pannable(tabindex="0",
-    ":style"="{width: viewportWidth + 'px', height: viewportHeight + 'px',}",
+    ":style"="{width: viewportWidth + 'px', height: viewportHeight + 'px'}",
     @touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd",
     @keyup="onKeyUp",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
     .pannable-bg(":style"="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'silver'}")
+        pannable-marquee(":visible"="marqueeMode", ":start"="marqueeStart.lt(marqueeEnd) ? marqueeStart : marqueeEnd", ":end"="marqueeStart.lt(marqueeEnd) ? marqueeEnd : marqueeStart")
         pannable-item(":x"="0", ":y"="0")
         pannable-item(":x"="70", ":y"="70")
 </template>
