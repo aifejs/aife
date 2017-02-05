@@ -102,4 +102,8 @@ export class Vector2 {
     static left() {
         return new Vector2(-1, 0);
     }
+
+    static fromDOMRect(domRect, xName = 'left', yName = 'top') {
+        return new Vector2(domRect[xName], domRect[yName]);
+    }
 }
