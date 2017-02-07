@@ -42,12 +42,16 @@ export default {
     },
 
     mounted() {
-        document.addEventListener('mouseup', this.onMouseUp.bind(this), false);
+        const stopDragging = this.stopDragging.bind(this);
+
+        document.addEventListener('mouseup', stopDragging, false);
+        document.addEventListener('touchend', stopDragging, false);
     },
 
     methods: {
         onTouchStart(event) {
             this.touchDrag.remember(event.touches[0].clientX, event.touches[0].clientY);
+            this.selected = true;
             event.stopPropagation();
         },
         onTouchMove(event) {
@@ -59,9 +63,7 @@ export default {
             }
         },
         onTouchEnd(event) {
-            if (this.touchDrag.active) {
-                this.touchDrag.off();
-            }
+            this.stopDragging(event);
         },
 
         onKeyUp(event) {
@@ -77,7 +79,8 @@ export default {
         onMouseDown(event) {
             if (event.button === this.dragButton) {
                 this.mouseDrag.remember(event.clientX, event.clientY);
-                this.$el.focus();
+
+                this.selected = true;
 
                 event.preventDefault();
                 event.stopPropagation();
@@ -95,14 +98,20 @@ export default {
         },
         onMouseUp(event) {
             if (event.button === this.dragButton) {
-                if (this.mouseDrag.active) {
-                    this.mouseDrag.off();
+                this.stopDragging(event);
+            }
+        },
 
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-            } else if (event.button === this.selectButton) {
-                this.selected = !this.selected;
+        stopDragging(event) {
+            if (this.mouseDrag.active) {
+                this.mouseDrag.off();
+
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            if (this.touchDrag.active) {
+                this.touchDrag.off();
             }
         },
     },
