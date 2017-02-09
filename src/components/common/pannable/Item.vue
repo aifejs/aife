@@ -135,16 +135,17 @@ export default {
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
-itemHeight = 40px
-itemWidth = 60px
+itemHeight = 100px
+itemWidth = 100px
 
 .pannable
     &-item
         position: absolute
         width: itemWidth
         height: itemHeight
-        color: olive;
-        box-shadow: inset 2px 2px, inset -2px -2px;
+        color: olive
+        box-shadow: inset 2px 2px, inset -2px -2px
+        background-color: alpha(silver, 0.35)
         &.selected
             color: navy
 </style>

@@ -33,7 +33,7 @@ export default {
 
         gridSize: {
             type: Number,
-            default: 50,
+            default: 100,
         },
     },
 
@@ -172,8 +172,8 @@ canvasHeight = 3000px
 
     &-bg
         position: absolute;
-        left: 0//"calc((%s - %s)/2)" % (fieldWidth canvasWidth)
-        top: 0//"calc((%s - %s)/2)" % (fieldHeight canvasHeight)
+        left: 0
+        top: 0
         width: canvasWidth
         height: canvasHeight
 
