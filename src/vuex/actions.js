@@ -9,6 +9,10 @@ import {
     addTag,
     removeTag,
     makeStarting,
+    deselectAllPassages,
+    selectPassage,
+    selectPassages,
+    selectPassagesAdd,
 } from './passages/actions';
 import {
     createStory,
@@ -72,6 +76,10 @@ export {
     addTag,
     removeTag,
     makeStarting,
+    deselectAllPassages,
+    selectPassage,
+    selectPassages,
+    selectPassagesAdd,
 
     createStory,
     deleteStory,

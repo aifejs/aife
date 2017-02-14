@@ -35,6 +35,10 @@ export default {
             type: Number,
             default: 100,
         },
+
+        passages: {
+            type: Array,
+        },
     },
 
     data() {
@@ -151,14 +155,13 @@ export default {
 
 <template lang="pug">
 .pannable(tabindex="0",
-    ":style"="{width: viewportWidth + 'px', height: viewportHeight + 'px'}",
+    :style="{width: viewportWidth + 'px', height: viewportHeight + 'px'}",
     @touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd",
     @keyup="onKeyUp",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
-    .pannable-bg(":style"="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'silver'}")
-        pannable-marquee(":visible"="marqueeMode", ":start"="marqueeStart.lt(marqueeEnd) ? marqueeStart : marqueeEnd", ":end"="marqueeStart.lt(marqueeEnd) ? marqueeEnd : marqueeStart")
-        pannable-item(":x"="0", ":y"="0")
-        pannable-item(":x"="70", ":y"="70")
+    .pannable-bg(:style="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'silver'}")
+        pannable-marquee(:visible="marqueeMode", :start="marqueeStart.lt(marqueeEnd) ? marqueeStart : marqueeEnd", :end="marqueeStart.lt(marqueeEnd) ? marqueeEnd : marqueeStart")
+        pannable-item(v-for="passage in passages", :passage="passage")
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">

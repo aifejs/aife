@@ -7,6 +7,11 @@ const passageBlueprint = {
     text: 'This blank sheet stares at you. Blankly.',
     tags: [],
     starting: false,
+    selected: false,
+    position: {
+        x: 0,
+        y: 0,
+    },
 };
 
 export function OPEN_PASSAGE(state, pid) {
@@ -37,16 +42,42 @@ export function CLOSE_PASSAGE(state, pid) {
     }
 }
 
+/**
+ * @param {IStory} story
+ * @return {IPassage|null}
+ */
+function getLatestAddedPassage(story) {
+    if (!story.passages.length) {
+        return null;
+    } else {
+        return story.passages.reduce(
+            (highestPidPassage, passage) => {
+                if (passage.pid > highestPidPassage.pid) {
+                    return passage;
+                } else {
+                    return highestPidPassage;
+                }
+            },
+            story.passages[0]
+        );
+    }
+}
+
 export function ADD_PASSAGE(state, {title = passageBlueprint.title, text = passageBlueprint.text,}) {
     const story = getCurrentStory(state);
-    const lastPid = story.passages.reduce((pid, passage) => Math.max(pid, passage.pid), 0);
+    const lastPassage = getLatestAddedPassage(story);
 
     story.passages.push({
         title,
         text,
-        pid: lastPid + 1,
+        pid: lastPassage ? lastPassage.pid + 1 : 0,
         tags: [],
         starting: false,
+        selected: false,
+        position: { // TODO: refine position algorithm
+            x: lastPassage ? lastPassage.position.x + 100 : 0,
+            y: lastPassage ? lastPassage.position.y + 100 : 0,
+        },
     });
 
     updateStory(story);
@@ -88,6 +119,64 @@ export function MAKE_PASSAGE_STARTING(state, pid) {
 
     const passage = findByPid(story.passages, pid);
     passage.starting = true;
+
+    updateStory(story);
+}
+
+
+// Passage de/selection
+
+/**
+ * @param {IState} state
+ */
+export function DESELECT_ALL_PASSAGES(state) {
+    const story = getCurrentStory(state);
+
+    story.passages.forEach((passage) => passage.selected = false);
+
+    updateStory(story);
+}
+
+/**
+ * @param {IState} state
+ * @param {PassagePid} pid
+ */
+export function SELECT_PASSAGE(state, pid) {
+    const story = getCurrentStory(state);
+    story.passages.forEach((passage) => {
+        // select passage if pid matches, deselect otherwise
+        passage.selected = passage.pid === pid;
+    });
+
+    updateStory(story);
+}
+
+/**
+ * @param {IState} state
+ * @param {PassagePid[]} pids
+ */
+export function SELECT_PASSAGES(state, pids) {
+    const story = getCurrentStory(state);
+    story.passages.forEach((passage) => {
+        // select passage if pid matches, deselect otherwise
+        passage.selected = pids.includes(passage.pid);
+    });
+
+    updateStory(story);
+}
+
+/**
+ * @param {IState} state
+ * @param {PassagePid[]} pids
+ */
+export function SELECT_PASSAGES_ADD(state, pids) {
+    const story = getCurrentStory(state);
+    story.passages.forEach((passage) => {
+        // select passage if pid matches
+        if (pids.includes(passage.pid)) {
+            passage.selected = true;
+        }
+    });
 
     updateStory(story);
 }

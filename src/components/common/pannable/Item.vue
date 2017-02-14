@@ -8,8 +8,7 @@ export default {
     name: 'pannable-item',
 
     props: {
-        x: Number,
-        y: Number,
+        passage: Object,
 
         dragButton: {
             type: Number,
@@ -32,7 +31,7 @@ export default {
 
     data() {
         return {
-            position: new Vector2(this.x, this.y),
+            position: new Vector2(this.passage.position),
 
             mouseDrag: new PositionTracker(),
             touchDrag: new PositionTracker(),
@@ -128,7 +127,7 @@ export default {
 </script>
 
 <template lang="pug">
-.pannable-item(":style"="style", ":class"="{selected: selected}",
+.pannable-item(:style="style", :class="{selected: passage.selected}",
     @touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd",
     @keyup="onKeyUp",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")

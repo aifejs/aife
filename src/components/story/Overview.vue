@@ -43,14 +43,14 @@
 article.overview.widget
     .widget-header.overview-header
         .widget-title
-            img.overview-format("v-bind:src"="formats[story.format].iconUrl", ":title"="story.format")
+            img.overview-format(:src="formats[story.format].iconUrl", :title="story.format")
             span.overview-title(v-text="story.title")
             | &nbsp;
-            story-run("v-bind:story"="story")
+            story-run(:story="story")
         .widget-controls
-            story-edit-code("v-bind:story"="story")
+            story-edit-code(:story="story")
     .widget-body
-        // pannable-container(":viewportWidth"="500", ":viewportHeight"="300")
+        // pannable-container(:viewportWidth="800", :viewportHeight="300", :passages="story.passages")
         overview-stats
         passages-list
 </template>

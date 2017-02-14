@@ -158,6 +158,11 @@ function convertPassage(twinePassage) {
         pid: Number(twinePassage.pid),
         tags: twinePassage.tags,
         starting: false,
+        selected: false,
+        position: {
+            x: twinePassage.left,
+            y: twinePassage.top,
+        },
     };
 }
 

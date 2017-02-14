@@ -45,3 +45,19 @@ export function removeTag({commit,}, {pid, index,}) {
 export function makeStarting({commit,}, pid) {
     commit('MAKE_PASSAGE_STARTING', pid);
 }
+
+export function deselectAllPassages({commit,}) {
+    commit('DESELECT_ALL_PASSAGES');
+}
+
+export function selectPassage({commit,}, pid) {
+    commit('SELECT_PASSAGE', pid);
+}
+
+export function selectPassages({commit,}, pids) {
+    commit('SELECT_PASSAGES', pids);
+}
+
+export function selectPassagesAdd({commit,}, pids) {
+    commit('SELECT_PASSAGES_ADD', pids);
+}

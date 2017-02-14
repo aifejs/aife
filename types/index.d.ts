@@ -16,16 +16,25 @@ interface IStory {
     format: string,
 }
 
+interface IPassagePosition {
+    x: number;
+    y: number;
+}
+
+type PassagePid = number;
+
 interface IPassage {
     title: string,
     text: string,
-    pid: number,
+    pid: PassagePid,
     tags: string[],
     starting: boolean,
+    selected: boolean;
+    position: IPassagePosition;
 }
 
 interface ITwineStory {
-    startPassagePid: number,
+    startPassagePid: PassagePid,
     name: string,
     ifid: string,
     lastUpdate: Date,
