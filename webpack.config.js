@@ -1,7 +1,12 @@
 'use strict';
 
 const path = require('path');
-const {DefinePlugin, optimize: {UglifyJsPlugin,}, NoEmitOnErrorsPlugin, LoaderOptionsPlugin,} = require('webpack');
+const {
+    DefinePlugin,
+    optimize: {UglifyJsPlugin,},
+    NoEmitOnErrorsPlugin,
+    LoaderOptionsPlugin,
+    NamedModulesPlugin,} = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('./package.json');
 
@@ -203,6 +208,7 @@ if (isProduction) {
 
     config.plugins.push(...[
         new NoEmitOnErrorsPlugin(),
+        new NamedModulesPlugin(),
     ]);
 }
 
