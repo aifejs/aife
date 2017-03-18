@@ -1,10 +1,10 @@
 <template lang="pug">
 div
-    //router-link("v-bind:to"="{name: 'storySettings'}")
+    //router-link(:to="{name: 'storySettings'}")
     //    i.fa.fa-cog
     //    | Story settings
 
-    a("v-bind:href"="bugs.url", target="_blank")
+    a(:href="bugs.url", target="_blank")
         i.fa.fa-bug
         | Report a bug
 </template>

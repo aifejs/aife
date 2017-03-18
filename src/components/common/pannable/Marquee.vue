@@ -32,7 +32,7 @@
 </script>
 
 <template lang="pug">
-.pannable-marquee(":class"="{visible: visible,}", ":style"="style")
+.pannable-marquee(:class="{visible: visible,}", :style="style")
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">

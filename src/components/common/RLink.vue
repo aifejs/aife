@@ -1,5 +1,5 @@
 <template lang="pug">
-a("v-bind:href"="lnk")
+a(:href="lnk")
     slot
 </template>
 

@@ -5,7 +5,7 @@ article.codeEditor
         Red outline means Aife can't parse current copy (be careful with special characters).
 
     label.codeArea
-        textarea.codeArea("v-bind:value"="proofReadCopy", @input="onInput", ":class"="{error: getProofModeError}")
+        textarea.codeArea(:value="proofReadCopy", @input="onInput", :class="{error: getProofModeError}")
 </template>
 
 <script>

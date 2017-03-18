@@ -2,7 +2,7 @@
 .sorterButtons
     span.sorterButtons-title Sort by:
     .sorterButtons-grp
-        button.sorterButtons-btn(v-for="sortProperty of sortProperties", "v-bind:class"="{active: sortProperty.field === activeProperty.field}", "@click"="changeSort(sortProperty)")
+        button.sorterButtons-btn(v-for="sortProperty of sortProperties", :class="{active: sortProperty.field === activeProperty.field}", @click="changeSort(sortProperty)")
             | {{ sortProperty.name }}
             span.sorterButtons-sort(v-sort-icon="activeProperty.sort")
 </template>

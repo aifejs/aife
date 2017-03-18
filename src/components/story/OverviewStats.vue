@@ -1,5 +1,5 @@
 <template lang="pug">
-story-stats.lighter("v-bind:stats"="stats")
+story-stats.lighter(:stats="stats")
 </template>
 
 <script type="text/babel">

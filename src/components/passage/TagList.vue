@@ -1,12 +1,12 @@
 <template lang="pug">
 .tagList
-    span.tagList-item(v-for="(tag, index) of tags", ":class"="{special: isSpecial(tag)}")
+    span.tagList-item(v-for="(tag, index) of tags", :class="{special: isSpecial(tag)}")
         | {{ tag }}
-        i.fa.fa-trash.activeIcon.danger.tagList-remove("@click"="onTagRemoveClick(index)")
+        i.fa.fa-trash.activeIcon.danger.tagList-remove(@click="onTagRemoveClick(index)")
 
-    input("v-bind:list"="domId", placeholder="Press enter to add tag", @keyup="onKeyPress")
-    datalist("v-bind:id"="domId")
-        option(v-for="(count, suggestion) of suggestions", "v-bind:value"="suggestion") {{count}}
+    input(:list="domId", placeholder="Press enter to add tag", @keyup="onKeyPress")
+    datalist(:id="domId")
+        option(v-for="(count, suggestion) of suggestions", :value="suggestion") {{count}}
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">

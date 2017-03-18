@@ -6,7 +6,7 @@
         p Various settings
 
     .widget-footer.widget-controlIcons
-        router-link("v-bind:to"="{name: 'stories'}")
+        router-link(:to="{name: 'stories'}")
             i.fa.fa-list-ul
             | Back to stories
 </template>

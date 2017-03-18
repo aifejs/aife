@@ -2,18 +2,18 @@
 article.passagesList.widget.lighter
     .widget-header
         .widget-title Filter passages:&nbsp;
-            input(type="search", "v-bind:value"="getPassagesFiltering", "@input"="setPassagesFiltering")
+            input(type="search", :value="getPassagesFiltering", @input="setPassagesFiltering")
         .widget-controls
-            sorter-buttons("v-bind:sort-properties"="sortProperties", "@sort"="setPassagesSorting")
+            sorter-buttons(:sort-properties="sortProperties", @sort="setPassagesSorting")
     .widget-body
         ul.passagesList-list
-            li.passagesList-item(v-for="passage of passagesOverview", ":class"="{special: passage.special}")
-                router-link("v-bind:to"="{name: 'passage', params: {pid: passage.pid, ifid: ifid}}", v-hilite-term="getPassagesFiltering") {{passage.title}}
+            li.passagesList-item(v-for="passage of passagesOverview", :class="{special: passage.special}")
+                router-link(:to="{name: 'passage', params: {pid: passage.pid, ifid: ifid}}", v-hilite-term="getPassagesFiltering") {{passage.title}}
                 span.actions
-                    router-link.passagesList("v-bind:to"="{name: 'deletePassage', params: {pid: passage.pid, ifid: ifid}}")
+                    router-link.passagesList(:to="{name: 'deletePassage', params: {pid: passage.pid, ifid: ifid}}")
                         i.fa.fa-trash.activeIcon.danger.passagesList-remove
-                    i.fa.fa-rocket.activeIcon("@click"="makeStarting(passage.pid)", ":class"="{disabled: passage.starting}")
-                p.passagesList-text(v-hilite-term="getPassagesFiltering", ":title"="passage.text") {{passage.text}}
+                    i.fa.fa-rocket.activeIcon(@click="makeStarting(passage.pid)", :class="{disabled: passage.starting}")
+                p.passagesList-text(v-hilite-term="getPassagesFiltering", :title="passage.text") {{passage.text}}
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">

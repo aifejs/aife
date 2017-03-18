@@ -3,7 +3,7 @@ article.deleteStory.deleter(v-if="passage")
     h3 Delete passage?
     p.deleter-notice Are you sure you want to delete passage #[strong \#{{ passage.pid }}] ({{ passage.title }})? This can't be undone.
 
-    router-link.deleter-cancel("v-bind:to"="{name: 'overview', params: {ifid: $route.params.ifid}}") No, take me back
+    router-link.deleter-cancel(:to="{name: 'overview', params: {ifid: $route.params.ifid}}") No, take me back
     button.deleter-confirm(@click="dropPassage(passage.pid)") Yes, delete passage completely and unrecoverably
 </template>
 

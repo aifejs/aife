@@ -34,11 +34,11 @@
 
 <template lang="pug">
 span.storyRun
-    r-link("v-bind:to"="{name: 'play', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Play story (in new window)")
+    r-link(:to="{name: 'play', params: {ifid: story.ifid}}", target="_blank", :class="{'disabled': !runnable}", title="Play story (in new window)")
         i.fa.fa-play
-    r-link("v-bind:to"="{name: 'debug', params: {ifid: story.ifid}}", target="_blank", ":class"="{'disabled': !runnable}", title="Debug story (in new window)")
+    r-link(:to="{name: 'debug', params: {ifid: story.ifid}}", target="_blank", :class="{'disabled': !runnable}", title="Debug story (in new window)")
         i.fa.fa-bug
-    r-link("v-bind:to"="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Export")
+    r-link(:to="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Export")
         i.fa.fa-download
 </template>
 

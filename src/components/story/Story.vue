@@ -4,7 +4,7 @@ article.widget.screen.story
         passage-tabs
         router-view
         p(v-if="!story")
-            | No such story available. Have you changed IFID? #[router-link("v-bind:to"="{name: 'stories'}") To stories list].
+            | No such story available. Have you changed IFID? #[router-link(:to="{name: 'stories'}") To stories list].
 
     story-footer.widget-footer.widget-controlIcons(v-if="storiesLoaded")
     .widget-body(v-if="!storiesLoaded")

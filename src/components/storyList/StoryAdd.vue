@@ -1,10 +1,10 @@
 <template lang="pug">
 .addStory
     .addStory-body
-        button.addStory-btn("@click"="onCreateStoryClick") Create new
+        button.addStory-btn(@click="onCreateStoryClick") Create new
         label.addStory-btn
             | Import from file(s)
-            input(type="file", "@change"="onFilePicked", accept=".html,.htm", multiple)
+            input(type="file", @change="onFilePicked", accept=".html,.htm", multiple)
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">

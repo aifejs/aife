@@ -2,7 +2,7 @@
 article.codeEditor
     label.codeArea
         strong Edit story script
-        code-mirror("v-bind:options"="jsEditorOptions", "v-bind:code"="getScript", "@code-changed"="saveScript")
+        code-mirror(:options="jsEditorOptions", :code="getScript", @code-changed="saveScript")
 </template>
 
 <script>

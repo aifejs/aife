@@ -1,19 +1,19 @@
 .widget.storyList-item
     .widget-header
-        .widget-title("v-bind:title"="story.title", "v-bind:class"="{editing: editing}")
-            router-link.storyListItem-link("v-bind:to"="{name: 'overview', params: {ifid: story.ifid}}") {{ story.title }}
-            input.storyListItem-input("v-bind:value.once"="story.title", "@keydown"="processTitleEdit", "@blur"="onBlur", ref="input")
-            span.fa.fa-pencil.activeIcon.storyListItem-editBtn("@click"="toggleEditing", title="Rename story")
+        .widget-title(:title="story.title", :class="{editing: editing}")
+            router-link.storyListItem-link(:to="{name: 'overview', params: {ifid: story.ifid}}") {{ story.title }}
+            input.storyListItem-input(":value.once"="story.title", @keydown="processTitleEdit", @blur="onBlur", ref="input")
+            span.fa.fa-pencil.activeIcon.storyListItem-editBtn(@click="toggleEditing", title="Rename story")
         .widget-controls
             .widget-controlIcons
-                span.fa.fa-files-o.activeIcon(title="Duplicate story", "@click"="duplicateStory(story.ifid)")
-                router-link("v-bind:to"="{name: 'deleteStory', params: {ifid: story.ifid}}", title="Delete story")
+                span.fa.fa-files-o.activeIcon(title="Duplicate story", @click="duplicateStory(story.ifid)")
+                router-link(:to="{name: 'deleteStory', params: {ifid: story.ifid}}", title="Delete story")
                     span.fa.fa-trash.activeIcon.danger
-                router-link("v-bind:to"="{name: 'proofRead', params: {ifid: story.ifid}}", title="Proof-read mode")
+                router-link(:to="{name: 'proofRead', params: {ifid: story.ifid}}", title="Proof-read mode")
                     span.fa.fa-pencil-square-o
     .widget-body
-        story-stats("v-bind:stats"="story.stats").lighter
+        story-stats(:stats="story.stats").lighter
     .widget-footer
         .widget-controls
             .widget-controlIcons
-                story-run("v-bind:story"="story")
+                story-run(:story="story")
