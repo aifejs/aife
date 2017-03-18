@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const {DefinePlugin, optimize: {UglifyJsPlugin, OccurenceOrderPlugin,}, NoErrorsPlugin,} = require('webpack');
+const {DefinePlugin, optimize: {UglifyJsPlugin,}, NoEmitOnErrorsPlugin, LoaderOptionsPlugin,} = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('./package.json');
 
@@ -27,7 +27,14 @@ function generateLoaders(loaders, sourceMap, extract) {
     // Extract CSS when that option is specified
     // (which is the case during production build)
     if (extract) {
-        return ExtractTextPlugin.extract('vue-style-loader', sourceLoader);
+        // return ExtractTextPlugin.extract('vue-style-loader', sourceLoader);
+        return {
+            use: ExtractTextPlugin.extract({
+                fallback: 'vue-style-loader',
+                use: sourceLoader,
+                publicPath: distFolder,
+            }),
+        };
     } else {
         return ['vue-style-loader', sourceLoader,].join('!');
     }
@@ -71,11 +78,14 @@ const config = {
     },
 
     resolveLoader: {
-        root: path.join(__dirname, 'node_modules'),
     },
 
     plugins: [
-        new ExtractTextPlugin(`${pkg.name}.css`),
+        new ExtractTextPlugin({
+            filename: `${pkg.name}.css`,
+            disable: false,
+            allChunks: true,
+        }),
         new DefinePlugin({
             'process.env': {
                 NODE_ENV: isProduction ? '"production"' : '"development"',
@@ -84,43 +94,58 @@ const config = {
     ],
 
     module: {
-        preLoaders: [
+        rules: [
             {
                 test: /\.vue|js$/,
-                loader: 'eslint',
+                loader: 'eslint-loader',
                 include: [
                     path.join(__dirname, 'src'),
                 ],
                 exclude: /node_modules/,
+                enforce: 'pre',
+                options: {
+                    formatter: require('eslint-friendly-formatter'),
+                },
             },
-        ],
 
-        loaders: [
             {
                 test: /\.vue$/,
-                loader: 'vue',
+                loader: 'vue-loader',
+                options: {
+                    loaders: cssLoaders({
+                        sourceMap: true,
+                        extract: isProduction,
+                    }),
+
+                    autoprefixer: {
+                        browsers: [
+                            'last 2 Chrome versions',
+                            'last 2 Firefox versions',
+                            'ChromeAndroid > 50',
+                            'Edge >= 13',
+                            'iOS >=8',
+                        ],
+                        flexbox: 'no-2009',
+                    },
+                },
             },
             {
                 test: /\.js$/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 include: /node_modules(?:\\|\/)sugarcube-mode/,
             },
             {
                 test: /\.js$/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 exclude: /node_modules/,
             },
             {
-                test: /\.json$/,
-                loader: 'json',
-            },
-            {
                 test: /\.html$/,
-                loader: 'vue-html',
+                loader: 'vue-html-loader',
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/,
-                loader: 'url',
+                loader: 'url-loader',
                 query: {
                     limit: 10000,
                     name: '[name].[ext]?[hash]',
@@ -129,39 +154,14 @@ const config = {
             ...styleLoaders({
                 sourceMap: true,
                 extract: isProduction,
+                use: [ // TODO: make this actually work
+                    // make @import css actually include them
+                    (stylus) => {
+                        stylus
+                            .set('include css', true);
+                    },
+                ],
             }),
-        ],
-    },
-
-    eslint: {
-        formatter: require('eslint-friendly-formatter'),
-    },
-
-    vue: {
-        loaders: cssLoaders({
-            sourceMap: true,
-            extract: isProduction,
-        }),
-
-        autoprefixer: {
-            browsers: [
-                'last 2 Chrome versions',
-                'last 2 Firefox versions',
-                'ChromeAndroid > 50',
-                'Edge >= 13',
-                'iOS >=8',
-            ],
-            flexbox: 'no-2009',
-        },
-    },
-
-    stylus: {
-        use: [
-            // make @import css actually include them
-            (stylus) => {
-                stylus
-                    .set('include css', true);
-            },
         ],
     },
 };
@@ -174,7 +174,9 @@ if (isProduction) {
                 warnings: false,
             },
         }),
-        new OccurenceOrderPlugin(),
+        new LoaderOptionsPlugin({
+            minimize: true,
+        }),
     ]);
 } else {
     config.devtool = '#eval-source-map'; // nice stacktraces
@@ -182,7 +184,6 @@ if (isProduction) {
     let devServerConfig = {
         noInfo: true,
         inline: true,
-        colors: true,
         historyApiFallback: true,
     };
     try {
@@ -201,7 +202,7 @@ if (isProduction) {
     config.devServer = devServerConfig;
 
     config.plugins.push(...[
-        new NoErrorsPlugin(),
+        new NoEmitOnErrorsPlugin(),
     ]);
 }
 
