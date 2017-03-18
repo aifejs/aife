@@ -21,14 +21,21 @@ export const testState = {
                     tags: [],
                     text: 'Passage paragraph',
                     title: 'Eleventh passage',
+                    position: {
+                        x: 0, y: 0,
+                    },
                 },
                 {
                     pid: 22,
                     tags: ['some tag',],
                     text: 'Another passage text',
                     title: 'Another passage',
+                    position: {
+                        x: 200, y: 200,
+                    },
                 },
             ],
+            format: 'SugarCube 2',
         },
     ],
 };

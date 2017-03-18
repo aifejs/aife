@@ -7,6 +7,10 @@ especially in early stages, especially in story formats. Main goal is to provide
 
 ## Technical details
 
+### Status
+
+[![Build Status](https://travis-ci.org/aifejs/aife.svg?branch=master)](https://travis-ci.org/aifejs/aife)
+
 Aife is written in ES2015 with Vue.js, Jade/Pug and Stylus. Tests are written in [tape](https://github.com/substack/tape).
 
 ### Build Setup

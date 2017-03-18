@@ -1,10 +1,8 @@
 import test from 'tape';
-import {fixture, testState,} from '../fixture';
+import {fixture,} from '../fixture';
 import {CLOSE_PASSAGE,} from '../../../../src/vuex/mutations';
 
 test('CLOSE_PASSAGE', (assert) => {
-    // assert.plan(2);
-
     const state = fixture();
     const story = state.stories[0];
     story.opened = [story.passages[0], story.passages[1],];

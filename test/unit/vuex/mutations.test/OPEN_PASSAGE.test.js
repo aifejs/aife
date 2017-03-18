@@ -1,5 +1,5 @@
 import test from 'tape';
-import {fixture, testState,} from '../fixture';
+import {fixture,} from '../fixture';
 import {OPEN_PASSAGE,} from '../../../../src/vuex/mutations';
 
 test('OPEN_PASSAGE', (assert) => {
