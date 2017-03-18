@@ -12,7 +12,7 @@ nav.passageTabs
         special-tab(v-if="proofReadEditing", ":route-name"="'proofRead'", ":title"="'Proof-read'", ":close"="closeProofReadAndGoBack", ":ifid"="ifid")
 
     span.passageTabs-section(v-if="story")
-        router-link.passageTabs-item.passage(v-for="tab of tabs", track-by="pid", tag="span", "v-bind:to"="{name: 'passage', params: {pid: tab.pid, ifid: ifid}}")
+        router-link.passageTabs-item.passage(v-for="tab of tabs", :key="tab.pid", tag="span", "v-bind:to"="{name: 'passage', params: {pid: tab.pid, ifid: ifid}}")
             a(":title"="tabTitle(tab)") {{tab.title}}
             i.fa.fa-times-circle.activeIcon.danger.passageTabs-close("@click"="closePassageAndGoBack(tab.pid)")
 

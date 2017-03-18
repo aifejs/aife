@@ -4,7 +4,7 @@ article.widget.lighter.screen.storyList
         .widget-controls
             sorter-buttons("v-bind:sort-properties"="sortProperties", "@sort"="setStoriesSorting")
     .widget-body.storyList-body
-        story-list-item(v-for="story of storiesList", "v-bind:story"="story")
+        story-list-item(v-for="story of storiesList", "v-bind:story"="story", :key="story.ifid")
 
         story-add.storyListItem
 

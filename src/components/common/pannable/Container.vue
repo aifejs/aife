@@ -161,7 +161,7 @@ export default {
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
     .pannable-bg(:style="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'silver'}")
         pannable-marquee(:visible="marqueeMode", :start="marqueeStart.lt(marqueeEnd) ? marqueeStart : marqueeEnd", :end="marqueeStart.lt(marqueeEnd) ? marqueeEnd : marqueeStart")
-        pannable-item(v-for="passage in passages", :passage="passage")
+        pannable-item(v-for="passage in passages", :passage="passage", :key="passage.pid")
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
