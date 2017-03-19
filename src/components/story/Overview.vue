@@ -50,7 +50,7 @@ article.overview.widget
         .widget-controls
             story-edit-code(:story="story")
     .widget-body
-        // pannable-container(:viewportWidth="800", :viewportHeight="300", :passages="story.passages")
+        pannable-container(:passages="story.passages", style="width: 100%; height: 500px")
         overview-stats
         passages-list
 </template>

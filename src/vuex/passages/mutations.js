@@ -1,6 +1,7 @@
 /* eslint new-cap: [2, {newIsCap: true, capIsNew: false}] */
 
 import {updateStory, findByPid, findIndexByPid, getCurrentStory,} from '../utils';
+import {Rect,} from '../../lib/Rect';
 
 const passageBlueprint = {
     title: 'New passage',
@@ -175,6 +176,46 @@ export function SELECT_PASSAGES_ADD(state, pids) {
         // select passage if pid matches
         if (pids.includes(passage.pid)) {
             passage.selected = true;
+        }
+    });
+
+    updateStory(story);
+}
+
+export function MOVE_PASSAGE(state, {pid, x, y,}) {
+    const story = getCurrentStory(state);
+    const passage = findByPid(story.passages, pid);
+
+    passage.position.x = x;
+    passage.position.y = y;
+
+    updateStory(story);
+}
+
+export function MOVE_SELECTED_PASSAGES(state, {x, y,}) {
+    const story = getCurrentStory(state);
+
+    story.passages.forEach((passage) => {
+        if (passage.selected) {
+            passage.position.x += x;
+            passage.position.y += y;
+        }
+    });
+
+    updateStory(story);
+}
+
+export function SELECT_PASSAGES_BY_MARQUEE(state, {start, end, mode = 'create',}) {
+    const story = getCurrentStory(state);
+
+    const marqueeRect = new Rect(start, end);
+
+    story.passages.forEach((passage) => {
+        const passageRect = Rect.fromStartAndSize(passage.position, {x: 100, y: 100,});
+        if (marqueeRect.intersectsRect(passageRect)) {
+            passage.selected = true;
+        } else {
+            passage.selected = false;
         }
     });
 

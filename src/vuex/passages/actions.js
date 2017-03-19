@@ -61,3 +61,27 @@ export function selectPassages({commit,}, pids) {
 export function selectPassagesAdd({commit,}, pids) {
     commit('SELECT_PASSAGES_ADD', pids);
 }
+
+export function movePassage({commit,}, {pid, x, y,}) {
+    commit('MOVE_PASSAGE', {
+        pid,
+        x,
+        y,
+    });
+}
+
+export function moveSelectedPassages({commit,}, {x, y,}) {
+    commit('MOVE_SELECTED_PASSAGES', {
+        x,
+        y,
+    });
+}
+
+export function selectPassagesByMarquee({commit,}, {start, end, mode = 'create',}) {
+    commit('SELECT_PASSAGES_BY_MARQUEE', {
+        start,
+        end,
+        mode,
+    });
+}
+

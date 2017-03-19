@@ -1,4 +1,6 @@
 <script>
+import {mapActions, mapGetters,} from 'vuex';
+
 import {Vector2,} from '../../../lib/Vector2';
 import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
 import {mouseButtons,} from '../../../lib/mouseButtons';
@@ -27,9 +29,6 @@ export default {
             type: Number,
             default: mouseButtons.main,
         },
-
-        viewportWidth: Number,
-        viewportHeight: Number,
 
         gridSize: {
             type: Number,
@@ -82,9 +81,15 @@ export default {
         onKeyUp(event) {
             if (keyCodeVectors.hasOwnProperty(event.keyCode)) {
                 const magnitude = event.shiftKey ? this.offsetByKeyLarge : this.offsetByKey;
-                const vector = keyCodeVectors[event.keyCode];
+                const vector = keyCodeVectors[event.keyCode].clone().multiply(magnitude);
 
-                this.position.add(vector.clone().multiply(magnitude));
+
+                if (this.hasSelectedPassages) {
+                    this.moveSelectedPassages(vector);
+                } else {
+                    this.position.add(vector);
+                }
+
                 event.stopPropagation();
             }
         },
@@ -132,14 +137,30 @@ export default {
                 }
             } else if (event.button === this.selectButton) {
                 this.marqueeMode = false;
+
+                this.selectPassagesByMarquee({
+                    start: this.marqueeStart,
+                    end: this.marqueeEnd,
+                });
             }
         },
+
+        ...mapActions([
+            'selectPassage',
+            'movePassage',
+            'moveSelectedPassages',
+            'selectPassagesByMarquee',
+        ]),
     },
 
     computed: {
         bgTransform() {
             return `translateX(${this.position.x}px) translateY(${this.position.y}px)`;
         },
+
+        ...mapGetters([
+            'hasSelectedPassages',
+        ]),
     },
 
     directives: {
@@ -155,13 +176,12 @@ export default {
 
 <template lang="pug">
 .pannable(tabindex="0",
-    :style="{width: viewportWidth + 'px', height: viewportHeight + 'px'}",
     @touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd",
     @keyup="onKeyUp",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
-    .pannable-bg(:style="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'silver'}")
+    .pannable-bg(:style="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'gray'}")
         pannable-marquee(:visible="marqueeMode", :start="marqueeStart.lt(marqueeEnd) ? marqueeStart : marqueeEnd", :end="marqueeStart.lt(marqueeEnd) ? marqueeEnd : marqueeStart")
-        pannable-item(v-for="passage in passages", :passage="passage", :key="passage.pid")
+        pannable-item(v-for="passage in passages", :passage="passage", :key="passage.pid", @item-selected="selectPassage", @item-moved="movePassage", tabindex="0")
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">

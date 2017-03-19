@@ -13,6 +13,9 @@ import {
     selectPassage,
     selectPassages,
     selectPassagesAdd,
+    movePassage,
+    moveSelectedPassages,
+    selectPassagesByMarquee,
 } from './passages/actions';
 import {
     createStory,
@@ -80,6 +83,9 @@ export {
     selectPassage,
     selectPassages,
     selectPassagesAdd,
+    movePassage,
+    moveSelectedPassages,
+    selectPassagesByMarquee,
 
     createStory,
     deleteStory,

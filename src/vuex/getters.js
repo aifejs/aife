@@ -283,3 +283,15 @@ export function getStoriesLoaded({storiesLoaded,}) {
 export function isStoryRunnable(runnableStory) {
     return runnableStory.passages && runnableStory.passages.length > 0;
 }
+
+export function hasSelectedPassages({stories, route,}) {
+    const currentStory = getCurrentStory({stories, route,});
+
+    for (let i = 0, len = currentStory.passages.length; i < len; i++) {
+        if (currentStory.passages[i].selected) {
+            return true;
+        }
+    }
+
+    return false;
+}
