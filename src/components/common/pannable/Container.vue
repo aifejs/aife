@@ -53,11 +53,17 @@ export default {
             marqueeEnd: Vector2.zero(),
 
             offset: Vector2.zero(),
+
+            isHovered: false,
         };
     },
 
     mounted() {
         document.addEventListener('mouseup', this.onMouseUp.bind(this), false);
+
+        // listening keyup on element proves to be error prone, since in requires element to have focus
+        document.addEventListener('keyup', this.onDocumentKeyUp.bind(this), false);
+
         this.offset = Vector2.fromDOMRect(this.$el.getBoundingClientRect()); // TODO: update on dimension changes
     },
 
@@ -78,11 +84,16 @@ export default {
             }
         },
 
+        onDocumentKeyUp(event) {
+            if (this.isHovered) {
+                this.onKeyUp(event);
+            }
+        },
+
         onKeyUp(event) {
             if (keyCodeVectors.hasOwnProperty(event.keyCode)) {
                 const magnitude = event.shiftKey ? this.offsetByKeyLarge : this.offsetByKey;
                 const vector = keyCodeVectors[event.keyCode].clone().multiply(magnitude);
-
 
                 if (this.hasSelectedPassages) {
                     this.moveSelectedPassages(vector);
@@ -91,6 +102,7 @@ export default {
                 }
 
                 event.stopPropagation();
+                event.preventDefault();
             }
         },
 
@@ -121,9 +133,13 @@ export default {
                     event.stopPropagation();
                 }
             } else if (event.button === this.selectButton) {
-                this.marqueeEnd = new Vector2(event.clientX, event.clientY)
-                    .subtract(this.offset)
-                    .subtract(this.position);
+                if (this.marqueeMode) {
+                    this.marqueeEnd = new Vector2(event.clientX, event.clientY)
+                        .subtract(this.offset)
+                        .subtract(this.position);
+
+                    this._selectByMarquee();
+                }
             }
         },
         onMouseUp(event) {
@@ -138,11 +154,15 @@ export default {
             } else if (event.button === this.selectButton) {
                 this.marqueeMode = false;
 
-                this.selectPassagesByMarquee({
-                    start: this.marqueeStart,
-                    end: this.marqueeEnd,
-                });
+                this._selectByMarquee();
             }
+        },
+
+        _selectByMarquee() {
+            this.selectPassagesByMarquee({
+                start: this.marqueeStart,
+                end: this.marqueeEnd,
+            });
         },
 
         ...mapActions([
@@ -175,13 +195,13 @@ export default {
 </script>
 
 <template lang="pug">
-.pannable(tabindex="0",
+.pannable(tabindex="-1",
     @touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd",
-    @keyup="onKeyUp",
+    @mouseenter="isHovered = true", @mouseleave="isHovered = false",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
     .pannable-bg(:style="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'gray'}")
         pannable-marquee(:visible="marqueeMode", :start="marqueeStart.lt(marqueeEnd) ? marqueeStart : marqueeEnd", :end="marqueeStart.lt(marqueeEnd) ? marqueeEnd : marqueeStart")
-        pannable-item(v-for="passage in passages", :passage="passage", :key="passage.pid", @item-selected="selectPassage", @item-moved="movePassage", tabindex="0")
+        pannable-item(v-for="passage in passages", :passage="passage", :key="passage.pid", @item-selected="selectPassage", @item-moved="movePassage")
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">

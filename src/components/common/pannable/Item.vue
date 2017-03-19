@@ -19,15 +19,6 @@ export default {
             default: mouseButtons.main,
         },
 
-        offsetByKey: {
-            type: Number,
-            default: 25,
-        },
-        offsetByKeyLarge: {
-            type: Number,
-            default: 25 * 4,
-        },
-
         select: Function,
     },
 
@@ -64,17 +55,6 @@ export default {
         },
         onTouchEnd(event) {
             this.stopDragging(event);
-        },
-
-        onKeyUp(event) {
-            if (keyCodeVectors.hasOwnProperty(event.keyCode)) {
-                const magnitude = event.shiftKey ? this.offsetByKeyLarge : this.offsetByKey;
-                const vector = keyCodeVectors[event.keyCode];
-
-                this.position.add(vector.clone().multiply(magnitude));
-                this.emitMovement();
-                event.stopPropagation();
-            }
         },
 
         onMouseDown(event) {
@@ -140,10 +120,9 @@ export default {
 </script>
 
 <template lang="pug">
-.pannable-item(:style="style", :class="{selected: passage.selected}", tabindex="0",
+.pannable-item(:style="style", :class="{selected: passage.selected}",
     :title="passage.text",
     @touchstart="onTouchStart", @touchmove="onTouchMove", @touchend="onTouchEnd",
-    @keyup="onKeyUp",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
     h6 {{passage.title}}
     pre {{passage.text}}
@@ -163,15 +142,22 @@ itemWidth = 100px
         box-shadow: inset 2px 2px, inset -2px -2px
         background-color: alpha(silver, 0.35)
         overflow: hidden
+        cursor: pointer
+
         &.selected
             color: navy
-            z-index: 10
+            z-index: 10 // lift selected items so dragging will not be interrupted by other items
 
-    h6
+    text-child()
         font-size: 10px
         white-space: pre
         margin: 0.4ex 0.4ex 0.2ex 0.8ex
+        &::selection {
+            background: none // adding user-select: none breaks marquee
+        }
+
+    h6
+        text-child()
     pre
-        font-size: 10px
-        margin: 0.4ex 0.2ex 0.2ex 0.8ex
+        text-child()
 </style>
