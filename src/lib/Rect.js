@@ -75,14 +75,15 @@ export class Rect {
 
     /**
      *
-     * @param {Vector2} start
-     * @param {Vector2} size
+     * @param {Vector2|Object} start
+     * @param {Vector2|Object} size
      * @return {Rect}
      */
     static fromStartAndSize(start, size) {
+        const p = new Vector2(start.x, start.y);
         return new Rect(
-            start,
-            start.clone().add(size)
+            p,
+            p.clone().add(size)
         );
     }
 }
