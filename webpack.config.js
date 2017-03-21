@@ -187,9 +187,10 @@ if (isProduction) {
     config.devtool = '#eval-source-map'; // nice stacktraces
 
     let devServerConfig = {
-        noInfo: true,
         inline: true,
         historyApiFallback: true,
+        overlay: true,
+        clientLogLevel: 'error',
     };
     try {
         // create devserver.config.js file to locally override webpack devserver settings
