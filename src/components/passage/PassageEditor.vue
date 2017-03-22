@@ -10,13 +10,13 @@ article.codeEditor.passageEditor(v-if="passage")
 
     label
         strong Tags
-        tag-list(:tags="passage.tags", ":pid.once"="passage.pid", :suggestions="tagSuggestions", :special-tags="specialNames[story.format].tags", @add-tag="addTag", @remove-tag="removeTag")
+        tag-list(:tags="passage.tags", :pid.once="passage.pid", :suggestions="tagSuggestions", :special-tags="specialNames[story.format].tags", @add-tag="addTag", @remove-tag="removeTag")
 
     label.codeArea
         strong Text
             small.passageEditor-docs
                 a(:href="docs[story.format]", target="_blank") format documentation
-        code-mirror(:options="passageEditorOptions", :code="passage.text" @code-changed="onCodeChanged")
+        code-mirror(:options="passageEditorOptions", :code="passage.text", @code-changed="onCodeChanged")
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
