@@ -20,13 +20,14 @@
   },
   "dependencies": {
     "browser-saveas": "^1.0.1",
-    "codemirror": "^5.23.0",
+    "codemirror": "^5.25.0",
     "common-tags": "^1.4.0",
     "fetch-jsonp": "^1.0.6",
     "jshint": "^2.9.3",
     "lodash": "^4.17.4",
     "normalize.css": "^5.0.0",
     "sugarcube-mode": "github:aifejs/sugarcube2-mode",
+    "codemirror-jshint-async": "github:aifejs/codemirror-jshint-async#v1.1.0",
     "tiny-uuid": "^1.0.0",
     "vue": "^2.2.4",
     "vue-router": "^2.3.0",
@@ -35,7 +36,9 @@
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
+    "babel-eslint": "^7.2.0",
     "babel-loader": "^6.4.1",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -70,6 +73,7 @@
   "types": "./types/index.d.ts",
   "eslintConfig": {
     "root": true,
+    "parser": "babel-eslint",
     "parserOptions": {
       "ecmaVersion": 6,
       "sourceType": "module",

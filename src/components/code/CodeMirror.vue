@@ -3,13 +3,10 @@ div.codeArea.mirror
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
-@require '~codemirror/addon/lint/lint.css';
 </style>
 
 <script>
-    import CodeMirror from 'codemirror';
     import debounce from 'lodash/debounce';
-    import 'codemirror/addon/lint/lint';
 
     /**
      * Generic reusable code editor component, adapted from Twine source
@@ -22,19 +19,22 @@ div.codeArea.mirror
         },
 
         mounted() {
-            this.codeMirror = new CodeMirror(this.$el, this.options);
-            this.codeMirror.setValue(this.code);
+            import('../../lib/codeMirrorIntegration').then((integration) => {
+                const CodeMirror = integration.default;
+                this.codeMirror = new CodeMirror(this.$el, this.options);
+                this.codeMirror.setValue(this.code);
 
-            this.codeMirror.on('change', this.onCodeMirrorChange.bind(this));
+                this.codeMirror.on('change', this.onCodeMirrorChange.bind(this));
 
-            this.onWindowResizeBound = this.onWindowResize.bind(this);
-            this.onWindowResizeThrottled = debounce(this.onWindowResizeBound);
+                this.onWindowResizeBound = this.onWindowResize.bind(this);
+                this.onWindowResizeThrottled = debounce(this.onWindowResizeBound);
 
-            // this is some hack, without it CodeMirror renders blank
-            requestAnimationFrame(this.onWindowResizeBound);
+                // this is some hack, without it CodeMirror renders blank
+                requestAnimationFrame(this.onWindowResizeBound);
 
-            this.$nextTick(() => {
-                this.onAttached();
+                this.$nextTick(() => {
+                    this.onAttached();
+                });
             });
         },
 

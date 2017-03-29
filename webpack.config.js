@@ -137,7 +137,7 @@ const config = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                include: /node_modules(?:\\|\/)sugarcube-mode/,
+                include: /node_modules(?:\\|\/)(sugarcube-mode|codemirror-jshint-async)/,
             },
             {
                 test: /\.js$/,

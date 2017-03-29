@@ -2,7 +2,7 @@
   "env": {
     "development": {
       "plugins": [
-        "transform-es2015-modules-commonjs",
+        "syntax-dynamic-import",
         "transform-object-rest-spread",
         "transform-runtime"
       ],
@@ -11,6 +11,7 @@
     "production": {
       "presets": ["es2015"],
       "plugins": [
+        "syntax-dynamic-import",
         "transform-object-rest-spread",
         "transform-runtime"
       ]

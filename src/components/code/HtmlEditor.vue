@@ -29,7 +29,6 @@ article.codeEditor.htmlEditor
 
 <script>
     import CodeMirror from './CodeMirror.vue';
-    import 'codemirror/mode/htmlmixed/htmlmixed';
     import {mapGetters, mapActions,} from 'vuex';
     import {formats,} from '../../lib/formatManager';
 

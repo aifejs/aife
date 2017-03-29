@@ -7,7 +7,6 @@ article.codeEditor
 
 <script>
     import CodeMirror from './CodeMirror.vue';
-    import 'codemirror/mode/css/css';
 
     import {mapGetters, mapActions,} from 'vuex';
 

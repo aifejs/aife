@@ -7,17 +7,13 @@ article.codeEditor
 
 <script>
     import CodeMirror from './CodeMirror.vue';
-    import 'codemirror/mode/javascript/javascript';
-    import 'codemirror/addon/lint/javascript-lint';
     import {mapGetters, mapActions,} from 'vuex';
 
     export default {
         name: 'script-editor',
 
         mounted() {
-            require.ensure([], function (require) { // eslint-disable-line prefer-arrow-callback
-                window.JSHINT = require('jshint').JSHINT; // javascript-lint expects JSHINT in global scope
-            });
+            import('codemirror-jshint-async').then(({register,}) => register());
         },
 
         computed: mapGetters([
