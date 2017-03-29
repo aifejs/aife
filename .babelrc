@@ -1,20 +1,20 @@
 {
+  "plugins": [
+    "syntax-dynamic-import",
+    "transform-object-rest-spread",
+    "transform-runtime"
+  ],
   "env": {
     "development": {
-      "plugins": [
-        "syntax-dynamic-import",
-        "transform-object-rest-spread",
-        "transform-runtime"
-      ],
+      "plugins": [],
       "sourceMaps": "inline"
     },
     "production": {
       "presets": ["es2015"],
-      "plugins": [
-        "syntax-dynamic-import",
-        "transform-object-rest-spread",
-        "transform-runtime"
-      ]
+      "plugins": []
+    },
+    "test": {
+      "plugins": ["babel-plugin-transform-es2015-modules-commonjs"]
     }
   }
 }
