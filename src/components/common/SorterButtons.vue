@@ -7,48 +7,77 @@
             span.sorterButtons-sort(v-sort-icon="activeProperty.sort")
 </template>
 
-<style lang="stylus" src="../../styles/sorterButtons.styl"></style>
-
 <script>
-    import SortIcon from '../../directives/SortIcon';
+import SortIcon from '../../directives/SortIcon';
 
-    export default {
-        name: 'sorter-buttons',
+export default {
+    name: 'SorterButtons',
 
-        props: {
-            sortProperties: Array,
+    directives: {
+        SortIcon,
+    },
+
+    props: {
+        sortProperties: {
+            type: Array,
+            required: true,
         },
+    },
 
-        data() {
-            return {
-                activeProperty: {
-                    field: this.sortProperties[0].field,
-                    sort: 'desc',
-                },
-            };
-        },
-
-        methods: {
-            changeSort(sortProperty) {
-                const sort = this.activeProperty.sort;
-                if (sortProperty.field === this.activeProperty.field) {
-                    if (sort === 'desc') {
-                        this.activeProperty.sort = 'asc';
-                    } else {
-                        this.activeProperty.sort = 'desc';
-                    }
-                } else {
-                    this.activeProperty.field = sortProperty.field;
-                    this.activeProperty.sort = sort;
-                }
-
-                // we need to clone sort object or we gonna mutate state directly
-                this.$emit('sort', Object.assign({}, this.activeProperty));
+    data() {
+        return {
+            activeProperty: {
+                field: this.sortProperties[0].field,
+                sort: 'desc',
             },
-        },
+        };
+    },
 
-        directives: {
-            SortIcon,
+    methods: {
+        changeSort(sortProperty) {
+            const sort = this.activeProperty.sort;
+            if (sortProperty.field === this.activeProperty.field) {
+                if (sort === 'desc') {
+                    this.activeProperty.sort = 'asc';
+                } else {
+                    this.activeProperty.sort = 'desc';
+                }
+            } else {
+                this.activeProperty.field = sortProperty.field;
+                this.activeProperty.sort = sort;
+            }
+
+            // we need to clone sort object or we gonna mutate state directly
+            this.$emit('sort', Object.assign({}, this.activeProperty));
         },
-    };
+    },
+};
 </script>
+
+<style lang="stylus">
+.sorterButtons
+    &-title
+        margin-right: 1ex
+
+    &-sort
+        display: inline-block
+        margin-left: 1ex
+
+    &-grp
+        display: inline-block
+
+    &-btn
+        width: 8em
+        line-height: 2em
+        display: inline-block
+        border: 0 none
+        background: lightgrey
+
+        &:first-child
+            border-radius: 4px 0 0 4px
+        &:last-child
+            border-radius: 0 4px 4px 0
+
+        &.active
+            background-color: silver
+</style>

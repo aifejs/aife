@@ -19,74 +19,74 @@ article.codeEditor.passageEditor(v-if="passage")
         code-mirror(:options="passageEditorOptions", :code="passage.text", @code-changed="onCodeChanged")
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
-.passageEditor
-    &-docs
-        margin-left: 1ex
-        &::before
-            content: '('
-        &::after
-            content: ')'
-
-</style>
-
 <script>
-    import CodeMirror from '../code/CodeMirror.vue';
-    import 'sugarcube-mode';
-    import {mapGetters, mapActions,} from 'vuex';
-    import TagList from './TagList.vue';
-    import {documentations as docs,} from '../../lib/formatManager';
-    import {specialNames,} from '../../lib/specialNames';
+import CodeMirror from '../code/CodeMirror.vue';
+import 'sugarcube-mode';
+import {mapGetters, mapActions,} from 'vuex';
+import TagList from './TagList.vue';
+import {documentations as docs,} from '../../lib/formatManager';
+import {specialNames,} from '../../lib/specialNames';
 
-    export default {
-        name: 'passage-editor',
+export default {
+    name: 'PassageEditor',
 
-        data() {
-            return {
-                docs,
-                specialNames,
-            };
+    components: {
+        TagList,
+        CodeMirror,
+    },
+
+    data() {
+        return {
+            docs,
+            specialNames,
+        };
+    },
+
+    computed: mapGetters({
+        passage: 'getCurrentPassage',
+        tagSuggestions: 'tagSuggestionsCounted',
+        passageEditorOptions: 'passageEditorOptions',
+        story: 'story',
+    }),
+
+    methods: {
+        onCodeChanged(text) {
+            this.editPassageText({pid: this.passage.pid, text,});
         },
 
-        computed: mapGetters({
-            passage: 'getCurrentPassage',
-            tagSuggestions: 'tagSuggestionsCounted',
-            passageEditorOptions: 'passageEditorOptions',
-            story: 'story',
-        }),
-
-        methods: {
-            onCodeChanged(text) {
-                this.editPassageText({pid: this.passage.pid, text,});
-            },
-
-            onTitleChanged(event) {
-                this.editPassage({
-                    value: event.target.value,
-                    pid: this.passage.pid,
-                    field: 'title',
-                });
-            },
-
-            ...mapActions([
-                'openPassage',
-                'editPassage',
-                'editPassageText',
-                'addTag',
-                'removeTag',
-                'makeStarting',
-            ]),
-        },
-
-        beforeRouteEnter(to, from, next) {
-            next((vm) => {
-                vm.openPassage(to.params.pid);
+        onTitleChanged(event) {
+            this.editPassage({
+                value: event.target.value,
+                pid: this.passage.pid,
+                field: 'title',
             });
         },
 
-        components: {
-            TagList,
-            CodeMirror,
-        },
-    };
+        ...mapActions([
+            'openPassage',
+            'editPassage',
+            'editPassageText',
+            'addTag',
+            'removeTag',
+            'makeStarting',
+        ]),
+    },
+
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            vm.openPassage(to.params.pid);
+        });
+    },
+};
 </script>
+
+<style lang="stylus">
+    .passageEditor
+        &-docs
+            margin-left: 1ex
+            &::before
+                content: '('
+            &::after
+                content: ')'
+
+</style>

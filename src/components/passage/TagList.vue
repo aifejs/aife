@@ -9,7 +9,7 @@
         option(v-for="(count, suggestion) of suggestions", :value="suggestion") {{count}}
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus">
 .tagList
     &-item
         margin-right: 1em
@@ -23,39 +23,51 @@
 </style>
 
 <script>
-    import uniqueId from 'lodash/uniqueId';
-    export default {
-        props: {
-            pid: Number,
-            suggestions: Object,
-            tags: Array,
-            specialTags: Array,
+import uniqueId from 'lodash/uniqueId';
+export default {
+    props: {
+        pid: {
+            type: Number,
+            required: true,
         },
-        data() {
-            return {
-                uuid: uniqueId('tag-list-'),
-                domId: `${uniqueId('tag-list-')}-${this.pid}`,
-            };
+        suggestions: {
+            type: Object,
+            required: true,
         },
-        methods: {
-            isSpecial(tag) {
-                return this.specialTags.includes(tag);
-            },
-            onKeyPress({keyCode, target,}) {
-                if (keyCode === 13) {
-                    this.$emit('add-tag', {
-                        pid: this.pid,
-                        tag: target.value,
-                    });
-                    target.value = '';
-                }
-            },
-            onTagRemoveClick(index) {
-                this.$emit('remove-tag', {
+        tags: {
+            type: Array,
+            required: true,
+        },
+        specialTags: {
+            type: Array,
+            required: true,
+        },
+    },
+    data() {
+        return {
+            uuid: uniqueId('tag-list-'),
+            domId: `${uniqueId('tag-list-')}-${this.pid}`,
+        };
+    },
+    methods: {
+        isSpecial(tag) {
+            return this.specialTags.includes(tag);
+        },
+        onKeyPress({keyCode, target,}) {
+            if (keyCode === 13) {
+                this.$emit('add-tag', {
                     pid: this.pid,
-                    index,
+                    tag: target.value,
                 });
-            },
+                target.value = '';
+            }
         },
-    };
+        onTagRemoveClick(index) {
+            this.$emit('remove-tag', {
+                pid: this.pid,
+                index,
+            });
+        },
+    },
+};
 </script>

@@ -1,3 +1,4 @@
-node_modules
-dist
-storyFormats
+/build
+/config
+/dist/
+/storyFormats/

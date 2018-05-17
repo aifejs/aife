@@ -7,7 +7,7 @@
             input(type="file", @change="onFilePicked", accept=".html,.htm", multiple)
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus">
 .addStory
     border: 1px solid silver
     border-radius 2px
@@ -50,35 +50,35 @@
 </style>
 
 <script>
-    import {mapActions,} from 'vuex';
-    import {readFiles, importStories as importFromFiles,} from '../../lib/importStory';
+import {mapActions,} from 'vuex';
+import {readFiles, importStories as importFromFiles,} from '../../lib/importStory';
 
-    export default {
-        methods: {
-            onCreateStoryClick(event) {
-                this.createStory();
-            },
+export default {
+    name: 'StoryAdd',
 
-            onFilePicked({target,}) {
-                if (target.files.length) {
-                    readFiles(target.files)
-                        .then(importFromFiles)
-                        .then((stories) => {
-                            stories.map(this.importStory);
-                        })
-                        .catch(
-                            // TODO: show errors if any
-                            console.error.bind(console)
-                        );
-                }
-            },
-
-            ...mapActions([
-                'createStory',
-                'importStory',
-            ]),
+    methods: {
+        onCreateStoryClick() {
+            this.createStory();
         },
 
-        name: 'story-add',
-    };
+        onFilePicked({target,}) {
+            if (target.files.length) {
+                readFiles(target.files)
+                    .then(importFromFiles)
+                    .then((stories) => {
+                        stories.map(this.importStory);
+                    })
+                    .catch(
+                        // TODO: show errors if any
+                        console.error.bind(console) // eslint-disable-line no-console
+                    );
+            }
+        },
+
+        ...mapActions([
+            'createStory',
+            'importStory',
+        ]),
+    },
+};
 </script>

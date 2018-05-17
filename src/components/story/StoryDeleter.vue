@@ -8,23 +8,23 @@ article.deleteStory.deleter(v-if="story")
 </template>
 
 <script>
-    import {mapGetters, mapActions,} from 'vuex';
-    import router from '../../router';
+import {mapGetters, mapActions,} from 'vuex';
+import router from '../../router';
 
-    export default {
-        name: 'story-deleter',
+export default {
+    name: 'StoryDeleter',
 
-        methods: {
-            dropStory(ifid) {
-                this.deleteStory(ifid);
-                router.push({name: 'stories',});
-            },
+    computed: mapGetters(['story',]),
 
-            ...mapActions([
-                'deleteStory',
-            ]),
+    methods: {
+        dropStory(ifid) {
+            this.deleteStory(ifid);
+            router.push({name: 'stories',});
         },
 
-        computed: mapGetters(['story',]),
-    };
+        ...mapActions([
+            'deleteStory',
+        ]),
+    },
+};
 </script>

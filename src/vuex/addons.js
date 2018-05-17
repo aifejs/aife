@@ -34,7 +34,7 @@ const mutationMap = {
 };
 
 export const persistenceMw = {
-    onMutation({type,}, state, store) {
+    onMutation({type,}, state) {
         const key = mutationMap[type];
         asyncStorage.setItem(key, state[key]);
     },

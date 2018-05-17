@@ -1,14 +1,17 @@
 <script>
 import {Vector2,} from '../../../lib/Vector2';
-import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
+// import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
 import {mouseButtons,} from '../../../lib/mouseButtons';
 import {PositionTracker,} from './PositionTracker';
 
 export default {
-    name: 'pannable-item',
+    name: 'PannableItem',
 
     props: {
-        passage: Object,
+        passage: {
+            type: Object,
+            required: true,
+        },
 
         dragButton: {
             type: Number,
@@ -19,7 +22,10 @@ export default {
             default: mouseButtons.main,
         },
 
-        select: Function,
+        select: {
+            type: Function,
+            required: true,
+        },
     },
 
     data() {
@@ -29,6 +35,15 @@ export default {
             mouseDrag: new PositionTracker(),
             touchDrag: new PositionTracker(),
         };
+    },
+
+    computed: {
+        style() {
+            return {
+                left: `${this.passage.position.x}px`,
+                top: `${this.passage.position.y}px`,
+            };
+        },
     },
 
     mounted() {
@@ -107,15 +122,6 @@ export default {
             });
         },
     },
-
-    computed: {
-        style() {
-            return {
-                left: `${this.passage.position.x}px`,
-                top: `${this.passage.position.y}px`,
-            };
-        },
-    },
 };
 </script>
 
@@ -129,7 +135,7 @@ export default {
 
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus">
 itemHeight = 100px
 itemWidth = 100px
 

@@ -11,11 +11,14 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            story: Object,
-        },
+export default {
 
-        name: 'story-edit-code',
-    };
+    name: 'StoryEditCode',
+    props: {
+        story: {
+            type: Object,
+            required: true,
+        },
+    },
+};
 </script>

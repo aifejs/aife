@@ -1,5 +1,5 @@
 {
-  "extends": "../package.json",
+  "extends": "../.eslintrc.js",
   "parserOptions": {
     "sourceType": "module"
   },

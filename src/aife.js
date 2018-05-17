@@ -7,9 +7,15 @@ import {mapActions,} from 'vuex';
 
 sync(store, router);
 
+Vue.config.productionTip = false;
+
 const aifeApp = new Vue({
     router,
     store,
+
+    components: {
+        AifeRoot,
+    },
 
     created() {
         this.loadState();
@@ -18,10 +24,6 @@ const aifeApp = new Vue({
     methods: mapActions([
         'loadState',
     ]),
-
-    components: {
-        AifeRoot,
-    },
 });
 
 aifeApp.$mount('aife-root');

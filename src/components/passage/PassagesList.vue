@@ -16,7 +16,7 @@ article.passagesList.widget.lighter
                 p.passagesList-text(v-hilite-term="getPassagesFiltering", :title="passage.text") {{passage.text}}
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus">
 .passagesList
     margin-top: 1ex
 
@@ -51,40 +51,40 @@ article.passagesList.widget.lighter
 </style>
 
 <script>
-    import {mapGetters, mapActions,} from 'vuex';
-    import SorterButtons from '../common/SorterButtons.vue';
-    import HiliteTerm from '../../directives/HiliteTerm';
+import {mapGetters, mapActions,} from 'vuex';
+import SorterButtons from '../common/SorterButtons.vue';
+import HiliteTerm from '../../directives/HiliteTerm';
 
-    export default {
-        name: 'passages-list',
+export default {
+    name: 'PassagesList',
 
-        data() {
-            return {
-                sortProperties: [
-                    {field: 'pid', name: 'Passage id',},
-                    {field: 'title', name: 'Title',},
-                ],
-            };
-        },
+    components: {
+        SorterButtons,
+    },
 
-        computed: mapGetters({
-            ifid: 'getCurrentIfid',
-            passagesOverview: 'passagesOverview',
-            getPassagesFiltering: 'getPassagesFiltering',
-        }),
+    directives: {
+        HiliteTerm,
+    },
 
-        methods: mapActions([
-            'setPassagesSorting',
-            'setPassagesFiltering',
-            'makeStarting',
-        ]),
+    data() {
+        return {
+            sortProperties: [
+                {field: 'pid', name: 'Passage id',},
+                {field: 'title', name: 'Title',},
+            ],
+        };
+    },
 
-        components: {
-            SorterButtons,
-        },
+    computed: mapGetters({
+        ifid: 'getCurrentIfid',
+        passagesOverview: 'passagesOverview',
+        getPassagesFiltering: 'getPassagesFiltering',
+    }),
 
-        directives: {
-            HiliteTerm,
-        },
-    };
+    methods: mapActions([
+        'setPassagesSorting',
+        'setPassagesFiltering',
+        'makeStarting',
+    ]),
+};
 </script>

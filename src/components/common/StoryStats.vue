@@ -18,24 +18,49 @@ article.storyStats.widget(:class="{longForm: longForm, shortForm: !longForm}")
             dd.longForm {{ stats.code }}
 </template>
 
-<style lang="stylus" src="../../styles/storyStats.styl"></style>
-
 <script>
-    export default {
-        props: {
-            stats: Object,
+export default {
+    props: {
+        stats: {
+            type: Object,
+            required: true,
         },
+    },
 
-        data() {
-            return {
-                longForm: false,
-            };
-        },
+    data() {
+        return {
+            longForm: false,
+        };
+    },
 
-        methods: {
-            toggleLongForm() {
-                this.longForm = !this.longForm;
-            },
+    methods: {
+        toggleLongForm() {
+            this.longForm = !this.longForm;
         },
-    };
+    },
+};
 </script>
+
+<style lang="stylus">
+.storyStats
+    &.shortForm .longForm,
+    &.longForm .shortForm
+        display: none
+
+    &-toggler
+        cursor: pointer
+
+    .storyStats-list
+        margin-bottom: 0
+        dt
+            display: inline-block
+            width: 8em
+            text-align: right
+            margin-right: 1ex
+        dd
+            display: inline
+            margin: 0
+            &::after
+                display: block
+                content: ''
+</style>

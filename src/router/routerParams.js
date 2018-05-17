@@ -1,20 +1,20 @@
-import Overview from './components/story/Overview.vue';
-import PassageEditor from './components/passage/PassageEditor.vue';
-import PassageDeleter from './components/passage/PassageDeleter.vue';
-import ProofRead from './components/code/ProofRead.vue';
+import Overview from '../components/story/Overview.vue';
+import PassageEditor from '../components/passage/PassageEditor.vue';
+import PassageDeleter from '../components/passage/PassageDeleter.vue';
+import ProofRead from '../components/code/ProofRead.vue';
 
-import ScriptEditor from './components/code/ScriptEditor.vue';
-import StyleEditor from './components/code/StyleEditor.vue';
-import HtmlEditor from './components/code/HtmlEditor.vue';
+import ScriptEditor from '../components/code/ScriptEditor.vue';
+import StyleEditor from '../components/code/StyleEditor.vue';
+import HtmlEditor from '../components/code/HtmlEditor.vue';
 
-import StoryList from './components/storyList/StoryList.vue';
-import Story from './components/story/Story.vue';
-import StoryDeleter from './components/story/StoryDeleter.vue';
-import StoryPlay from './components/story/export/StoryPlay.vue';
-import StoryDebug from './components/story/export/StoryDebug.vue';
-import StoryPublish from './components/story/export/StoryPublish.vue';
+import StoryList from '../components/storyList/StoryList.vue';
+import Story from '../components/story/Story.vue';
+import StoryDeleter from '../components/story/StoryDeleter.vue';
+import StoryPlay from '../components/story/export/StoryPlay.vue';
+import StoryDebug from '../components/story/export/StoryDebug.vue';
+import StoryPublish from '../components/story/export/StoryPublish.vue';
 
-import Settings from './components/settings/Settings.vue';
+import Settings from '../components/settings/Settings.vue';
 
 /** @type VueRouter.RouterOptions */
 const routerParams = {

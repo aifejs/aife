@@ -6,36 +6,38 @@ article.codeEditor
 </template>
 
 <script>
-    import CodeMirror from './CodeMirror.vue';
-    import {mapGetters, mapActions,} from 'vuex';
+import CodeMirror from './CodeMirror.vue';
+import {mapGetters, mapActions,} from 'vuex';
 
-    export default {
-        name: 'script-editor',
+export default {
+    name: 'ScriptEditor',
 
-        mounted() {
-            import('codemirror-jshint-async').then(({register,}) => register());
-        },
+    components: {
+        CodeMirror,
+    },
 
-        computed: mapGetters([
+    computed: {
+        ...mapGetters([
             'jsEditorOptions',
             'getScript',
         ]),
+    },
 
-        methods: {
-            ...mapActions([
-                'saveScript',
-                'openScript',
-            ]),
-        },
+    mounted() {
+        import('codemirror-jshint-async').then(({register,}) => register());
+    },
 
-        beforeRouteEnter(to, from, next) {
-            next((vm) => {
-                vm.openScript();
-            });
-        },
+    methods: {
+        ...mapActions([
+            'saveScript',
+            'openScript',
+        ]),
+    },
 
-        components: {
-            CodeMirror,
-        },
-    };
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            vm.openScript();
+        });
+    },
+};
 </script>

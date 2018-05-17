@@ -9,34 +9,34 @@ article.codeEditor
 </template>
 
 <script>
-    import {mapGetters, mapActions,} from 'vuex';
-    import debounce from 'lodash/debounce';
+import {mapGetters, mapActions,} from 'vuex';
+import debounce from 'lodash/debounce';
 
-    export default {
-        name: 'proof-read',
+export default {
+    name: 'ProofRead',
 
-        computed: mapGetters([
-            'proofReadCopy',
-            'getProofModeError',
-        ]),
+    computed: mapGetters([
+        'proofReadCopy',
+        'getProofModeError',
+    ]),
 
-        methods: {
-            onInput: debounce(
-                function (event) {
-                    this.$store.dispatch('updateStoryFromProof', event.target.value);
-                },
-                500
-            ),
+    methods: {
+        onInput: debounce(
+            function (event) {
+                this.$store.dispatch('updateStoryFromProof', event.target.value);
+            },
+            500
+        ),
 
-            ...mapActions({
-                openProofRead: 'openProofRead',
-            }),
-        },
+        ...mapActions({
+            openProofRead: 'openProofRead',
+        }),
+    },
 
-        beforeRouteEnter(to, from, next) {
-            next((vm) => {
-                vm.openProofRead();
-            });
-        },
-    };
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            vm.openProofRead();
+        });
+    },
+};
 </script>

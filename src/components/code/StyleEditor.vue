@@ -6,33 +6,33 @@ article.codeEditor
 </template>
 
 <script>
-    import CodeMirror from './CodeMirror.vue';
+import CodeMirror from './CodeMirror.vue';
 
-    import {mapGetters, mapActions,} from 'vuex';
+import {mapGetters, mapActions,} from 'vuex';
 
-    export default {
-        name: 'style-editor',
+export default {
+    name: 'StyleEditor',
 
-        computed: mapGetters([
-            'cssEditorOptions',
-            'getStyleSheet',
+    components: {
+        CodeMirror,
+    },
+
+    computed: mapGetters([
+        'cssEditorOptions',
+        'getStyleSheet',
+    ]),
+
+    methods: {
+        ...mapActions([
+            'saveStyleSheet',
+            'openStylesheet',
         ]),
+    },
 
-        methods: {
-            ...mapActions([
-                'saveStyleSheet',
-                'openStylesheet',
-            ]),
-        },
-
-        beforeRouteEnter(to, from, next) {
-            next((vm) => {
-                vm.openStylesheet();
-            });
-        },
-
-        components: {
-            CodeMirror,
-        },
-    };
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            vm.openStylesheet();
+        });
+    },
+};
 </script>

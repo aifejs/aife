@@ -8,25 +8,25 @@ article.deleteStory.deleter(v-if="passage")
 </template>
 
 <script>
-    import {mapGetters, mapActions,} from 'vuex';
-    import router from '../../router';
+import {mapGetters, mapActions,} from 'vuex';
+import router from '../../router';
 
-    export default {
-        name: 'passage-deleter',
+export default {
+    name: 'PassageDeleter',
 
-        methods: {
-            dropPassage(pid) {
-                this.deletePassage(pid);
-                router.push({name: 'overview', params: {ifid: this.$route.params.ifid,},});
-            },
+    computed: mapGetters({
+        passage: 'getCurrentPassage',
+    }),
 
-            ...mapActions([
-                'deletePassage',
-            ]),
+    methods: {
+        dropPassage(pid) {
+            this.deletePassage(pid);
+            router.push({name: 'overview', params: {ifid: this.$route.params.ifid,},});
         },
 
-        computed: mapGetters({
-            passage: 'getCurrentPassage',
-        }),
-    };
+        ...mapActions([
+            'deletePassage',
+        ]),
+    },
+};
 </script>

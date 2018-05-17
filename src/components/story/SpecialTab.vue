@@ -5,14 +5,26 @@ router-link.passageTabs-item.special(tag="span", :to="{name: routeName, params: 
 </template>
 
 <script>
-    export default {
-        name: 'special-tab',
+export default {
+    name: 'SpecialTab',
 
-        props: {
-            title: String,
-            routeName: String,
-            close: Function,
-            ifid: String,
+    props: {
+        title: {
+            type: String,
+            required: true,
         },
-    };
+        routeName: {
+            type: String,
+            required: true,
+        },
+        close: {
+            type: Function,
+            required: true,
+        },
+        ifid: {
+            type: String,
+            required: true,
+        },
+    },
+};
 </script>

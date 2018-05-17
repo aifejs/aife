@@ -2,10 +2,92 @@
 router-view
 </template>
 
-<style lang="stylus" src="./app.styl"></style>
-
 <script>
-    export default {
-        name: 'aife-root',
-    };
+export default {
+    name: 'AifeRoot',
+};
 </script>
+
+
+<style lang="stylus">
+@import 'normalize.css/normalize.css';
+@import 'codemirror/lib/codemirror.css';
+
+@import './styles/colors';
+
+* {
+    box-sizing: border-box
+}
+
+html
+    font-size: 10px
+    min-height: 100vh
+    padding: 0
+    margin: 0
+    display: flex
+    flex-direction: column
+
+body
+    font-family: Helvetica, Arial, sans-serif
+    font-size: 14px
+    line-height: 1.42857143
+    background-color: #fff
+    color: green
+    padding: 0
+    display: flex;
+    flex: 1;
+
+.aifeWrapper
+    padding: 0
+    margin: 0
+    width: 100%
+
+a
+    color: color-link
+    &.visited, &:hover
+        color: color-link2
+
+p
+    margin: 0 0 1ex
+
+dl
+    margin-top: 0
+
+h1, h2, h3, h4, h5, h6
+    font-weight: bold
+    line-height: 1.1
+
+h1
+    font-size: 36px
+
+h2
+    font-size: 30px
+
+h3
+    font-size: 24px
+
+h4
+    font-size: 18px
+
+h5
+    font-size: 18px
+
+h6
+    font-size: 18px
+
+.text
+    &-left
+        text-align: left
+    &-center
+        text-align: center
+    &-right
+        text-align: right
+    &-justify
+        text-align: justify
+
+@import './styles/widget';
+@import './styles/activeIcon';
+@import './styles/deleter';
+@import './styles/codeArea';
+@import './styles/codeEditor';
+</style>

@@ -1,15 +1,15 @@
-<template></template>
 <script>
-    import {playStory,} from './../../../lib/publishStory';
-    import {mapGetters,} from 'vuex';
-    export default {
-        name: 'story-play',
-        mounted() {
-            playStory(this.story, {});
-        },
+import {playStory,} from './../../../lib/publishStory';
+import {mapGetters,} from 'vuex';
+export default {
+    name: 'StoryPlay',
 
-        computed: {
-            ...mapGetters(['story',]),
-        },
-    };
+    computed: {
+        ...mapGetters(['story',]),
+    },
+
+    mounted() {
+        playStory(this.story, {});
+    },
+};
 </script>

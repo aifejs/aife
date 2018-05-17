@@ -1,41 +1,47 @@
-<script>
-    import {Vector2,} from '../../../lib/Vector2';
-    import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
-    import {mouseButtons,} from '../../../lib/mouseButtons';
-    import {PositionTracker,} from './PositionTracker';
-
-    export default {
-        name: 'pannable-marquee',
-
-        props: {
-            visible: {
-                type: Boolean,
-                default: false,
-            },
-
-            start: Vector2,
-            end: Vector2,
-        },
-
-        computed: {
-            style() {
-                return {
-                    left: `${this.start.x}px`,
-                    top: `${this.start.y}px`,
-
-                    width: `${this.end.x - this.start.x}px`,
-                    height: `${this.end.y - this.start.y}px`,
-                };
-            },
-        },
-    };
-</script>
-
 <template lang="pug">
 .pannable-marquee(:class="{visible: visible,}", :style="style")
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<script>
+import {Vector2,} from '../../../lib/Vector2';
+// import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
+// import {mouseButtons,} from '../../../lib/mouseButtons';
+// import {PositionTracker,} from './PositionTracker';
+
+export default {
+    name: 'PannableMarquee',
+
+    props: {
+        visible: {
+            type: Boolean,
+            default: false,
+        },
+
+        start: {
+            type: Vector2,
+            required: true,
+        },
+        end: {
+            type: Vector2,
+            required: true,
+        },
+    },
+
+    computed: {
+        style() {
+            return {
+                left: `${this.start.x}px`,
+                top: `${this.start.y}px`,
+
+                width: `${this.end.x - this.start.x}px`,
+                height: `${this.end.y - this.start.y}px`,
+            };
+        },
+    },
+};
+</script>
+
+<style lang="stylus">
 .pannable
     &-marquee
         position: absolute

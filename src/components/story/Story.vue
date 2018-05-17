@@ -13,26 +13,26 @@ article.widget.screen.story
             i.fa.fa-spinner.fa-spin.fa-4x
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus">
 .story
     &-body
         padding-top: 0
 </style>
 
 <script>
-    import PassageTabs from './PassageTabs.vue';
-    import StoryFooter from './StoryFooter.vue';
-    import {mapGetters,} from 'vuex';
+import PassageTabs from './PassageTabs.vue';
+import StoryFooter from './StoryFooter.vue';
+import {mapGetters,} from 'vuex';
 
-    export default {
-        computed: mapGetters({
-            story: 'story',
-            storiesLoaded: 'getStoriesLoaded',
-        }),
+export default {
+    components: {
+        PassageTabs,
+        StoryFooter,
+    },
 
-        components: {
-            PassageTabs,
-            StoryFooter,
-        },
-    };
+    computed: mapGetters({
+        story: 'story',
+        storiesLoaded: 'getStoriesLoaded',
+    }),
+};
 </script>

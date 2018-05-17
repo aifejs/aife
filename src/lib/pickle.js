@@ -10,7 +10,7 @@ export function pickleTags(tags) {
     return tags.map((tag) => `#${tag}`).join(' ');
 }
 
-const unpickleTagsRe = /(?:^| *)\#/;
+const unpickleTagsRe = /(?:^| *)#/;
 
 /**
  * @param {string} tagsString

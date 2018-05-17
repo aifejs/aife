@@ -45,7 +45,7 @@ function generateLoaders(loaders, sourceMap, extract) {
     }
 }
 
-function cssLoaders(options = {}) {
+function cssLoaders(options = {}) { // eslint-disable-line no-unused-vars
     // http://vuejs.github.io/vue-loader/en/configurations/extract-css.html
     return {
         css: generateLoaders(['css',]),

@@ -12,7 +12,49 @@ article.codeEditor.htmlEditor
         code-mirror(:options="htmlEditorOptions", :code="getHtml", @code-changed="saveHtml")
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<script>
+import CodeMirror from './CodeMirror.vue';
+import {mapGetters, mapActions,} from 'vuex';
+import {formats,} from '../../lib/formatManager';
+
+export default {
+    name: 'HtmlEditor',
+
+    components: {
+        CodeMirror,
+    },
+
+    computed: mapGetters({
+        htmlEditorOptions: 'htmlEditorOptions',
+        getHtml: 'getHtml',
+        story: 'story',
+    }),
+
+    methods: {
+        insertFormatSource() {
+            const format = formats[this.story.format];
+            format.load().then(
+                () => {
+                    this.saveHtml(format.properties.source);
+                }
+            );
+        },
+
+        ...mapActions([
+            'saveHtml',
+            'openHtml',
+        ]),
+    },
+
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            vm.openHtml();
+        });
+    },
+};
+</script>
+
+<style lang="stylus">
 @import '../../styles/colors'
 .htmlEditor
     label.codeArea
@@ -26,45 +68,3 @@ article.codeEditor.htmlEditor
             &:hover
                 border-bottom-color: currentColor
 </style>
-
-<script>
-    import CodeMirror from './CodeMirror.vue';
-    import {mapGetters, mapActions,} from 'vuex';
-    import {formats,} from '../../lib/formatManager';
-
-    export default {
-        name: 'html-editor',
-
-        computed: mapGetters({
-            htmlEditorOptions: 'htmlEditorOptions',
-            getHtml: 'getHtml',
-            story: 'story',
-        }),
-
-        methods: {
-            insertFormatSource() {
-                const format = formats[this.story.format];
-                format.load().then(
-                    () => {
-                        this.saveHtml(format.properties.source);
-                    }
-                );
-            },
-
-            ...mapActions([
-                'saveHtml',
-                'openHtml',
-            ]),
-        },
-
-        beforeRouteEnter(to, from, next) {
-            next((vm) => {
-                vm.openHtml();
-            });
-        },
-
-        components: {
-            CodeMirror,
-        },
-    };
-</script>

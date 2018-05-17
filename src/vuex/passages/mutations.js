@@ -205,7 +205,7 @@ export function MOVE_SELECTED_PASSAGES(state, {x, y,}) {
     updateStory(story);
 }
 
-export function SELECT_PASSAGES_BY_MARQUEE(state, {start, end, mode = 'create',}) {
+export function SELECT_PASSAGES_BY_MARQUEE(state, {start, end, /*mode = 'create',*/}) {
     const story = getCurrentStory(state);
 
     const marqueeRect = new Rect(start, end);

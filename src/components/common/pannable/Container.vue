@@ -10,7 +10,16 @@ import PannableItem from './Item.vue';
 import PannableMarquee from './Marquee.vue';
 
 export default {
-    name: 'pannable-container',
+    name: 'PannableContainer',
+
+    directives: {
+        bgGrid,
+    },
+
+    components: {
+        PannableItem,
+        PannableMarquee,
+    },
 
     props: {
         offsetByKey: {
@@ -37,6 +46,7 @@ export default {
 
         passages: {
             type: Array,
+            required: true,
         },
     },
 
@@ -56,6 +66,16 @@ export default {
 
             isHovered: false,
         };
+    },
+
+    computed: {
+        bgTransform() {
+            return `translateX(${this.position.x}px) translateY(${this.position.y}px)`;
+        },
+
+        ...mapGetters([
+            'hasSelectedPassages',
+        ]),
     },
 
     mounted() {
@@ -78,7 +98,7 @@ export default {
                 this.position.add(diff);
             }
         },
-        onTouchEnd(event) {
+        onTouchEnd() {
             if (this.touchDrag.active) {
                 this.touchDrag.off();
             }
@@ -172,25 +192,6 @@ export default {
             'selectPassagesByMarquee',
         ]),
     },
-
-    computed: {
-        bgTransform() {
-            return `translateX(${this.position.x}px) translateY(${this.position.y}px)`;
-        },
-
-        ...mapGetters([
-            'hasSelectedPassages',
-        ]),
-    },
-
-    directives: {
-        bgGrid,
-    },
-
-    components: {
-        PannableItem,
-        PannableMarquee,
-    },
 };
 </script>
 
@@ -204,7 +205,7 @@ export default {
         pannable-item(v-for="passage in passages", :passage="passage", :key="passage.pid", @item-selected="selectPassage", @item-moved="movePassage")
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus">
 canvasWidth = 3000px
 canvasHeight = 3000px
 

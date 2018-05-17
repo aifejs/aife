@@ -67,7 +67,7 @@ export class Format {
      * @param {number} startId
      * @return {Promise<string>}
      */
-    publish(story, formatOptions, startId) {
+    publish(story, formatOptions, startId) { // eslint-disable-line no-unused-vars
         return this.load().then(
             () => {
                 let output = getCustomHtml(story) || this.properties.source;
