@@ -1,8 +1,9 @@
 <script>
+import {PositionTracker,} from './PositionTracker';
+
 import {Vector2,} from '../../../lib/Vector2';
 // import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
 import {mouseButtons,} from '../../../lib/mouseButtons';
-import {PositionTracker,} from './PositionTracker';
 
 export default {
     name: 'PannableItem',

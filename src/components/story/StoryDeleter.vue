@@ -9,6 +9,7 @@ article.deleteStory.deleter(v-if="story")
 
 <script>
 import {mapGetters, mapActions,} from 'vuex';
+
 import router from '../../router';
 
 export default {

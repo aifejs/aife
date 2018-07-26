@@ -53,9 +53,11 @@ nav.passageTabs
 
 <script>
 import {mapGetters, mapActions,} from 'vuex';
-import router from '../../router';
+
 import SpecialTab from './SpecialTab.vue';
-import PassageTabClose from '../common/PassageTabClose';
+
+import router from '../../router';
+import PassageTabClose from '../common/PassageTabClose.vue';
 
 export default {
     name: 'PassageTabs',

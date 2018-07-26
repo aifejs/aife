@@ -23,8 +23,9 @@ article.widget.lighter.screen.storyList
 import {mapGetters, mapActions,} from 'vuex';
 
 import StoryListItem from './StoryListItem.vue';
-import SorterButtons from '../common/SorterButtons.vue';
 import StoryAdd from './StoryAdd.vue';
+
+import SorterButtons from '../common/SorterButtons.vue';
 import pkg from '../../../package.json';
 
 export default {

@@ -14,8 +14,10 @@ article.codeEditor.htmlEditor
 </template>
 
 <script>
-import CodeMirror from './CodeMirror.vue';
 import {mapGetters, mapActions,} from 'vuex';
+
+import CodeMirror from './CodeMirror.vue';
+
 import {formats,} from '../../lib/formatManager';
 
 export default {

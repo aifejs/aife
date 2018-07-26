@@ -1,5 +1,6 @@
-import {formats, Format,} from './formatManager';
 import saveAs from 'browser-saveas';
+
+import {formats, Format,} from './formatManager';
 
 function replaceContent(html) {
     // TODO: kill UI, if needed

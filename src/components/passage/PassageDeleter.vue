@@ -11,6 +11,7 @@ article.deleteStory.deleter(v-if="passage")
 
 <script>
 import {mapGetters, mapActions,} from 'vuex';
+
 import router from '../../router';
 
 export default {

@@ -2,9 +2,10 @@
 
 import cloneDeep from 'lodash/cloneDeep';
 import uuid from 'tiny-uuid';
+
 import {unpickleStory,} from '../../lib/pickle';
 import createCopyTitle from '../../lib/createCopyTitle';
-import {updateStory, hasPid, getCurrentStory,} from '../utils';
+import {getCurrentStory, hasPid, updateStory,} from '../utils';
 
 const storyBlueprint = {
     title: 'Untitled story',

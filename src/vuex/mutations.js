@@ -17,7 +17,6 @@ import {
     MOVE_SELECTED_PASSAGES,
     SELECT_PASSAGES_BY_MARQUEE,
 } from './passages/mutations';
-
 import {
     CREATE_STORY,
     DELETE_STORY,

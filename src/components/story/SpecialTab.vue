@@ -5,7 +5,7 @@ router-link.passageTabs-item.special(tag="span", :to="{name: routeName, params: 
 </template>
 
 <script>
-import PassageTabClose from '../common/PassageTabClose';
+import PassageTabClose from '../common/PassageTabClose.vue';
 
 export default {
     name: 'SpecialTab',

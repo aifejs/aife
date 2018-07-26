@@ -1,4 +1,3 @@
-import storage from '../lib/asyncStorage';
 import {
     openPassage,
     editPassage,
@@ -40,6 +39,8 @@ import {
     updateStoryFromProof,
     closeProofRead,
 } from './stories/actions';
+
+import storage from '../lib/asyncStorage';
 
 function setPassagesSorting({commit,}, sorting) {
     commit('PASSAGES_SORTING', sorting);

@@ -1,4 +1,5 @@
 import {stripIndent,} from 'common-tags';
+
 import pkg from '../../package.json';
 
 /**

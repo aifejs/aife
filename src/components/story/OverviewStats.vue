@@ -3,8 +3,9 @@ story-stats.lighter(:stats="stats")
 </template>
 
 <script type="text/babel">
-import StoryStats from '../common/StoryStats.vue';
 import {mapGetters,} from 'vuex';
+
+import StoryStats from '../common/StoryStats.vue';
 
 export default {
     name: 'OverviewStats',

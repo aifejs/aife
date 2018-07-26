@@ -1,8 +1,10 @@
-import {pickleStory,} from '../lib/pickle';
 import sortBy from 'lodash/sortBy';
 import deburr from 'lodash/deburr';
-import storyStats from '../lib/storyStats';
+
 import {getCurrentStory,} from './utils';
+
+import storyStats from '../lib/storyStats';
+import {pickleStory,} from '../lib/pickle';
 import {specialNames, isSpecial,} from '../lib/specialNames';
 
 /**

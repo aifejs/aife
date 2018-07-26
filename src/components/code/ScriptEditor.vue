@@ -6,8 +6,9 @@ article.codeEditor
 </template>
 
 <script>
-import CodeMirror from './CodeMirror.vue';
 import {mapGetters, mapActions,} from 'vuex';
+
+import CodeMirror from './CodeMirror.vue';
 
 export default {
     name: 'ScriptEditor',

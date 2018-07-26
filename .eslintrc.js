@@ -19,6 +19,8 @@ const eslintConfig = {
     },
     extends: [
         'eslint:recommended',
+        'plugin:import/warnings',
+        'plugin:import/errors',
         'eslint-config-aifejs',
         'plugin:vue/recommended',
     ],
@@ -35,6 +37,13 @@ const eslintConfig = {
         'indent': ['error', 4],
         'no-debugger': [process.env.NODE_ENV === 'production' ? 'error' : 'warn'],
         quotes: ['error', 'single', { allowTemplateLiterals: true }],
+
+        'import/order': ['error', {
+            'groups': ['builtin', 'external', 'internal', 'index', 'sibling', 'parent',],
+            'newlines-between': 'always',
+
+        }],
+        'import/newline-after-import': ['error', { 'count': 1, },],
     },
 };
 

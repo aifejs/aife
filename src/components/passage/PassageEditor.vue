@@ -27,10 +27,12 @@ article.codeEditor.passageEditor(v-if="passage")
 </template>
 
 <script>
-import CodeMirror from '../code/CodeMirror.vue';
 import 'sugarcube-mode';
 import {mapGetters, mapActions,} from 'vuex';
+
 import TagList from './TagList.vue';
+
+import CodeMirror from '../code/CodeMirror.vue';
 import {documentations as docs,} from '../../lib/formatManager';
 import {specialNames,} from '../../lib/specialNames';
 

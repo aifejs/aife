@@ -1,6 +1,8 @@
 <script>
-import {playStory,} from './../../../lib/publishStory';
 import {mapGetters,} from 'vuex';
+
+import {playStory,} from './../../../lib/publishStory';
+
 export default {
     name: 'StoryDebug',
 

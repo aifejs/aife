@@ -59,6 +59,7 @@ article.passagesList.widget.lighter
 
 <script>
 import {mapGetters, mapActions,} from 'vuex';
+
 import SorterButtons from '../common/SorterButtons.vue';
 import HiliteTerm from '../../directives/HiliteTerm';
 

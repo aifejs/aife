@@ -20,9 +20,10 @@ article.widget.screen.story
 </style>
 
 <script>
+import {mapGetters,} from 'vuex';
+
 import PassageTabs from './PassageTabs.vue';
 import StoryFooter from './StoryFooter.vue';
-import {mapGetters,} from 'vuex';
 
 export default {
     components: {

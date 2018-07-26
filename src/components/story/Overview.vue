@@ -15,12 +15,14 @@
 </template>
 
 <script>
+import {mapGetters,} from 'vuex';
+
 import OverviewStats from './OverviewStats.vue';
-import PassagesList from '../passage/PassagesList.vue';
 import StoryRun from './StoryRun.vue';
 import StoryEditCode from './StoryEditCode.vue';
+
+import PassagesList from '../passage/PassagesList.vue';
 import PannableContainer from '../common/pannable/Container.vue';
-import {mapGetters,} from 'vuex';
 import {formats,} from '../../lib/formatManager';
 
 export default {

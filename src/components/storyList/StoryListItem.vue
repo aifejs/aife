@@ -27,6 +27,7 @@
 
 <script>
 import {mapActions,} from 'vuex';
+
 import StoryStats from '../common/StoryStats.vue';
 import StoryRun from '../story/StoryRun.vue';
 

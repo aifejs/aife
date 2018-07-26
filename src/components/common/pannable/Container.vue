@@ -1,13 +1,14 @@
 <script>
 import {mapActions, mapGetters,} from 'vuex';
 
-import {Vector2,} from '../../../lib/Vector2';
-import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
-import {mouseButtons,} from '../../../lib/mouseButtons';
 import {PositionTracker,} from './PositionTracker';
 import bgGrid from './BgGrid';
 import PannableItem from './Item.vue';
 import PannableMarquee from './Marquee.vue';
+
+import {mouseButtons,} from '../../../lib/mouseButtons';
+import {keyCodeVectors,} from '../../../lib/keyCodeVectors';
+import {Vector2,} from '../../../lib/Vector2';
 
 export default {
     name: 'PannableContainer',

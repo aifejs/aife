@@ -51,6 +51,7 @@
 
 <script>
 import {mapActions,} from 'vuex';
+
 import {readFiles, importStories as importFromFiles,} from '../../lib/importStory';
 
 export default {
