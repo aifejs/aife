@@ -1,5 +1,5 @@
-import test from 'tape';
-import {fixture,} from '../fixture';
+import test from 'ava';
+import {fixture,} from '../../helpers/fixture';
 import {CLOSE_PASSAGE,} from '../../../../src/vuex/mutations';
 
 test('CLOSE_PASSAGE', (assert) => {
@@ -9,7 +9,7 @@ test('CLOSE_PASSAGE', (assert) => {
 
     CLOSE_PASSAGE(state, story.passages[0].pid);
 
-    assert.equal(
+    assert.is(
         story.opened.length,
         1,
         'One opened passage left after closing'
@@ -17,11 +17,9 @@ test('CLOSE_PASSAGE', (assert) => {
 
     CLOSE_PASSAGE(state, 451);
 
-    assert.equal(
+    assert.is(
         story.opened.length,
         1,
         'Nothing changed after attempting to close non-existing passage'
     );
-
-    assert.end();
 });

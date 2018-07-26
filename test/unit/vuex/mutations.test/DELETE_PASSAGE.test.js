@@ -1,5 +1,5 @@
-import test from 'tape';
-import {fixture, testState,} from '../fixture';
+import test from 'ava';
+import {fixture, testState,} from '../../helpers/fixture';
 import {DELETE_PASSAGE,} from '../../../../src/vuex/mutations';
 
 test('DELETE_PASSAGE', (assert) => {
@@ -10,13 +10,13 @@ test('DELETE_PASSAGE', (assert) => {
     story.opened.push(story.passages[0], story.passages[1]);
     DELETE_PASSAGE(state, testState.stories[0].passages[0].pid);
 
-    assert.equal(
+    assert.is(
         story.opened.length,
         1,
         'One opened passage left after deleting'
     );
 
-    assert.equal(
+    assert.is(
         story.passages.length,
         1,
         'One passage less'
@@ -24,7 +24,7 @@ test('DELETE_PASSAGE', (assert) => {
 
     DELETE_PASSAGE(state, 451);
 
-    assert.equal(
+    assert.is(
         story.passages.length,
         1,
         'Nothing changed after attempting to delete non-existing passage'

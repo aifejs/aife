@@ -1,5 +1,5 @@
 import {cssEditorOptions,} from '../../../../src/vuex/getters';
-import test from 'tape';
+import test from 'ava';
 
 test('cssEditorOptions', (assert) => {
     const state = {
@@ -8,7 +8,7 @@ test('cssEditorOptions', (assert) => {
 
     assert.plan(1);
 
-    assert.deepEquals(
+    assert.deepEqual(
         cssEditorOptions(state),
         {
             mode: 'css',

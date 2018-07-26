@@ -1,6 +1,6 @@
-import test from 'tape';
-import {fixture, testState,} from '../fixture';
-import {textual,} from '../comparePassages';
+import test from 'ava';
+import {fixture, testState,} from '../../helpers/fixture';
+import {textual,} from '../../helpers/comparePassages';
 import {proofReadCopy,} from '../../../../src/vuex/getters';
 import {UPDATE_STORY_FROM_PROOF,} from '../../../../src/vuex/mutations';
 
@@ -17,13 +17,13 @@ test('UPDATE_STORY_FROM_PROOF', (assert) => {
         copy
     );
 
-    assert.equals(
+    assert.is(
         state.stories[0].passages[0].text,
         'Passage piece',
         'Changed 1st passage'
     );
 
-    assert.ok(
+    assert.true(
         textual(
             state.stories[0].passages[1],
             testState.stories[0].passages[1]
@@ -31,7 +31,7 @@ test('UPDATE_STORY_FROM_PROOF', (assert) => {
         '2nd passage textually unchanged'
     );
 
-    assert.deepEquals(
+    assert.deepEqual(
         {
             pid: state.stories[0].passages[1].pid,
             tags: state.stories[0].passages[1].tags,

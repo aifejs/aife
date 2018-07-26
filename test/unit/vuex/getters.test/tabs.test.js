@@ -1,6 +1,6 @@
 import {tabs,} from '../../../../src/vuex/getters';
-import test from 'tape';
-import {fixture,} from '../fixture';
+import test from 'ava';
+import {fixture,} from '../../helpers/fixture';
 
 test('tabs', (assert) => {
     assert.plan(2);
@@ -12,7 +12,7 @@ test('tabs', (assert) => {
         notEmptyState.stories[0].passages[1],
     ];
 
-    assert.equals(
+    assert.is(
         tabs(emptyState).length,
         0,
         'empty array when no tabs is opened'
@@ -20,7 +20,7 @@ test('tabs', (assert) => {
 
     const nonEmptyTabs = tabs(notEmptyState);
 
-    assert.deepEquals(
+    assert.deepEqual(
         nonEmptyTabs,
         [
             {

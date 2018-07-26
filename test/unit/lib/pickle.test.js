@@ -1,4 +1,4 @@
-import test from 'tape';
+import test from 'ava';
 import {stripIndents, stripIndent,} from 'common-tags';
 import {
     picklePassage,
@@ -53,71 +53,68 @@ const testPickledStory = stripIndents`
     ${testPickledPassages}
 `;
 
+test('pickle/picklePassage', (assert) => {
+    assert.plan(2);
 
-test('pickle', (assert) => {
-    assert.test('picklePassage', (assert) => {
-        assert.plan(2);
+    const pickled = picklePassage(testPassage0);
+    assert.is(
+        pickled,
+        testPassage0Pickled,
+        'Pickled passage without tags correctly'
+    );
 
-        const pickled = picklePassage(testPassage0);
-        assert.equals(
-            pickled,
-            testPassage0Pickled,
-            'Pickled passage without tags correctly'
-        );
+    const pickledExtraSpicy = picklePassage(testPassage1);
+    assert.is(
+        pickledExtraSpicy,
+        testPassage1Pickled,
+        'Pickled passage with tags correctly'
+    );
+});
 
-        const pickledExtraSpicy = picklePassage(testPassage1);
-        assert.equals(
-            pickledExtraSpicy,
-            testPassage1Pickled,
-            'Pickled passage with tags correctly'
-        );
-    });
+test('pickle/unpicklePassage', (assert) => {
+    assert.plan(2);
 
-    assert.test('unpicklePassage', (assert) => {
-        assert.plan(2);
+    const unpickled = unpicklePassage(testPassage0Pickled);
+    assert.deepEqual(
+        unpickled,
+        testPassage0,
+        'Un-pickled passage without tags correctly'
+    );
 
-        const unpickled = unpicklePassage(testPassage0Pickled);
-        assert.deepEquals(
-            unpickled,
-            testPassage0,
-            'Un-pickled passage without tags correctly'
-        );
+    const unpickledExtraSpicy = unpicklePassage(testPassage1Pickled);
+    assert.deepEqual(
+        unpickledExtraSpicy,
+        testPassage1,
+        'un-pickled passage with tags correctly'
+    );
+});
 
-        const unpickledExtraSpicy = unpicklePassage(testPassage1Pickled);
-        assert.deepEquals(
-            unpickledExtraSpicy,
-            testPassage1,
-            'un-pickled passage with tags correctly'
-        );
-    });
+test('pickle/picklePassages', (assert) => {
+    assert.plan(1);
 
-    assert.test('picklePassages', (assert) => {
-        assert.plan(1);
+    const pickledPassages = picklePassages(testStory.passages);
 
-        const pickledPassages = picklePassages(testStory.passages);
+    assert.is(
+        pickledPassages,
+        testPickledPassages,
+        'Correct passages pickled successfully'
+    );
+});
 
-        assert.equals(
-            pickledPassages,
-            testPickledPassages,
-            'Correct passages pickled successfully'
-        );
-    });
+test('pickle/unpickleStory', (assert) => {
+    assert.plan(2);
 
-    assert.test('unpickleStory', (assert) => {
-        assert.plan(2);
+    const unpickledStory = unpickleStory(testPickledStory);
+    assert.deepEqual(
+        unpickledStory,
+        testStory,
+        'Correct story unpickled successfully'
+    );
 
-        const unpickledStory = unpickleStory(testPickledStory);
-        assert.deepEquals(
-            unpickledStory,
-            testStory,
-            'Correct story unpickled successfully'
-        );
-
-        const twoWayTestStory = unpickleStory(pickleStory(testStory));
-        assert.deepEquals(
-            twoWayTestStory,
-            testStory,
-            'Correctly pickled/unpickled story'
-        );
-    });
+    const twoWayTestStory = unpickleStory(pickleStory(testStory));
+    assert.deepEqual(
+        twoWayTestStory,
+        testStory,
+        'Correctly pickled/unpickled story'
+    );
 });

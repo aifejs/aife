@@ -1,5 +1,5 @@
-import test from 'tape';
-import {fixture, testState,} from '../fixture';
+import test from 'ava';
+import {fixture, testState,} from '../../helpers/fixture';
 import {UPDATE_PASSAGE,} from '../../../../src/vuex/mutations';
 
 test('UPDATE_PASSAGE', (assert) => {
@@ -13,13 +13,13 @@ test('UPDATE_PASSAGE', (assert) => {
         text: 'Look at me, I\'m completely different now',
     });
 
-    assert.equals(
+    assert.is(
         story.passages[0].text,
         'Look at me, I\'m completely different now',
         'Updated passage text correctly'
     );
 
-    assert.equals(
+    assert.is(
         story.passages[1].text,
         testState.stories[0].passages[1].text,
         'Another passages are not changed'

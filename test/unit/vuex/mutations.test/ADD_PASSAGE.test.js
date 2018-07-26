@@ -1,5 +1,5 @@
-import test from 'tape';
-import {fixture,} from '../fixture';
+import test from 'ava';
+import {fixture,} from '../../helpers/fixture';
 import {ADD_PASSAGE,} from '../../../../src/vuex/mutations';
 
 test('ADD_PASSAGE', (assert) => {
@@ -14,13 +14,13 @@ test('ADD_PASSAGE', (assert) => {
     });
 
 
-    assert.equals(
+    assert.is(
         state.stories[0].passages.length,
         3,
         'Added 1 new passage'
     );
 
-    assert.equals(
+    assert.is(
         state.stories[0].passages[2].pid,
         23,
         'correctly assigns new pid'

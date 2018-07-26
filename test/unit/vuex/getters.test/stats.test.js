@@ -1,6 +1,6 @@
 import {stats,} from '../../../../src/vuex/getters';
-import test from 'tape';
-import {fixture,} from '../fixture';
+import test from 'ava';
+import {fixture,} from '../../helpers/fixture';
 
 test('stats', (assert) => {
     assert.plan(2);
@@ -8,7 +8,7 @@ test('stats', (assert) => {
     const emptyStoryState = fixture();
     emptyStoryState.stories[0].passages.length = 0;
 
-    assert.deepEquals(
+    assert.deepEqual(
         stats(emptyStoryState),
         {
             words: 0,
@@ -20,7 +20,7 @@ test('stats', (assert) => {
         'Correctly counted words and characters in empty story'
     );
 
-    assert.deepEquals(
+    assert.deepEqual(
         stats(fixture()),
         {
             words: 11,
@@ -31,6 +31,4 @@ test('stats', (assert) => {
         },
         'Correctly counted words and characters in test story'
     );
-
-    assert.end();
 });

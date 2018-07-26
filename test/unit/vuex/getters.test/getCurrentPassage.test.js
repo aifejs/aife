@@ -1,6 +1,6 @@
 import {getCurrentPassage,} from '../../../../src/vuex/getters';
-import test from 'tape';
-import {testState, fixture,} from '../fixture';
+import test from 'ava';
+import {fixture, testState,} from '../../helpers/fixture';
 
 test('getCurrentPassage', (assert) => {
     assert.plan(4);
@@ -18,25 +18,25 @@ test('getCurrentPassage', (assert) => {
         });
     }
 
-    assert.deepEquals(
+    assert.deepEqual(
         getCurrentPassage(state({pid: '11',})),
         testState.stories[0].passages[0],
         'Fetches correct passage by pid'
     );
 
-    assert.equals(
+    assert.is(
         getCurrentPassage(state({pid: '424242',})),
         undefined,
         'Fetches undefined with non-existing pid'
     );
 
-    assert.deepEquals(
+    assert.deepEqual(
         getCurrentPassage(state({passageTitle: testState.stories[0].passages[1].title,})),
         testState.stories[0].passages[1],
         'Fetches correct passage by title'
     );
 
-    assert.deepEquals(
+    assert.deepEqual(
         getCurrentPassage(state({passageTitle: 'No such passage',})),
         undefined,
         'Fetches undefined with non-existing title'
