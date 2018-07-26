@@ -1,11 +1,21 @@
 <template lang="pug">
     span.storyRun
-        r-link(:to="{name: 'play', params: {ifid: story.ifid}}", target="_blank", :class="{'disabled': !runnable}", title="Play story (in new window)")
-            i.fa.fa-play
-        r-link(:to="{name: 'debug', params: {ifid: story.ifid}}", target="_blank", :class="{'disabled': !runnable}", title="Debug story (in new window)")
-            i.fa.fa-bug
-        r-link(:to="{name: 'publish', params: {ifid: story.ifid}}", target="_blank", title="Export")
-            i.fa.fa-download
+        r-link(
+            :to="route('play')",
+            target="_blank",
+            :class="{'disabled': !runnable}",
+            title="Play story (in new window)"
+        )
+            fa-icon(icon="play")
+        r-link(
+            :to="route('debug')",
+            target="_blank",
+            :class="{'disabled': !runnable}",
+            title="Debug story (in new window)"
+        )
+            fa-icon(icon="bug")
+        r-link(:to="route('publish')", target="_blank", title="Export")
+            fa-icon(icon="download")
 </template>
 
 <script>
@@ -29,6 +39,17 @@ export default {
     computed: {
         runnable() {
             return isStoryRunnable(this.story);
+        },
+    },
+
+    methods: {
+        route(name) {
+            return {
+                name,
+                params: {
+                    ifid: this.story.ifid,
+                },
+            };
         },
     },
 };

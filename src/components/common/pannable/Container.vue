@@ -76,6 +76,14 @@ export default {
         ...mapGetters([
             'hasSelectedPassages',
         ]),
+
+        realMarqueeStart() {
+            return this.marqueeStart.lt(this.marqueeEnd) ? this.marqueeStart : this.marqueeEnd;
+        },
+
+        realMarqueeEnd() {
+            return this.marqueeStart.lt(this.marqueeEnd) ? this.marqueeEnd : this.marqueeStart;
+        },
     },
 
     mounted() {
@@ -201,8 +209,14 @@ export default {
     @mouseenter="isHovered = true", @mouseleave="isHovered = false",
     @mousedown="onMouseDown", @mousemove="onMouseMove", @mouseup="onMouseUp")
     .pannable-bg(:style="{transform: bgTransform}", v-bg-grid="{size: gridSize, color: 'gray'}")
-        pannable-marquee(:visible="marqueeMode", :start="marqueeStart.lt(marqueeEnd) ? marqueeStart : marqueeEnd", :end="marqueeStart.lt(marqueeEnd) ? marqueeEnd : marqueeStart")
-        pannable-item(v-for="passage in passages", :passage="passage", :key="passage.pid", @item-selected="selectPassage", @item-moved="movePassage")
+        pannable-marquee(:visible="marqueeMode", :start="realMarqueeStart", :end="realMarqueeEnd")
+        pannable-item(
+            v-for="passage in passages",
+            :passage="passage",
+            :key="passage.pid",
+            @item-selected="selectPassage",
+            @item-moved="movePassage"
+        )
 </template>
 
 <style lang="stylus">

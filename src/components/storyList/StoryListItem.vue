@@ -3,15 +3,20 @@
     .widget-header
         .widget-title(:title="story.title", :class="{editing: editing}")
             router-link.storyListItem-link(:to="{name: 'overview', params: {ifid: story.ifid}}") {{ story.title }}
-            input.storyListItem-input(":value.once"="story.title", @keydown="processTitleEdit", @blur="onBlur", ref="input")
-            span.fa.fa-pencil.activeIcon.storyListItem-editBtn(@click="toggleEditing", title="Rename story")
+            input.storyListItem-input(
+                :value.once="story.title",
+                @keydown="processTitleEdit",
+                @blur="onBlur",
+                ref="input"
+            )
+            fa-icon.activeIcon.storyListItem-editBtn(icon="pencil-alt", @click="toggleEditing", title="Rename story")
         .widget-controls
             .widget-controlIcons
-                span.fa.fa-files-o.activeIcon(title="Duplicate story", @click="duplicateStory(story.ifid)")
+                fa-icon.activeIcon(icon="copy", title="Duplicate story", @click="duplicateStory(story.ifid)")
                 router-link(:to="{name: 'deleteStory', params: {ifid: story.ifid}}", title="Delete story")
-                    span.fa.fa-trash.activeIcon.danger
+                    fa-icon.activeIcon.danger(icon="trash")
                 router-link(:to="{name: 'proofRead', params: {ifid: story.ifid}}", title="Proof-read mode")
-                    span.fa.fa-pencil-square-o
+                    fa-icon(icon="edit")
     .widget-body
         story-stats(:stats="story.stats").lighter
     .widget-footer

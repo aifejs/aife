@@ -10,7 +10,7 @@ article.widget.screen.story
     .widget-body(v-if="!storiesLoaded")
         p.text-center Loading story, please wait...
             br
-            i.fa.fa-spinner.fa-spin.fa-4x
+            fa-icon(icon="spinner", spin, size="4x")
 </template>
 
 <style lang="stylus">

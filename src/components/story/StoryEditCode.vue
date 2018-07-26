@@ -1,13 +1,13 @@
 <template lang="pug">
 .widget-controlIcons.storyCode
     router-link(:to="{name: 'stylesheet', params: {ifid: story.ifid}}", title="Edit styles")
-        i.fa.fa-css3
+        fa-icon(:icon="['fab', 'css3']")
     router-link(:to="{name: 'script', params: {ifid: story.ifid}}", title="Edit script")
-        i.fa.fa-terminal
+        fa-icon(:icon="['fab', 'js']")
     router-link(:to="{name: 'html', params: {ifid: story.ifid}}", title="Edit html")
-        i.fa.fa-code
+        fa-icon(:icon="['fab', 'html5']")
     router-link(:to="{name: 'proofRead', params: {ifid: story.ifid}}", title="Proof-read copy")
-        i.fa.fa-pencil-square-o
+        fa-icon(icon="edit")
 </template>
 
 <script>

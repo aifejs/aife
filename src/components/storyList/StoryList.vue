@@ -11,11 +11,11 @@ article.widget.lighter.screen.storyList
 
     .widget-footer.widget-controlIcons
         router-link(:to="{name: 'settings'}")
-            i.fa.fa-cog
+            fa-icon(icon="cog")
             | Settings
 
         a(:href="bugs.url", target="_blank")
-            i.fa.fa-bug
+            fa-icon(icon="bug")
             | Report a bug
 </template>
 

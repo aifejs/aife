@@ -5,9 +5,10 @@ article.codeEditor.htmlEditor
         p
             | This is very advanced feature and you should be absolutely sure what you're doing.
             | This will completely replace built-in markup, so don't forget to
-            | #[span.pseudo(title="Insert format source", @click="insertFormatSource") add scripts and styles from format]
-            | (or provide your own).
-            // | Place #[code {{STORY_NAME}}] and #[code {{STORY_NAME}}] markers where you want story name and data to be.
+            | #[span.pseudo(title="Insert format source", @click="insertFormatSource") add scripts and styles]
+            |  from format (or provide your own).
+            // | Place #[code {{STORY_NAME}}] and #[code {{STORY_NAME}}] markers
+            // | where you want story name and data to be.
 
         code-mirror(:options="htmlEditorOptions", :code="getHtml", @code-changed="saveHtml")
 </template>

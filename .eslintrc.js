@@ -18,9 +18,9 @@ const eslintConfig = {
         node: true,
     },
     extends: [
-        'eslint-config-aifejs',
         'eslint:recommended',
-        'plugin:vue/recommended'
+        'eslint-config-aifejs',
+        'plugin:vue/recommended',
     ],
     rules: {
         semi: ['error', 'always'],

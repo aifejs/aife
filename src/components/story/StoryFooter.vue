@@ -5,7 +5,7 @@ div
     //    | Story settings
 
     a(:href="bugs.url", target="_blank")
-        i.fa.fa-bug
+        fa-icon(icon="bug")
         | Report a bug
 </template>
 

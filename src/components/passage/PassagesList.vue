@@ -8,11 +8,18 @@ article.passagesList.widget.lighter
     .widget-body
         ul.passagesList-list
             li.passagesList-item(v-for="passage of passagesOverview", :class="{special: passage.special}")
-                router-link(:to="{name: 'passage', params: {pid: passage.pid, ifid: ifid}}", v-hilite-term="getPassagesFiltering") {{passage.title}}
+                router-link(
+                    :to="{name: 'passage', params: {pid: passage.pid, ifid}}",
+                    v-hilite-term="getPassagesFiltering"
+                ) {{passage.title}}
                 span.actions
-                    router-link.passagesList(:to="{name: 'deletePassage', params: {pid: passage.pid, ifid: ifid}}")
-                        i.fa.fa-trash.activeIcon.danger.passagesList-remove
-                    i.fa.fa-rocket.activeIcon(@click="makeStarting(passage.pid)", :class="{disabled: passage.starting}")
+                    router-link.passagesList(:to="{name: 'deletePassage', params: {pid: passage.pid, ifid}}")
+                        fa-icon.activeIcon.danger.passagesList-remove(icon="trash")
+                    fa-icon.activeIcon(
+                        icon="rocket",
+                        @click="makeStarting(passage.pid)",
+                        :class="{disabled: passage.starting}"
+                    )
                 p.passagesList-text(v-hilite-term="getPassagesFiltering", :title="passage.text") {{passage.text}}
 </template>
 

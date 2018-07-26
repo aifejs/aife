@@ -7,15 +7,44 @@ nav.passageTabs
         router-link.passageTabs-item.special(:to="{name: 'overview', params: {ifid: ifid}}", tag="span")
             a Overview
 
-        special-tab(v-if="stylesheetEditing", :route-name="'stylesheet'", :title="'Style'", :close="closeStylesheetAndGoBack", :ifid="ifid")
-        special-tab(v-if="scriptEditing", :route-name="'script'", :title="'Script'", :close="closeScriptAndGoBack", :ifid="ifid")
-        special-tab(v-if="htmlEditing", :route-name="'html'", :title="'HTML'", :close="closeHtmlAndGoBack", :ifid="ifid")
-        special-tab(v-if="proofReadEditing", :route-name="'proofRead'", :title="'Proof-read'", :close="closeProofReadAndGoBack", :ifid="ifid")
+        special-tab(
+            v-if="stylesheetEditing",
+            route-name="stylesheet",
+            title="Style",
+            :close="closeStylesheetAndGoBack",
+            :ifid="ifid"
+        )
+        special-tab(
+            v-if="scriptEditing",
+            route-name="script",
+            title="Script",
+            :close="closeScriptAndGoBack",
+            :ifid="ifid"
+        )
+        special-tab(
+            v-if="htmlEditing",
+            route-name="html",
+            title="HTML",
+            :close="closeHtmlAndGoBack",
+            :ifid="ifid"
+        )
+        special-tab(
+            v-if="proofReadEditing",
+            route-name="proofRead",
+            title="Proof-read",
+            :close="closeProofReadAndGoBack",
+            :ifid="ifid"
+        )
 
     span.passageTabs-section(v-if="story")
-        router-link.passageTabs-item.passage(v-for="tab of tabs", :key="tab.pid", tag="span", :to="{name: 'passage', params: {pid: tab.pid, ifid: ifid}}")
+        router-link.passageTabs-item.passage(
+            v-for="tab of tabs",
+            :key="tab.pid",
+            tag="span",
+            :to="{name: 'passage', params: {pid: tab.pid, ifid}}"
+        )
             a(:title="tabTitle(tab)") {{tab.title}}
-            i.fa.fa-times-circle.activeIcon.danger.passageTabs-close(@click="closePassageAndGoBack(tab.pid)")
+            passage-tab-close(@click="closePassageAndGoBack(tab.pid)")
 
     span.passageTabs-section(v-if="story")
         span.passageTabs-item.btn.addPassage
@@ -26,11 +55,13 @@ nav.passageTabs
 import {mapGetters, mapActions,} from 'vuex';
 import router from '../../router';
 import SpecialTab from './SpecialTab.vue';
+import PassageTabClose from '../common/PassageTabClose';
 
 export default {
     name: 'PassageTabs',
 
     components: {
+        PassageTabClose,
         SpecialTab,
     },
 

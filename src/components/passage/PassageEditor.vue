@@ -10,7 +10,14 @@ article.codeEditor.passageEditor(v-if="passage")
 
     label
         strong Tags
-        tag-list(:tags="passage.tags", :pid.once="passage.pid", :suggestions="tagSuggestions", :special-tags="specialNames[story.format].tags", @add-tag="addTag", @remove-tag="removeTag")
+        tag-list(
+            :tags="passage.tags",
+            :pid.once="passage.pid",
+            :suggestions="tagSuggestions",
+            :special-tags="specialNames[story.format].tags",
+            @add-tag="addTag",
+            @remove-tag="removeTag"
+        )
 
     label.codeArea
         strong Text

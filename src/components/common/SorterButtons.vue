@@ -2,20 +2,18 @@
 .sorterButtons
     span.sorterButtons-title Sort by:
     .sorterButtons-grp
-        button.sorterButtons-btn(v-for="sortProperty of sortProperties", :class="{active: sortProperty.field === activeProperty.field}", @click="changeSort(sortProperty)")
+        button.sorterButtons-btn(
+            v-for="sortProperty of sortProperties",
+            :class="{active: sortProperty.field === activeProperty.field}",
+            @click="changeSort(sortProperty)"
+        )
             | {{ sortProperty.name }}
-            span.sorterButtons-sort(v-sort-icon="activeProperty.sort")
+            fa-icon(:icon="activeProperty.sort === 'asc' ? 'sort-amount-up' : 'sort-amount-down'")
 </template>
 
 <script>
-import SortIcon from '../../directives/SortIcon';
-
 export default {
     name: 'SorterButtons',
-
-    directives: {
-        SortIcon,
-    },
 
     props: {
         sortProperties: {

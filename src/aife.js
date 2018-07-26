@@ -1,9 +1,12 @@
 import Vue from 'vue';
+import {mapActions,} from 'vuex';
+import {sync,} from 'vuex-router-sync';
+
+import './faIcons';
+
 import AifeRoot from './AifeRoot.vue';
 import router from './router';
 import store from './vuex/store';
-import {sync,} from 'vuex-router-sync';
-import {mapActions,} from 'vuex';
 
 sync(store, router);
 

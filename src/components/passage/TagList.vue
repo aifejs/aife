@@ -2,7 +2,7 @@
 .tagList
     span.tagList-item(v-for="(tag, index) of tags", :class="{special: isSpecial(tag)}")
         | {{ tag }}
-        i.fa.fa-trash.activeIcon.danger.tagList-remove(@click="onTagRemoveClick(index)")
+        fa-icon.activeIcon.danger.tagList-remove(icon="trash", @click="onTagRemoveClick(index)")
 
     input(:list="domId", placeholder="Press enter to add tag", @keyup="onKeyPress")
     datalist(:id="domId")
