@@ -10,7 +10,7 @@
     },
     "rules": {
         "trailing-comma": [
-            true,
+            false,
             {
                 "multiline": "always",
                 "singleline": "always"

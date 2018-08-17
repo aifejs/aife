@@ -1,9 +1,9 @@
 <template lang="pug">
-article.storyStats.widget(:class="")
+article.storyStats.widget(:class="widgetClass")
     .widget-header
         .widget-title Story stats
         .widget-controls
-            fa-icon(:icon="togglerIcon", @click="toggleLongForm", title="Show more/less")
+            fa-icon.activeIcon(:icon="togglerIcon", @click="toggleLongForm", title="Show more/less")
     .widget-body
         dl.storyStats-list
             dt Passages:
@@ -18,40 +18,33 @@ article.storyStats.widget(:class="")
             dd.longForm {{ stats.code }}
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
+
+@Component({
     props: {
-        stats: {
-            type: Object,
-            required: true,
-        },
+        stats: Object,
     },
+})
+export default class StoryStats extends Vue {
+    public longForm = false;
 
-    data() {
+    get togglerIcon() {
+        return this.longForm ? 'minus-square' : 'plus-square';
+    }
+
+    get widgetClass() {
         return {
-            longForm: false,
+            longForm: this.longForm,
+            shortForm: !this.longForm,
         };
-    },
+    }
 
-    computed: {
-        togglerIcon() {
-            return this.longForm ? 'minus-square' : 'plus-square';
-        },
-
-        widgetClass() {
-            return {
-                longForm: this.longForm,
-                shortForm: !this.longForm,
-            };
-        },
-    },
-
-    methods: {
-        toggleLongForm() {
-            this.longForm = !this.longForm;
-        },
-    },
-};
+    public toggleLongForm() {
+        this.longForm = !this.longForm;
+    }
+}
 </script>
 
 <style lang="stylus">
